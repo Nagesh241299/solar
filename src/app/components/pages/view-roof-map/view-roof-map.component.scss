@@ -1,0 +1,49 @@
+// .chartjs-wrapper-demo {
+//     height: 300px;
+// }
+@media (max-width: 1500px) {
+  .back-button {
+    margin-left: 1000px;
+    position: absolute;
+  }
+}
+
+@media (min-width: 1900px) {
+  .back-button {
+    margin-left: 960px;
+    position: absolute;
+  }
+}
+
+// .ht-500 {
+//     height: 300px;
+//     /* Increased height */
+// }
+
+// .ht-300 {
+//     height: 250px;
+//     /* Increased height */
+// }
+
+// .ht-lg-500 {
+//     min-height: 200px;
+//     /* Increased height */
+// }
+
+// .ht-lg-350 {
+//     min-height: 200px;
+//     /* Increased height */
+// }
+
+// .wd-500 {
+//     width: 550px;
+//     /* Increased width */
+// }
+.color {
+
+  color: orange;
+}
+
+.caps {
+  text-transform: uppercase;
+}

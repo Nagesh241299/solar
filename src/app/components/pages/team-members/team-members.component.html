@@ -1,0 +1,362 @@
+<main class="loader-container" *ngIf="isLoader">
+    <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5ebd3e" />
+                <stop offset="33%" stop-color="#ffb900" />
+                <stop offset="67%" stop-color="#f78200" />
+                <stop offset="100%" stop-color="#e23838" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0%" stop-color="#e23838" />
+                <stop offset="33%" stop-color="#973999" />
+                <stop offset="67%" stop-color="#009cdf" />
+                <stop offset="100%" stop-color="#5ebd3e" />
+            </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-width="16">
+            <g class="ip__track" stroke="#ddd">
+                <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+            <g stroke-dasharray="180 656">
+                <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0"
+                    d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358"
+                    d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+        </g>
+    </svg>
+</main>
+<div class="p-3 main">
+    <div class="container-fluid p-0">
+        <div class="row p-0">
+            <div class="col-lg-12 p-0">
+                <!-- <div class="card body-radius"> -->
+                <div class="card-body p-0">
+                    <div class="row col-md-6 d-flex justify-content-end float-end mb-2">
+                        <button class=" button-add float-end" (click)="LargeSizeOpen(largesizemodal)"
+                            title="Add Roof Top">Add
+                        </button>
+                    </div>
+
+                    <div class="border-radius-25 card no-shadow mt-2">
+                        <form class="ngb-table border-radius-25">
+                            <div class="table-responsive border-radius-25">
+                                <table mat-table class="table table-hover border-radius-25">
+                                    <thead>
+                                        <tr>
+                                            <th mat-header-cell scope="col">
+                                                Name</th>
+                                            <th mat-header-cell scope="col" width="30%"
+                                                style="vertical-align: middle;text-align: middle !important;">Title
+                                            </th>
+                                            <th mat-header-cell scope="col"
+                                                style="vertical-align: middle;text-align: middle !important;">Email
+                                                Address
+                                            </th>
+                                            <th mat-header-cell scope="col" width="140px">Phone Number
+                                            </th>
+                                            <th></th>
+                                            <th mat-header-cell scope="col" class="text-center" width="150px">
+                                                Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="Data.length === 0">
+                                            <td colspan="6">
+                                                <div class="data-center">
+                                                    No Data Found.
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr mat-row *ngFor="let uidata of Data" style="height: 40px;">
+
+                                            <td mat-cell
+                                                style="text-align:left !important;vertical-align:top !important">
+                                                {{uidata.first_name}}
+                                                {{uidata.last_name}}</td>
+                                            <td mat-cell
+                                                style="text-align:left !important;vertical-align: top !important">
+                                                {{uidata.title}}
+                                            </td>
+
+                                            <td mat-cell style="text-align:left !important;vertical-align: top;">{{
+                                                uidata.email }}</td>
+                                            <td mat-cell style="text-align:right !important;vertical-align:top;">{{
+                                                uidata.mobile_number }}</td>
+                                            <td></td>
+
+                                            <td mat-cell style="text-align:center !important;vertical-align: right;">
+                                                <!-- <button (click)="openConfirmationModal(uidata.id,confirmationModal)">
+                                            <img src="./assets/images/ri_eye-fill.svg" alt="View Details"
+                                                title="View Details" /></button> -->
+                                                <button (click)="editTeamMember(uidata.id,largesizemodal)"
+                                                    class="table-btn edit-btn">
+                                                    <i class="fa fa-pencil fs-16" title="Edit"></i>
+                                                </button>
+                                                <button (click)="deleteTeamMember(uidata.id)"
+                                                    class="table-btn delete-btn">
+                                                    <i class="fa fa-trash fs-16" title="Delete"></i>
+                                                </button>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="d-flex justify-content-center between p-2">
+                                <ngb-pagination [collectionSize]="totalItems" [(page)]="currentPage"
+                                    [pageSize]="pageSize" (pageChange)="onPageChange($event)" [maxSize]="4"
+                                    [ellipses]="true" size="sm">
+                                </ngb-pagination>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<ng-template #confirmationModal let-modal>
+    <div class="modal-header p-2">
+        <h4 class="modal-title" id="confirmationModalLabel"><b>Confirmation</b></h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center custom-modal-body">
+        Are you sure you want to delete this Team Member?
+    </div>
+    <div class="modal-footer p-2">
+        <button type="button" class="button-no text-white body-radius" (click)="modal.dismiss()">No</button>
+    </div>
+
+
+</ng-template>
+
+
+
+<ng-template #largesizemodal let-modal>
+
+    <div class="modal-body p-2">
+        <div class="card body-radius title-card p-3 no-shadow">
+            <h5 class="details-title mb-0">{{ isEdit ? 'Edit Team Member' : 'Add Team Member' }}</h5>
+        </div>
+
+        <div class="card body-radius title-card p-3 no-shadow mt-2">
+            <form [formGroup]="teamMembersForm" (ngSubmit)="createaMember()">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="text-muted mb-0">Photo</label>
+                        <div class="photo-upload text-center position-relative">
+                            <!-- File Input -->
+                            <input type="file" class="form-control mt-2" (change)="onPhotoUpload($event)"
+                                accept="image/*" />
+
+                            <!-- Image Preview -->
+                            <div class="position-relative d-inline-block mt-2" *ngIf="photoPreview">
+                                <img [src]="photoPreview" alt="Photo Preview"
+                                    class="img-fluid rounded-square preview" />
+
+                                <!-- Remove Button -->
+                                <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-1"
+                                    (click)="removePhoto()">
+                                    &times;
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="row mb-2">
+                                <div class="col-md-4">
+                                    <label class="mb-0 text-muted">Salutation <span style="color: red;">*</span></label>
+                                    <select class="form-control form-select select2" formControlName="salutation">
+
+                                        <option label="Select" disabled>Salutation</option>
+                                        <option [value]="'Mr'">Mr</option>
+                                        <option [value]="'Mrs'">Mrs</option>
+                                    </select>
+                                    <small
+                                        *ngIf="teamMembersForm.get('salutation')?.touched && teamMembersForm.get('salutation')?.invalid"
+                                        class="text-danger">
+                                        Salutation is required.
+                                    </small>
+
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="mb-0 text-muted">First Name <span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control"
+                                        onkeypress="return /[a-zA-Z]/.test(event.key)" formControlName="first_name" />
+                                    <small
+                                        *ngIf="teamMembersForm.get('first_name')?.touched && teamMembersForm.get('first_name')?.invalid"
+                                        class="text-danger">
+                                        First Name is required.
+                                    </small>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="mb-0 text-muted">Last Name <span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control"
+                                        onkeypress="return /[a-zA-Z]/.test(event.key)" formControlName="last_name" />
+                                    <small
+                                        *ngIf="teamMembersForm.get('last_name')?.touched && teamMembersForm.get('last_name')?.invalid"
+                                        class="text-danger">
+                                        Last Name is required.
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-md-4">
+                                    <label class="mb-0 text-muted">Title <span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control"
+                                        onkeypress="return /[a-zA-Z]*$/.test(event.key)" formControlName="title" />
+                                    <small
+                                        *ngIf="teamMembersForm.get('title')?.touched && teamMembersForm.get('title')?.invalid"
+                                        class="text-danger">
+                                        Title is required.
+                                    </small>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="mb-0 text-muted">Email Address <span
+                                            style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" formControlName="email" />
+
+                                    <!-- Error: Email is required -->
+                                    <small
+                                        *ngIf="teamMembersForm.get('email')?.touched && teamMembersForm.get('email')?.hasError('required')"
+                                        class="text-danger">
+                                        Email is required.
+                                    </small>
+
+                                    <!-- Error: Invalid email format -->
+                                    <small
+                                        *ngIf="teamMembersForm.get('email')?.touched && teamMembersForm.get('email')?.hasError('pattern')"
+                                        class="text-danger">
+                                        Please enter a valid Email address.
+                                    </small>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <label class="mb-0 text-muted">Mobile Number <span
+                                            style="color: red;">*</span></label>
+
+                                    <input type="text" class="form-control" formControlName="mobile_number"
+                                        maxlength="10" onkeypress="return /[0-9]/.test(event.key)" />
+
+                                    <!-- Error: Field is empty -->
+                                    <small
+                                        *ngIf="teamMembersForm.get('mobile_number')?.touched && teamMembersForm.get('mobile_number')?.hasError('required')"
+                                        class="text-danger">
+                                        Mobile Number is required.
+                                    </small>
+
+                                    <!-- Error: Not exactly 10 digits -->
+                                    <small
+                                        *ngIf="teamMembersForm.get('mobile_number')?.touched && teamMembersForm.get('mobile_number')?.hasError('pattern')"
+                                        class="text-danger">
+                                        Mobile Number must be exactly 10 digits.
+                                    </small>
+                                </div>
+
+                            </div>
+
+                            <!-- Social Media Fields -->
+                            <div class="row mb-2">
+                                <div class="col-md-4">
+                                    <label class="mb-0 text-muted">LinkedIn URL</label>
+                                    <input type="text" class="form-control" formControlName="linkedin" />
+                                    <small *ngIf="teamMembersForm.get('linkedin')?.hasError('pattern')"
+                                        class="text-danger">
+                                        Please enter a valid LinkedIn URL.
+                                    </small>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="mb-0 text-muted">Instagram URL</label>
+                                    <input type="text" class="form-control" formControlName="instagram" />
+                                    <small *ngIf="teamMembersForm.get('instagram')?.hasError('pattern')"
+                                        class="text-danger">
+                                        Please enter a valid Instagram URL.
+                                    </small>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="mb-0 text-muted">Facebook URL</label>
+                                    <input type="text" class="form-control" formControlName="facebook" />
+                                    <small *ngIf="teamMembersForm.get('facebook')?.hasError('pattern')"
+                                        class="text-danger">
+                                        Please enter a valid Facebook URL.
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-md-4">
+                                    <label class="mb-0 text-muted">X URL</label>
+                                    <input type="text" class="form-control" formControlName="twitter" />
+                                    <small *ngIf="teamMembersForm.get('twitter')?.hasError('pattern')"
+                                        class="text-danger">
+                                        Please enter a valid X URL.
+                                    </small>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="mb-0 text-muted">Pinterest URL</label>
+                                    <input type="text" class="form-control" formControlName="pinterest" />
+                                    <small *ngIf="teamMembersForm.get('pinterest')?.hasError('pattern')"
+                                        class="text-danger">
+                                        Please enter a valid Pinterest URL.
+                                    </small>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="mb-0 text-muted">YouTube URL</label>
+                                    <input type="text" class="form-control" formControlName="youtube" />
+                                    <small
+                                        *ngIf="teamMembersForm.get('youtube')?.value &&teamMembersForm.get('youtube')?.hasError('pattern')"
+                                        class="text-danger">
+                                        Please enter a valid YouTube URL.
+                                    </small>
+                                    <!-- <small
+                                        *ngIf="pastProjectForm.get('contact_number')?.touched && pastProjectForm.get('contact_number')?.hasError('pattern')"
+                                        class="text-danger">
+                                        Mobile number must be exactly 10
+                                        digits.
+                                    </small> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="p-2 mt-1">
+                    <button class="btn button-cancelModal float-end" (click)="closeModal()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary rounded-pill float-end me-2 p" *ngIf="isEdit == false">
+                        Save
+                    </button>
+                    <button type="submit" class="btn btn-primary rounded-pill float-end me-2 p" *ngIf="isEdit == true">
+                        Update
+                    </button>
+
+                </div>
+            </form>
+
+        </div>
+
+
+
+        <!-- </div> -->
+    </div>
+</ng-template>

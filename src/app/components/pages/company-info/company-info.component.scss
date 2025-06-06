@@ -1,0 +1,54 @@
+.form-card {
+    max-width: 800px; /* Adjust as needed */
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+    .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+  
+  .container-login100 {
+    margin-top: 65px; /* Adjust the value as needed */
+  }
+  
+  .wrap-login100 {
+    // width: calc(100% - 250px); /* Make the form full width while leaving space for the side menu */
+    max-width: none; /* Disable max width */
+    padding: 20px; /* Add some padding */
+    // margin-left: 250px; /* Adjust the value to match the width of your side menu */
+  }
+  
+  .page.bg-img {
+    background-size: cover; /* Add this to ensure the background image covers the entire page */
+  }
+  .question-section {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  .larger-card {
+    width: 80%; 
+    max-width: 800px; 
+    margin: 0 auto;
+  }
+  .custom-mat-select {
+    width: calc(50% - 16px); 
+  }
+  .question {
+    flex: 1;
+    padding: 8px 0;
+  }
+  
+  .answer {
+    flex: 3;
+  }
+  
+  mat-label {
+    font-weight: bold;
+  }
+  

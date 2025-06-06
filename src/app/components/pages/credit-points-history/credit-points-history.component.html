@@ -1,0 +1,147 @@
+<main class="loader-container" *ngIf="isLoader">
+    <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5ebd3e" />
+                <stop offset="33%" stop-color="#ffb900" />
+                <stop offset="67%" stop-color="#f78200" />
+                <stop offset="100%" stop-color="#e23838" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0%" stop-color="#e23838" />
+                <stop offset="33%" stop-color="#973999" />
+                <stop offset="67%" stop-color="#009cdf" />
+                <stop offset="100%" stop-color="#5ebd3e" />
+            </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-width="16">
+            <g class="ip__track" stroke="#ddd">
+                <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+            <g stroke-dasharray="180 656">
+                <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0"
+                    d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358"
+                    d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+        </g>
+    </svg>
+</main>
+<div class="container-fluid pt-0">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+            <div class="card body-radius mb-3">
+                <div class="card-body p-2">
+                    <div class="card-header-section">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 class="header-title">
+                                    Credit Points History
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-radius-25 card shadow-none mt-4">
+                        <form class="ngb-table border-radius-25">
+                            <div class="table-responsive border-radius-25">
+                                <table class="table custom-table table-hover">
+                                    <thead class="mat-elevation-z5">
+                                        <tr>
+
+                                            <th class="text-left" > Date</th>
+                                            <!-- <th scope="cstyle="text-align:left"ol" width="27%"> Time </th> -->
+                                            <th  class="text-left" > Action</th>
+                                            <!-- <th scope="col" style="text-align:left !important"> Type </th> -->
+
+                                            <th  class="text-center" width="108px"> Points </th>
+
+
+                                            <th class="text-center" width="12%"></th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of creditData" style="height: 30px;">
+
+                                            <td style="text-align:left !important">
+                                                {{ data.updated_date | date: 'dd/MM/yyyy' }}&nbsp;&nbsp;{{
+                                                data.updated_date
+                                                | date: 'hh:mm a' }}
+                                            </td>
+                                            <td style="text-align:left !important">{{data.action_name
+                                                }}
+                                            </td>
+                                            <!-- <td style="text-align:left">{{ data.type}}</td> -->
+
+                                            <td style="text-align:right !important">
+
+                                                <ng-container *ngIf="data.type === 'Debit'">
+                                                    <i class="fa fa-minus fs-67"
+                                                        style="color: red;margin-top: 2px;"></i>
+                                                    <!-- <img src="./assets/images/Plus-sign-white.svg"
+                                                    alt="Description of the image"
+                                                    style="background-color: #FF4752;" />-->&nbsp;&nbsp;{{data.points}}
+                                                </ng-container>
+                                                <ng-container *ngIf="data.type === 'Credit'">
+                                                    <i class="fa fa-plus fs-67  green" style="color: #22A447;"></i>
+                                                    <!-- <img src="./assets/images/Plus-sign-white.svg"
+                                                    alt="Description of the image"
+                                                    style="background-color: #22A447;" />-->&nbsp;&nbsp;{{data.points}}
+
+                                                </ng-container>
+
+                                            </td>
+                                            <td style="text-align:left !important; ">
+
+                                            </td>
+
+
+                                            <!-- <td class="text-center">
+
+                                        <button (click)="edit(data.id)" class="mt-1">
+                                            <i class="fa fa-pencil-square-o fs-20" style="color: #86bb46"
+                                                title="Edit"></i>
+                                        </button>
+
+                                        <button (click)="openConfirmationModal(data.id,confirmationModal)">
+                                            <i class="fa fa-trash-o fs-20 text-danger" title="Delete"></i>
+                                        </button>
+
+
+
+
+                                    </td> -->
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <!-- {{totalItems}}TotalItems ;
+                    {{currentPage}}page;
+                    {{pageSize}}pagesize; -->
+                            <div class="d-flex justify-content-center between p-2">
+                                <ngb-pagination [collectionSize]="totalItems" [(page)]="currentPage" [maxSize]="4"
+                                    size="sm" [pageSize]="pageSize" (pageChange)="onPageChange($event)"
+                                    [ellipses]="true">
+                                </ngb-pagination>
+                                <div class="d-flex justify-content-between p-2">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <!-- <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+     
+          <div id="map" style="height: 400px;"></div>
+        </div>
+      </div>
+    </div> -->
+            </div>
+        </div>

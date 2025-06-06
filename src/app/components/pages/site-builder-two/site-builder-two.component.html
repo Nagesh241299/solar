@@ -1,0 +1,326 @@
+<div class="page-wrapper" [style.background]="secondaryColor">
+    <div class="top-bar" [style.background]="secondaryColor">
+
+    </div>
+
+    <header>
+        <div class="logo">
+            <img src="assets/images/logo_solar-removebg-preview 2.png" alt="Logo" class="header-logo" />
+        </div>
+
+        <!-- Hamburger Button -->
+        <button class="hamburger" (click)="toggleMenu()">
+            ☰
+        </button>
+
+        <!-- Navigation Links -->
+        <nav [ngClass]="{'nav-active': isMenuOpen}">
+            <ul class="add-margin">
+                <li *ngFor="let section of getAvailableSections()">
+                    <a class="template-color" href="#" (click)="scrollToSection(section, $event); closeMenu()">
+                        {{ section | titlecase }}
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+    <section class="hero1">
+        <img [style.color]="primaryColor" src="assets/images/american-public-power-association-XGAZzyLzn18-unsplash.jpg"
+            alt="Banner Image">
+        <div class="hero1-text-template">
+            <h4>Sustainable and <br> Reliable Energy!</h4>
+            <p>Purchase online with Solar Quote's AI-powered platform today <br> and take advantage of our UNBEATABLE
+                prices. We are committed <br> to making sustainable power accessible to all!</p>
+        </div>
+        <div class="bottom-right-box-template" *ngIf="companyInfo?.past_projects_count > 0">
+            <div class="top-content-template-slide">
+                <h2 [style.color]="primaryColor">{{ this.companyInfo?.past_projects_count }}</h2>
+                <p>Number of <br> Past Projects</p>
+            </div>
+            <p class="bottom-text1-template-slide">
+                Purchase online with Solar Quote's AI-powered platform today and take advantage
+                of our UNBEATABLE prices. We are committed to making sustainable power accessible to all!
+            </p>
+        </div>
+
+    </section>
+    <section id="about Us" *ngIf="isSectionAvailable('about Us')" class="about">
+        <h1 [style.color]="secondaryColor" class="font-size-template">About Us</h1>
+        <div class="gradient-line"></div>
+
+        <div class="about-content">
+            <div class="image-text-container">
+                <div class="image-container-about">
+                    <img src="assets/images/chelsea-WvusC5M-TM8-unsplash.jpg" alt="Company Image" class="about-image">
+                </div>
+
+                <!-- Description and Read More button inside the same <p> tag -->
+                <p class="para-width-about">
+                    {{ isExpanded ? companyInfo?.company_profile?.long_description :
+                    companyInfo?.company_profile?.long_description?.substring(0, 500) + '...' }}
+
+                    <!-- Read More button should be inline with text -->
+                    <button class="read-more-btn"
+                        *ngIf="companyInfo?.company_profile?.long_description && companyInfo.company_profile.long_description.length > 500"
+                        (click)="toggleReadMore()">
+                        {{ isExpanded ? 'Read Less' : 'Read More' }}
+                    </button>
+                </p>
+            </div>
+
+            <div [style.background]="primaryColor" class="about-bottom"></div>
+        </div>
+    </section>
+
+
+
+    <section id="services" *ngIf="isSectionAvailable('services')" [ngStyle]="{'--primary-color': primaryColor}"
+        class="services-section">
+
+        <h1 [style.color]="secondaryColor" class="font-size-template">Solar Services</h1>
+        <div class="gradient-line"></div>
+        <p [style.color]="secondaryColor" class="para-width-template">We provide the best service for saving
+            electricity, clean energy for your home and protecting the earth.</p>
+        <div class="container">
+            <!-- Stats Section -->
+            <div class="stats-container">
+                <!-- First Row -->
+                <div class="stats-row">
+                    <div class="stats-box">
+                        <h2>{{this.companyInfo?.epc_services[0]?.num_projects_done|| 0}}</h2>
+                        <p [innerHTML]="convertToTitleCase(companyInfo?.epc_services[0]?.service_type)"></p>
+                        <span>Since {{ this.companyInfo?.epc_services?.[0]?.doing_since ?
+                            this.companyInfo?.epc_services[0].doing_since.split('-')[0] : '-' }}</span>
+                    </div>
+                    <div class="stats-box">
+                        <h2>{{this.companyInfo?.epc_services?.[1]?.num_projects_done || 0}}</h2>
+                        <p [innerHTML]="convertToTitleCase(companyInfo?.epc_services[1]?.service_type)"></p>
+                        <span>Since {{ this.companyInfo?.epc_services?.[1]?.doing_since ?
+                            this.companyInfo?.epc_services[1]?.doing_since.split('-')[0] : '-' }}</span>
+                    </div>
+                    <div class="stats-box">
+                        <h2>{{this.companyInfo?.epc_services?.[2]?.num_projects_done || 0}}</h2>
+                        <p [innerHTML]="convertToTitleCase(companyInfo?.epc_services[2]?.service_type)"></p>
+                        <span>Since {{ this.companyInfo?.epc_services?.[2]?.doing_since ?
+                            this.companyInfo.epc_services[2].doing_since.split('-')[0] : '-' }}</span>
+                    </div>
+                    <div class="stats-box">
+                        <h2>{{this.companyInfo?.epc_services?.[3]?.num_projects_done || 0}}</h2>
+                        <p [innerHTML]="convertToTitleCase(companyInfo?.epc_services[3]?.service_type)"></p>
+                        <span>Since {{ this.companyInfo?.epc_services?.[3]?.doing_since ?
+                            this.companyInfo.epc_services[3].doing_since.split('-')[0] : '-' }}</span>
+                    </div>
+                </div>
+
+                <!-- Second Row -->
+                <div class="stats-row-two">
+                    <div class="stats-box-two">
+                        <h2>{{this.companyInfo?.epc_services?.[4]?.num_projects_done || 0}}</h2>
+                        <p [innerHTML]="convertToTitleCase(companyInfo?.epc_services[4]?.service_type)"></p>
+                        <span>Since {{ this.companyInfo?.epc_services?.[4]?.doing_since ?
+                            this.companyInfo?.epc_services[4]?.doing_since.split('-')[0] : '-' }}</span>
+                    </div>
+                    <div class="stats-box-two">
+                        <h2>{{this.companyInfo?.epc_services?.[5]?.num_projects_done || 0}}</h2>
+                        <p [innerHTML]="convertToTitleCase(companyInfo?.epc_services[5]?.service_type)"></p>
+
+                        <span>Since {{ this.companyInfo?.epc_services?.[5]?.doing_since ?
+                            this.companyInfo.epc_services[5].doing_since.split('-')[0] : '-' }}</span>
+                    </div>
+                    <div class="stats-box-two">
+                        <h2>{{this.companyInfo?.epc_services?.[6]?.num_projects_done || 0}}</h2>
+                        <p [innerHTML]="convertToTitleCase(companyInfo?.epc_services[6]?.service_type)"></p>
+                        <span>Since {{ this.companyInfo?.epc_services?.[6]?.doing_since ?
+                            this.companyInfo.epc_services[6].doing_since.split('-')[0] : '-' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="solar" *ngIf="isSectionAvailable('projects')">
+        <h1 [style.color]="secondaryColor" class="font-size-template">Our Projects</h1>
+        <div class="gradient-line"></div>
+        <p [style.color]="secondaryColor" class="para-width-template bottom-pad">
+            Bridging Solar Innovation with Intelligent Energy Solutions.
+        </p>
+
+        <h2 [style.color]="secondaryColor" class="project para-width-template">
+            Latest Projects and Solutions
+        </h2>
+
+        <!-- Ngb Carousel -->
+        <ngb-carousel *ngIf="slides.length" [pauseOnHover]="false" [wrap]="true" [interval]="10000">
+
+            <ng-template ngbSlide *ngFor="let slide of slides">
+                <div class="carousel-item-content d-flex justify-content-center">
+                    <div *ngFor="let project of slide"
+                        class="col-lg-3 col-md-4 col-sm-6 col-12 px-2 d-flex justify-content-center">
+                        <div class="project-card">
+                            <div class="image-container">
+                                <img [src]="project.images[project.currentImageIndex]" loading="lazy"
+                                    class="d-block w-100 fade-image" [class.hidden]="!project.imageLoaded"
+                                    (load)="project.imageLoaded = true" alt="{{ project.title }}">
+
+
+                                <!-- Text Overlay -->
+                                <div class="text-overlay">
+                                    <h5>{{ project.title }}</h5>
+                                    <p class="project-description">{{ project.description | slice: 0:100 }}{{
+                                        project.description.length > 100 ? '.....' : '' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+
+        </ngb-carousel>
+
+        <div [style.background]="primaryColor" class="project-card-bottom"></div>
+    </section>
+
+
+    <section id="team" *ngIf="teamSlides.length">
+        <h1 [style.color]="secondaryColor" class="font-size-template">Our Team</h1>
+        <div class="gradient-line"></div>
+        <p [style.color]="secondaryColor" class="para-width-template">Shaping the Future with Clean Energy.</p>
+
+        <!-- Ngb Carousel -->
+        <ngb-carousel *ngIf="teamSlides.length" [pauseOnHover]="false" [wrap]="true" [interval]="10000">
+            <ng-template ngbSlide *ngFor="let slide of teamSlides">
+                <div class="row justify-content-center">
+                    <div *ngFor="let member of slide"
+                        class="col-lg-3 col-md-4 col-sm-6 col-12 px-2 d-flex justify-content-center">
+
+                        <!-- Social Icons -->
+                        <div class="icon-box" *ngIf="hasSocialIcons(member)">
+                            <a *ngIf="member.linkedin !== '#'" [href]="member.linkedin" target="_blank" class="icon">
+                                <i class="fa fa-linkedin"></i></a>
+                            <a *ngIf="member.instagram !== '#'" [href]="member.instagram" target="_blank" class="icon">
+                                <i class="fa fa-instagram"></i></a>
+                            <a *ngIf="member.pinterest !== '#'" [href]="member.pinterest" target="_blank" class="icon">
+                                <i class="fa fa-pinterest"></i></a>
+                            <a *ngIf="member.facebook !== '#'" [href]="member.facebook" target="_blank" class="icon">
+                                <i class="fa fa-facebook-f"></i></a>
+                            <a *ngIf="member.twitter !== '#'" [href]="member.twitter" target="_blank" class="icon">
+                                𝕏</a>
+                            <a *ngIf="member.youtube !== '#'" [href]="member.youtube" target="_blank" class="icon">
+                                <i class="fa fa-youtube"></i></a>
+                        </div>
+
+                        <!-- Team Member Card -->
+                        <div class="team-card">
+                            <div class="image-container-team">
+                                <img [src]="member.image" class="d-block w-100" alt="{{ member.name }}">
+                            </div>
+                            <div class="team-info">
+                                <h3>{{ member.name }}</h3>
+                                <p>{{ member.position }}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-carousel>
+
+        <!-- Custom Bottom Section -->
+        <div class="project-card-bottom-team"></div>
+    </section>
+
+
+
+    <section id="testimonials" *ngIf="isSectionAvailable('testimonials')">
+        <h1 [style.color]="secondaryColor" class="font-size-template">Testimonial</h1>
+        <div class="gradient-line"></div>
+        <p [style.color]="secondaryColor" class="para-width-template">Trusted by Many, Powered by the Sun.</p>
+
+        <!-- Ngb Carousel -->
+        <ngb-carousel *ngIf="testimonials.length" [pauseOnHover]="false" [wrap]="true" [interval]="10000">
+
+            <ng-template ngbSlide *ngFor="let testimonial of testimonials">
+                <div class="testimonial-card text-center">
+                    <div [style.background]="primaryColor"></div>
+                    <p [style.color]="primaryColor" class="testimonial-quote">
+                        “{{ testimonial.title }}”
+                    </p>
+                    <p [style.color]="secondaryColor" class="testimonial-text">
+                        {{ testimonial.testimonial | slice: 0:500 }}{{ testimonial.testimonial.length > 500 ? '.....' :
+                        '' }}
+                    </p>
+                    <div class="testimonial-user">
+                        <img [src]="testimonial.image" alt="User Image" class="user-image">
+                        <div class="user-info">
+                            <h4 [style.color]="secondaryColor" class="user-name">{{ testimonial.name }}</h4>
+                            <p class="user-role">{{ testimonial.role }}</p>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+
+        </ngb-carousel>
+
+        <div [style.background]="primaryColor" class="about-bottom-test"></div>
+    </section>
+
+
+    <section id="contact Us" *ngIf="isSectionAvailable('contact Us')">
+        <h1 [style.color]="secondaryColor" class="font-size-template">Contact-us</h1>
+        <div class="gradient-line"></div>
+        <p [style.color]="secondaryColor" class="para-width-template">Your sustainable future is one message away—reach
+            out now!</p>
+        <div [style.background]="secondaryColor" class="contact-section">
+            <h1 class="contact-font">Let's work together</h1>
+            <div class="contact-container">
+                <!-- Address Section -->
+
+                <div class="contact-box-address">
+
+                    <h3>Address Solar Junction</h3>
+                    <p>
+                        <i class="fa fa-map-marker"></i>
+                        {{this.companyInfo?.company_profile?.address_line_1}}
+                    </p>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="contact-box">
+                    <h3>Contact with us</h3>
+                    <p>
+                        <i class="fa fa-phone"></i>
+                        <a
+                            href="tel:{{this.companyInfo?.company_profile?.mobile_number}}">{{this.companyInfo?.company_profile?.mobile_number}}</a>
+                    </p>
+                    <p>
+                        <i class="fa fa-envelope"></i>
+                        <a
+                            href="mailto:{{this.companyInfo?.company_profile?.email_address}}">{{this.companyInfo?.company_profile?.email_address}}</a>
+                    </p>
+                </div>
+
+                <!-- QR Code -->
+                <div class="contact-item qr-code">
+
+                    <qrcode [qrdata]="qrData" [allowEmptyString]="true"
+                        [ariaLabel]="'QR Code image with the following content...'" [cssClass]="'center'"
+                        [colorDark]="secondaryColor" [elementType]="'canvas'" [errorCorrectionLevel]="'M'" [margin]="1"
+                        [scale]="1" [width]="150"></qrcode>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-height"></div>
+    </section>
+
+
+
+
+
+
+
+
+</div>

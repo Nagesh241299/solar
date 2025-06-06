@@ -1,0 +1,215 @@
+<!-- <form [formGroup]="serviceForm"> -->
+<main class="loader-container" *ngIf="isLoader">
+    <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5ebd3e" />
+                <stop offset="33%" stop-color="#ffb900" />
+                <stop offset="67%" stop-color="#f78200" />
+                <stop offset="100%" stop-color="#e23838" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0%" stop-color="#e23838" />
+                <stop offset="33%" stop-color="#973999" />
+                <stop offset="67%" stop-color="#009cdf" />
+                <stop offset="100%" stop-color="#5ebd3e" />
+            </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-width="16">
+            <g class="ip__track" stroke="#ddd">
+                <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+            <g stroke-dasharray="180 656">
+                <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0"
+                    d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358"
+                    d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+        </g>
+    </svg>
+</main>
+
+<form [formGroup]="solarForm">
+    <div class="card body-radius p-3 colPadding no-shadow">
+        <div class="row mt-3 p-0">
+
+            <!-- Card 1: Installations -->
+            <div class="col-md-6 p-4 colPadding" style="padding-right:10px !important;padding-left: 9px !important;">
+                <div class="card mb-3 title-card body-radius no-shadow">
+                    <div class="card-body p-4 mt-0  pt-0 no-shadow">
+                        <!-- Solar Street Light Installation -->
+                        <div class="mb-1">
+                            <label class="fw-bold mb-1">Solar Street Light Installation</label>
+                            <div class="row mb-5">
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">Doing Since</label>
+                                    <input type="date" class="form-control" formControlName="streetLightSince"
+                                        max="{{ maxDate | date:'yyyy-MM-dd' }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">No. Of Projects</label>
+                                    <input type="number" class="form-control" formControlName="streetLightProjects"
+                                        min="0">
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <!-- Solar Water Heater Installation -->
+                        <div class="mb-1">
+                            <label class="fw-bold mb-1">Solar Water Heater Installation</label>
+                            <div class="row mb-5">
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">Doing Since</label>
+                                    <input type="date" class="form-control" formControlName="waterHeaterSince"
+                                        max="{{ maxDate | date:'yyyy-MM-dd' }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">No. Of Projects</label>
+                                    <input type="number" class="form-control" formControlName="waterHeaterProjects"
+                                        min="0">
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <!-- Solar Pump Installation -->
+                        <div class="mb-1">
+                            <label class="fw-bold mb-1">Solar Pump Installation</label>
+                            <div class="row mb-5">
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">Doing Since</label>
+                                    <input type="date" class="form-control" formControlName="pumpSince"
+                                        max="{{ maxDate | date:'yyyy-MM-dd' }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">No. Of Projects</label>
+                                    <input type="number" class="form-control" formControlName="pumpProjects" min="0">
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- Rooftop Solar PV Installation -->
+                        <div>
+                            <label class="fw-bold mb-1">Rooftop Solar PV Installation</label>
+                            <div class="row mb-5">
+                                <div class="col-md-4">
+                                    <label class="mb-0 text-muted">Doing Since</label>
+                                    <input type="date" class="form-control" formControlName="rooftopSince"
+                                        max="{{ maxDate | date:'yyyy-MM-dd' }}">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="mb-0 text-muted">No. Of Projects</label>
+                                    <input type="number" class="form-control" formControlName="rooftopProjects" min="0">
+                                </div>
+                                <div class="col-md-5">
+                                    <label class="mb-0 text-muted">Total Installed Capacity (kW)</label>
+                                    <input type="number" class="form-control" formControlName="rooftopCapacity" min="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Maintenance -->
+            <div class="col-md-6 p-5 colPadding" style="padding-left:10px !important">
+                <div class="row mt-0">
+                    <div class="card mb-3 title-card body-radius mt-0 no-shadow">
+                        <div class="card-body p-4 mt-0 pt-1 no-shadow">
+                            <!-- Rooftop Solar PV Maintenance -->
+                            <div class="mb-3">
+                                <label class="fw-bold mb-1">Rooftop Solar PV Maintenance</label>
+                                <div class="row mb-5">
+                                    <div class="col-md-4">
+                                        <label class="mb-0 text-muted">Doing Since</label>
+                                        <input type="date" class="form-control"
+                                            formControlName="rooftopMaintenanceSince"
+                                            max="{{ maxDate | date:'yyyy-MM-dd' }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="mb-0 text-muted">No. Of Projects</label>
+                                        <input type="number" class="form-control"
+                                            formControlName="rooftopMaintenanceProjects" min="0">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="mb-0 text-muted">Total Maintained Capacity (kW)</label>
+                                        <input type="number" class="form-control"
+                                            formControlName="rooftopMaintenanceCapacity" min="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- Ground-Mounted Solar PV Maintenance -->
+                            <div>
+                                <label class="fw-bold mb-1">Ground-Mounted Solar PV Maintenance</label>
+                                <div class="row mb-5">
+                                    <div class="col-md-4">
+                                        <label class="mb-0 text-muted">Doing Since</label>
+                                        <input type="date" class="form-control" formControlName="groundMountedSince"
+                                            max="{{ maxDate | date:'yyyy-MM-dd' }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="mb-0 text-muted">No. Of Projects</label>
+                                        <input type="number" class="form-control"
+                                            formControlName="groundMountedProjects" min="0">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="mb-0 text-muted">Total Maintained Capacity (kW)</label>
+                                        <input type="number" class="form-control"
+                                            formControlName="groundMountedCapacity" min="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <!-- Ground-Mounted Solar PV Installation -->
+                            <div class="mb-9">
+                                <label class="fw-bold mb-2">Ground-Mounted Solar PV Installation</label>
+                                <div class="row mb-7">
+                                    <div class="col-md-4">
+                                        <label class="mb-0 text-muted">Doing Since</label>
+                                        <input type="date" class="form-control"
+                                            formControlName="groundMountedInstallationSince"
+                                            max="{{ maxDate | date:'yyyy-MM-dd' }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="mb-0 text-muted">No. Of Projects</label>
+                                        <input type="number" class="form-control"
+                                            formControlName="groundMountedInstallationProjects" min="0">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="mb-0 text-muted">Total Installed Capacity (kW)</label>
+                                        <input type="number" class="form-control"
+                                            formControlName="groundMountedInstallationCapacity" min="0">
+                                    </div>
+                                </div>
+                                <div class=" row">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="p-0 d-flex justify-content-end mt-1">
+        <mat-card-actions>
+            <!-- Update Button -->
+            <button class="button-add" type="submit" *ngIf="isEditMode != false"
+                (click)="submitSolrForm()">Update</button>&nbsp;
+
+            <!-- Submit Button -->
+            <button class="button-add" type="submit" *ngIf="isEditMode == false"
+                (click)="submitSolrForm()">Save</button>
+
+            <!-- Cancel Button -->
+            <button class="button-cancelProposal m-2" (click)="cancelSolarForm()">Cancel</button>
+        </mat-card-actions>
+    </div>
+</form>

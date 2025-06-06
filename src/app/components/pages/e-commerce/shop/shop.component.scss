@@ -1,0 +1,12 @@
+.custom-select{
+    padding: 0 !important;
+}
+::ng-deep{
+    .dark-mode .page-link:focus {
+        background-color: #272740 !important;
+        box-shadow: none;
+    }
+    .dark-mode .page-link:hover{
+        border-color: #24243b !important;
+    }
+}

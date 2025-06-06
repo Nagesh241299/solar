@@ -1,0 +1,1 @@
+{"version":3,"sources":["global/color-header.scss"],"names":[],"mappings":"AAAA;EACI;EACA;EACA","file":"color-header.css","sourcesContent":[".color-header  .header .form-inline .form-control {\r\n    color: var(--volgh-default-color) !important;\r\n    background-color: rgb(var(--volgh-primary-rgb)) !important;\r\n    border-color:  rgba(255,255,255, 0.2) !important;\r\n}"]}

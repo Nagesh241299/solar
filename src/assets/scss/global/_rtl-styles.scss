@@ -1,0 +1,94 @@
+.rtl {
+    .side-menu[_ngcontent-ng-c3865146789] {
+        margin-right: 0px !important;
+    }
+
+    .apexcharts-canvas .apexcharts-yaxis-texts-g {
+        text {
+            translate: -20px !important;
+        }
+    }
+
+    .horizontal-bar-chart .apexcharts-canvas .apexcharts-yaxis-texts-g {
+        text {
+            translate: -70px !important;
+        }
+    }
+
+    .fa[_ngcontent-ng-c3379605534] {
+        margin-left: 10px;
+        margin-right: 0px;
+    }
+    .angular-editor-toolbar[_ngcontent-ng-c834769704] .angular-editor-toolbar-set[_ngcontent-ng-c834769704] .foreground[_ngcontent-ng-c834769704] [_ngcontent-ng-c834769704]:after {
+        left: -16px;
+    }
+    .clock-face {
+        direction: ltr;
+    }
+    .mat-mdc-menu-item {
+        text-align: left !important;
+    }
+    .owl-nav .owl-next {
+        right: 957px;
+        top: 30%;
+    }
+    .fa[_ngcontent-ng-c4101058920] {
+        margin-right: 0px;
+        margin-left: 10px;
+    }
+    .owl-nav .owl-prev {
+        right: -26px !important;
+        top: 30%;
+    }
+
+    .single-month-picker {
+        .ngb-dp-arrow-next .ngb-dp-navigation-chevron {
+            transform: rotate(-134deg);
+            margin-left: 0.15em;
+            margin-right: 0.25em;
+        }
+
+        .ngb-dp-navigation-chevron {
+            transform: rotate(43deg);
+        }
+    }
+
+    .apexcharts-hidden-element-shown {
+        direction: ltr;
+    }
+
+    .ngx-colors-overlay {
+        direction: ltr;
+
+        .colors {
+            .circle.button {
+                right: -14px
+            }
+        }
+    }
+
+    .rounded-spit-buttons {
+        .btn-group.dropdown .btn {
+            &:nth-child(2) {
+                border-top-left-radius: 13rem !important;
+                border-bottom-left-radius: 13rem !important;
+                border-top-right-radius: 0rem !important;
+                border-bottom-right-radius: 0rem !important;
+            }
+
+        }
+    }
+
+    scrollbar-y {
+        left: 0 !important;
+        right: auto !important;
+    }
+
+    .dropdown-menu {
+        left: 0 !important;
+        right: auto !important;
+    }
+    .bs-tooltip-end .tooltip-arrow::before {
+        transform: rotate(0deg) !important;
+    }
+}

@@ -1,0 +1,417 @@
+// .custom-radio {
+//     width: 15px;
+//     /* Adjust as needed */
+//     height: 15px;
+//     /* Adjust as needed */
+//     border-color: black;
+// }
+
+
+// .google-logo {
+//     width: 80px;
+//     // margin-bottom: 20px;
+//     margin-left: auto;
+//     margin-right: auto;
+//     display: block;
+// }
+
+// .border-box {
+//     border: 2px solid black;
+
+// }
+
+// .overlay {
+//     /* Overlay styles */
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-color: rgba(0, 0, 0, 0.5);
+//     /* Semi-transparent black */
+//     z-index: 9998;
+//     /* Ensure it's above other content */
+// }
+
+// .login-container {
+//     display: flex;
+//     height: 99vh;
+//     overflow: hidden;
+// }
+
+// .left-half {
+//     width: 50vw;
+//     height: 100vh;
+//     //background-color: #f0f0f0;
+//     display: inline;
+//     align-items: center;
+//     justify-content: center;
+//     overflow: hidden;
+// }
+
+// .full-image {
+//     width: 100%;
+//     height: 100%;
+//     object-fit: cover;
+//     padding: 5px !important;
+//     border-radius: 25px !important;
+// }
+
+// .right-half {
+//     width: 50%;
+//     padding: 0px;
+//     position: relative;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     background-color: #fff;
+//     flex-direction: column;
+// }
+
+// .logo {
+//     position: absolute;
+//     top: 3vh;
+//     right: 3vw;
+//     // width: 150px;
+//     // height: 90px;
+//     // width: 150px;
+//     height: 60px;
+//     /* Adjust the logo size as needed */
+// }
+
+
+// .btn-primary {
+//     width: 100%;
+//     padding: 10px;
+//     background-color: #007bff;
+//     border: none;
+//     border-radius: 5px;
+//     color: white;
+//     font-size: 16px;
+//     cursor: pointer;
+//     transition: background-color 0.3s ease;
+// }
+
+// .btn-primary:hover {
+//     background-color: #0056b3;
+// }
+
+
+// .email-input img {
+//     margin-right: 0px;
+//     /* Adjust spacing between the image and input field */
+// }
+
+// .element.style {
+//     width: 230px !important;
+// }
+
+// .form-group input[type="radio"]:focus {
+//     outline: none;
+//     box-shadow: none;
+// }
+
+
+// .radio-group {
+//     display: flex;
+//     align-items: center;
+//     gap: 5px;
+//     /* Space between radio options */
+// }
+
+// /* Remove focus outlines for the hidden radio input */
+// ::ng-deep .mat-radio-button .mat-radio-input {
+//     position: absolute;
+//     /* Ensures it doesn't interfere with layout */
+//     opacity: 0;
+//     /* Makes it completely invisible */
+//     pointer-events: none;
+//     /* Prevents interaction with the hidden input */
+//     outline: none;
+//     /* Removes focus outlines */
+//     box-shadow: none;
+//     /* Removes any box-shadow */
+// }
+
+
+
+
+// ::ng-deep .mat-radio-button .mat-radio-input:focus {
+//     outline: none;
+// }
+
+// .color {
+//     color: #1f82d3;
+//     padding-left: 10px;
+//     text-align: left;
+// }
+
+
+// .text {
+//     color: #200D63;
+//     padding-right: 120px !important;
+//     text-align: left;
+//     font-weight: bold;
+// }
+
+
+// .button-sendOtp {
+//     background-color: #200D63;
+//     border-radius: 34px;
+//     height: 41px;
+//     width: 320px;
+//     color: #FFFFFF;
+//     font-size: 14px;
+//     font-weight: 600;
+//     //display: flex;
+//     text-align: center;
+//     padding-right: 40px !important;
+
+// }
+
+// .email {
+//     margin-left: 25px !important;
+// }
+
+// /* Input container to position the icon */
+// .input-container {
+//     position: relative;
+//     width: 100%;
+// }
+
+// /* Icon styling inside the input */
+// .input-container .icon {
+//     position: absolute;
+//     left: 10px;
+//     top: 22px;
+//     transform: translateY(-50%);
+//     color: #888;
+//     /* Grey color for the icon */
+//     pointer-events: none;
+//     /* Prevent the icon from blocking input clicks */
+// }
+
+// /* Adjust padding to avoid text overlap with the icon */
+// .input-container .form-control {
+//     padding-left: 45px;
+//     /* Space for the icon */
+//     height: 45px;
+//     /* Adjust height for better appearance */
+//     font-size: 15px;
+// }
+
+
+/* mobile view */
+
+/* General Styles (Unchanged for Desktop) */
+.custom-radio {
+    width: 15px;
+    height: 15px;
+    border-color: black;
+}
+
+.google-logo {
+    width: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.border-box {
+    border: 2px solid black;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
+
+.login-container {
+    display: flex;
+    height: 99vh;
+    overflow: hidden;
+}
+
+.left-half {
+    width: 50vw;
+    height: 100vh;
+    display: inline;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.full-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 5px !important;
+    border-radius: 25px !important;
+}
+
+.right-half {
+    width: 50%;
+    padding: 0px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    flex-direction: column;
+}
+
+.logo {
+    position: absolute;
+    top: 3vh;
+    right: 3vw;
+    height: 60px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.email-input img {
+    margin-right: 0px;
+}
+
+.element.style {
+    width: 230px !important;
+}
+
+.form-group input[type="radio"]:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+::ng-deep .mat-radio-button .mat-radio-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    outline: none;
+    box-shadow: none;
+}
+
+::ng-deep .mat-radio-button .mat-radio-input:focus {
+    outline: none;
+}
+
+.color {
+    color: #1f82d3;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.text {
+    color: #200D63;
+    padding-right: 120px !important;
+    text-align: left;
+    font-weight: bold;
+}
+
+.button-sendOtp {
+    background-color: #200D63;
+    border-radius: 34px;
+    height: 41px;
+    width: 320px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    padding-right: 40px !important;
+}
+
+.email {
+    margin-left: 25px !important;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.input-container .icon {
+    position: absolute;
+    left: 10px;
+    top: 22px;
+    transform: translateY(-50%);
+    color: #888;
+    pointer-events: none;
+}
+
+.input-container .form-control {
+    padding-left: 45px;
+    height: 45px;
+    font-size: 15px;
+}
+
+/* Responsive Design for Mobile View */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .left-half {
+        width: 100%;
+        height: auto;
+    }
+
+    .right-half {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .logo {
+        position: static;
+        margin-bottom: 20px;
+    }
+
+    .full-image {
+        border-radius: 0;
+        padding: 0;
+    }
+
+    .button-sendOtp {
+        width: 100%;
+        height: 50px;
+    }
+
+    .text {
+        text-align: center;
+        padding-right: 0 !important;
+    }
+
+    .input-container .form-control {
+        font-size: 14px;
+        height: 40px;
+    }
+
+    .color {
+        text-align: center;
+        padding-left: 0;
+    }
+}

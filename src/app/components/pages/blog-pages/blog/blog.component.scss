@@ -1,0 +1,15 @@
+.card-aside{
+    flex-direction: row !important;
+    flex: initial !important;
+}
+.btn-info, .btn-warning{
+    color: #fff;
+}
+::ng-deep{
+    .dark-mode
+    app-blog{
+        a.icon:hover {
+            color: #eee !important;
+        }
+    }
+}

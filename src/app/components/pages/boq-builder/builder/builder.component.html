@@ -1,0 +1,1139 @@
+<main class="loader-container" *ngIf="isLoader">
+    <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5ebd3e" />
+                <stop offset="33%" stop-color="#ffb900" />
+                <stop offset="67%" stop-color="#f78200" />
+                <stop offset="100%" stop-color="#e23838" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0%" stop-color="#e23838" />
+                <stop offset="33%" stop-color="#973999" />
+                <stop offset="67%" stop-color="#009cdf" />
+                <stop offset="100%" stop-color="#5ebd3e" />
+            </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-width="16">
+            <g class="ip__track" stroke="#ddd">
+                <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+            <g stroke-dasharray="180 656">
+                <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0"
+                    d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358"
+                    d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+        </g>
+    </svg>
+</main>
+
+
+<div class="container-fluid pt-0">
+    <!-- <app-header-breadcrumb title="BoQ Builder" title1="BoQ Builder" activeitem="BoQ Builder"></app-header-breadcrumb> -->
+
+    <div class="row chatbox">
+        <div class="col-sm-12 col-md-12 col-lg-7 col-xl-4 col-xxl-5 chat">
+            <div class="card body-radius mb-3">
+                <div class="card-body padding-bottom p-2 ">
+                    <div class="card-header-section">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="chat-header-title me-0">
+                                    <i class="fa fa-arrow-left btn-back" [routerLink]="'/pages/boq'"></i>
+                                    BoQ Builder
+                                    <i class="fa fa-refresh float-end btn-back" aria-hidden="true" (click)="resetChat()"></i>
+                                    <i class="fa fa-volume-up float-end btn-back" aria-hidden="true" *ngIf="isSpeechEnabled" (click)="isSpeechEnabled = !isSpeechEnabled"></i>
+                                    <i class="fa fa-volume-off float-end btn-back" aria-hidden="true" *ngIf="!isSpeechEnabled" (click)="speechStop()"></i>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="msg_card_body pt-3" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+                        <div *ngFor="let result of chatResponses">
+                            <div class="d-flex justify-content-start mb-4" *ngIf="result.flag == 0">
+                                <div class="img_cont_msg">
+                                    <img src="./assets/images/bot-1.png" class="rounded-circle bot_img_msg" alt="img">
+                                </div>
+                                <div class="msg_cotainer msg_cotainer-bot message-text">
+                                    <div [innerHTML]="result.chats"></div>
+                                    <span class="msg_time">{{result.datetime | date:'dd-MMM-yyyy hh:mm a'}}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end mb-4" *ngIf="result.flag == 1">
+                                <div class="msg_cotainer_send msg_cotainer-user message-text">
+                                    <div [innerHTML]="result.chats"></div>
+                                    <span class="msg_time_send">{{result.datetime | date:'dd-MMM-yyyy hh:mm a'}}</span>
+                                </div>
+                                <div class="img_cont_msg">
+                                    <img src="./assets/images/profile-pic.svg" class="rounded-circle user_img_msg"
+                                        alt="img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div *ngFor="let choice of choices" class="badge badge-info-gradient fs-12 fw-bolder m-1 p-2 rounded-pill cursor-pointer" (click)="selectSuggestionOption(choice)">
+                                {{choice}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card-footer p-0 pr-10"> -->
+                    <div class="msb-reply d-flex bg-transparent padding-top" >
+                        <span class="input-group-text attach_btn btn-attach-mic" (click)="startRecording()"
+                            *ngIf="!recognizing">
+                            <i class="fa fa-microphone icon-mic" *ngIf="!recognizing"></i>
+                        </span>
+                        <span class="input-group-text input-group-text-stop attach_btn btn-attach-mic"
+                            (click)="stopRecording($event)" *ngIf="recognizing">
+                            <i class="fa fa-stop-circle-o icon-mic text-danger fs-20"></i>
+                            <!-- <img src="./assets/images/chat/stop-1.gif" class="rounded-circle recording-gif" alt="img" > -->
+                        </span>
+                        <input type="text" placeholder="Enter message here.."
+                        class="form-control form-control-lg fs-15" [(ngModel)]="chatInputBox"
+                        [ngModelOptions]="{standalone: true}" (keydown.enter)="sendResponse()" autofocus>
+                            <!-- <textarea placeholder="Typing a message here..." class="border-0" [(ngModel)]="chatInputBox"
+                                [ngModelOptions]="{standalone: true}" autofocus></textarea> -->
+                        <span class="reply-submit-btn text-white" (click)="sendResponse()"><i
+                                class="fa fa-paper-plane"></i></span>
+                    </div>
+                <!-- </div> -->
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-5 col-xl-8 col-xxl-7 ps-0" *ngIf="isProductValid()">
+            <div class="card body-radius title-card p-3">
+                <div class="col-12 mb-3">
+                    <label class="mb-0 title-text">Project Capacity</label>
+                    <h5 class="mb-0 title-value">{{product.projectSize}}</h5>
+                </div>
+            </div>
+            <div class="card body-radius p-3 mt-3">
+                <div class="row">
+                    <div class="col-6">
+                        <label class="mb-0 title-text">Indicative Project Cost (₹)</label>
+                        <h5 class="mb-0 title-amount">{{product.totalCost.toLocaleString('en-IN')}}</h5>
+                    </div>
+                    <div class="col-6">
+                        <button class="button-add float-end rounded-pill ml-15"
+                            (click)="confirmBoQ(saveConfirmationModal)" *ngIf="!isValueChangedFlag">Save</button>
+                        <button class="float-end rounded-pill btn-send-cost" (click)="sendCostEstimation()"
+                            *ngIf="!isValueChangedFlag">Request for Quotation</button>
+                        <button class="button-add float-end rounded-pill" (click)="calculateBoQ()" *ngIf="isValueChangedFlag">Calculate</button>
+                    </div>
+                </div>
+                <div class="product-details-section mt-3">
+                    <!-- Start Module Section -->
+                    <div class="card body-radius no-shadow title-card p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="details-title mb-1">Module Details</label>
+                            </div>
+                            <div class="col-4">
+                                <span class="float-end"><button class="action-btns add-btn"
+                                        (click)="addModule(this.selectedProductOptionIndex,'moduleDetails')"
+                                        *ngIf="product.moduleDetails.length == 0"><i class="fa fa-plus fs-16"
+                                            title="Add"></i></button></span>
+                                <span class="float-end"><button class="action-btns delete-btn"
+                                        (click)="removeAll(this.selectedProductOptionIndex,'moduleDetails')"
+                                        *ngIf="product.moduleDetails.length == 1"><i class="fa fa-trash fs-16"
+                                            title="Remove All"></i></button></span>
+                            </div>
+                        </div>
+                        <!-- card body-radius section-border-1 no-shadow p-3 mt-3 -->
+                        <div class="mt-2"
+                            *ngIf="product.moduleDetails.length > 0">
+                            <div class="row" *ngFor="let modules of product.moduleDetails; let m=index">
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Brand</label>
+                                    <select class="form-control form-select select2" #moduleBrandSelector
+                                        data-bs-placeholder="Select" [(ngModel)]="modules.brandName"
+                                        (change)="fetchModuleDetails(moduleBrandSelector.value,modules)">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfModuleBrands" [value]="item.name">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Cell Type</label>
+                                    <select class="form-control form-select select2"
+                                        (change)="fetchPeakPower(modules.brandName,modules.cellTypeName,modules)"
+                                        data-bs-placeholder="Select" [(ngModel)]="modules.cellTypeName">
+                                        <option label="Select">Cell Type</option>
+                                        <option *ngFor="let item of listOfModuleCellTypes" [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Peak Power (Wp)</label>
+
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="modules.peakPower" (change)="changePeakPower(modules)">
+                                        <option label="Select">Peak Power</option>
+                                        <option *ngFor="let item of listOfModulePeakPowers" [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Quantity</label>
+                                    <div class="input-wrapper">
+                                        <div class="input-group input-group-prepend mb-3">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('moduleDetails','quantity','minus',m)"><i
+                                                        class="fa fa-minus fs-11" title="Remove"></i></button>
+                                            </div>
+                                            <input type="text" class="form-control text-center" placeholder=""
+                                                [(ngModel)]="modules.quantity">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('moduleDetails','quantity','add',m)"><i
+                                                        class="fa fa-plus fs-11" title="Add"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-8">
+                                    <h5>Alternate Option</h5>
+                                </div>
+                                <div class="col-4">
+                                    <h5 class="float-end cursor-pointer" *ngIf="!isModuleOptionEnabled" (click)="isModuleOptionEnabled = !isModuleOptionEnabled">Show <i class="fa fa-chevron-down" aria-hidden="true"></i></h5>
+                                    <h5 class="float-end cursor-pointer" *ngIf="isModuleOptionEnabled" (click)="isModuleOptionEnabled = !isModuleOptionEnabled">Hide <i class="fa fa-chevron-up" aria-hidden="true"></i></h5>
+                                </div>
+                            </div>
+                            <div class="row mt-2" *ngIf="isModuleOptionEnabled">
+                                <div class="col-4" *ngFor="let item of alternateModuleList; let m=index" >
+                                    <div class="card alternate-section" (click)="addAlternateOption(item,'Module')">
+                                        <div class="saving-section" *ngIf="item.percent_savings != 0"> <i class="fa fa-caret-down text-success" aria-hidden="true" *ngIf="item.percent_savings > 0"></i><i class="fa fa-caret-up text-danger" aria-hidden="true" *ngIf="item.percent_savings < 0"></i> {{item.percent_savings < 0 ? -item.percent_savings : item.percent_savings}}%</div>
+                                        <h4 class="fs-16 fw-bold mb-2">{{item.brandName}}</h4>
+                                        <h6 class="fs-12 fw-semibold mb-0 sub-title-text">{{item.cellTypeName}} | {{item.peakPower}} | #{{item.quantity}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- End Module Section -->
+
+                    <!-- Start Inverter Section -->
+                    <div class="card body-radius no-shadow title-card p-3 mt-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="details-title mb-1">Inverter Details</label>
+                            </div>
+                            <div class="col-4">
+                                <span class="float-end"><button class="action-btns delete-btn"
+                                        (click)="removeAll(this.selectedProductOptionIndex,'inverterDetails')"
+                                        *ngIf="product.inverterDetails.length > 0"><i class="fa fa-trash fs-16"
+                                            title="Remove All"></i></button></span>
+                                <span class="float-end"><button class="action-btns add-btn"
+                                        (click)="addInverter(product.inverterDetails)"><i class="fa fa-plus fs-16"
+                                            title="Add"></i></button></span>
+
+                            </div>
+                        </div>
+                        <div class="mt-2"
+                            *ngIf="product.inverterDetails.length > 0">
+                            <div class="row" *ngFor="let inverter of product.inverterDetails; let i=index">
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Brand</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="inverter.brandName" (change)="onInverterBrandChange()">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfInverterBrands" [value]="item.name">
+                                            {{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label class="mb-0 text-muted">Type</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="inverter.type"
+                                        (change)="fetchRatedACPowerInverter(inverter.brandName,inverter.type,i)">
+                                        <option label="Select">Type</option>
+                                        <option *ngFor="let item of listOfInverterTypes" [value]="item.inverter_type">
+                                            {{item.inverter_type}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Rated AC Power</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="inverter.ratedACPower" (change)="changeRatedACPower()">
+                                        <option label="Select">Rated AC Power</option>
+                                        <option *ngFor="let item of inverter.listOfInverterRatedACPower"
+                                            [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Quantity</label>
+                                    <div class="input-wrapper">
+                                        <div class="input-group input-group-prepend mb-3">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('inverterDetails','quantity','minus',i)"><i
+                                                        class="fa fa-minus fs-11" title="Remove"></i></button>
+                                            </div>
+                                            <input type="text" class="form-control text-center" placeholder=""
+                                                [(ngModel)]="inverter.quantity">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('inverterDetails','quantity','add',i)"><i
+                                                        class="fa fa-plus fs-11" title="Add"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-1" *ngIf="i !== 0">
+                                    <button ngbtooltip="Delete" data-bs-toggle="tooltip" data-bs-original-title="Delete"
+                                        class="btn btn-danger btn-sm mt-5"
+                                        (click)="removeItem(product.inverterDetails,i)">
+                                        <span class="fe fe-trash-2 fs-14"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-8">
+                                <h5>Alternate Option</h5>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="float-end cursor-pointer" *ngIf="!isInverterOptionEnabled" (click)="isInverterOptionEnabled = !isInverterOptionEnabled">Show <i class="fa fa-chevron-down" aria-hidden="true"></i></h5>
+                                <h5 class="float-end cursor-pointer" *ngIf="isInverterOptionEnabled" (click)="isInverterOptionEnabled = !isInverterOptionEnabled">Hide <i class="fa fa-chevron-up" aria-hidden="true"></i></h5>
+                            </div>
+                        </div>
+                        <div class="row mt-2" *ngIf="isInverterOptionEnabled">
+                            <div class="col-4" *ngFor="let item of alternateInverterList; let m=index">
+                                <div class="card alternate-section" (click)="addAlternateOption(item,'Inverter')">
+                                    <div class="saving-section" *ngIf="item.percent_savings != 0"><i class="fa fa-caret-down text-success" aria-hidden="true" *ngIf="item.percent_savings > 0"></i><i class="fa fa-caret-up text-danger" aria-hidden="true" *ngIf="item.percent_savings < 0"></i> {{item.percent_savings < 0 ? -item.percent_savings : item.percent_savings}}%</div>
+                                    <h4 class="fs-16 fw-bold mb-2">{{item.brandName}}</h4>
+                                    <h6 class="fs-12 fw-semibold mb-0 sub-title-text">{{item.type}} | {{item.ratedACPower}} | #{{item.quantity}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Inverter Section -->
+
+                    <!-- Start DC Cables Details Section -->
+                    <div class="card body-radius no-shadow title-card p-3 mt-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="details-title mb-1">DC Cables Details</label>
+                            </div>
+                            <div class="col-4">
+                                <span class="float-end"><button class="action-btns add-btn"
+                                        (click)="addModule(this.selectedProductOptionIndex,'dCCableDetails')"
+                                        *ngIf="product.dCCableDetails.length == 0"><i class="fa fa-plus fs-16"
+                                            title="Add"></i></button></span>
+                                <span class="float-end"><button class="action-btns delete-btn"
+                                        (click)="removeAll(this.selectedProductOptionIndex,'dCCableDetails')"
+                                        *ngIf="product.dCCableDetails.length == 1"><i class="fa fa-trash fs-16"
+                                            title="Remove All"></i></button></span>
+                            </div>
+                        </div>
+                        <div class="mt-2"
+                            *ngIf="product.dCCableDetails.length > 0">
+                            <div class="row" *ngFor="let dccaables of product.dCCableDetails; let d=index">
+                                <div class="col-2">
+                                    <label class="mb-0 text-muted">Brand</label>
+                                    <select class="form-control form-select select2"
+                                        (change)="fetchDCConductMaterial(dccaables.brandName)"
+                                        data-bs-placeholder="Select" [(ngModel)]="dccaables.brandName">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfDCCableBrands" [value]="item.name">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Conductor Material</label>
+                                    <select class="form-control form-select select2"
+                                        (change)="fetchDCCrossSectionalArea(dccaables.brandName,dccaables.conductorMaterialName)"
+                                        data-bs-placeholder="Select" [(ngModel)]="dccaables.conductorMaterialName">
+                                        <option label="Select">Conductor Material</option>
+                                        <option *ngFor="let item of listOfDCCableConductorMaterial" [value]="item.name">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Cross Sectional Area</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="dccaables.crossSectionalArea" (change)="onChangeDCCableCrossSectionalArea()">
+                                        <option label="Select">Cross Sectional Area</option>
+                                        <option *ngFor="let item of listOfDCCrossSectionalArea" [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label class="mb-0 text-muted"># of Cores</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="dccaables.numberofCores" (change)="onChangeDCCableNumberofCores()">
+                                        <option label="Select"># of Cores</option>
+                                        <option *ngFor="let item of listOfDCCableNumberOfCores" [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label class="mb-0 text-muted">Length</label>
+                                    <div class="input-wrapper">
+                                        <div class="input-group input-group-prepend mb-3">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('dCCableDetails','quantity','minus',d)"><i
+                                                        class="fa fa-minus fs-11" title="Remove"></i></button>
+                                            </div>
+                                            <input type="text" class="form-control text-center p-0" placeholder=""
+                                                [(ngModel)]="dccaables.quantity">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('dCCableDetails','quantity','add',d)"><i
+                                                        class="fa fa-plus fs-11" title="Add"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End DC Cables Details Section -->
+
+                    <!-- Start DCDB Details Section -->
+                    <div class="card body-radius no-shadow title-card p-3 mt-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="details-title mb-1">DCDB Details</label>
+                            </div>
+                            <!-- <div class="col-4">
+                                <span class="float-end"><button class="action-btns add-btn"
+                                        (click)="addModule(this.selectedProductOptionIndex,'dCDBDetails')"
+                                        *ngIf="product.dCDBDetails.length == 0"><i class="fa fa-plus fs-16"
+                                            title="Add"></i></button></span>
+                                <span class="float-end"><button class="action-btns delete-btn"
+                                        (click)="removeAll(this.selectedProductOptionIndex,'dCDBDetails')"
+                                        *ngIf="product.dCDBDetails.length == 1"><i class="fa fa-trash fs-16"
+                                            title="Remove All"></i></button></span>
+                            </div> -->
+                        </div>
+                        <div class="mt-2"
+                            *ngIf="product.dCDBDetails.length > 0">
+                            <div class="row" *ngFor="let dcdb of product.dCDBDetails; let dc=index">
+                                <!-- <div class="col-3 mb-3">
+                                    <label class="mb-0 text-muted">Brand</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="dcdb.brandName" (change)="changeDCDBBrand()">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfDCDBBrand" [value]="item.name">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label class="mb-0 text-muted"># of Inputs</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="dcdb.numberOfInputs" (change)="changeDCDBNumberOfInputsAndOutput()">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfDCDBNoOfInput" [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label class="mb-0 text-muted"># of Outputs</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="dcdb.numberOfOutputs" (change)="changeDCDBNumberOfInputsAndOutput()">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfDCDBNoOfOutput" [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Rated Voltage</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="dcdb.ratedVoltage" (change)="changeDCDBRatedVoltage()">
+                                        <option label="Select">Rated Voltage</option>
+                                        <option *ngFor="let item of listOfDCDBRatedVoltage" [value]="item">
+                                            {{item}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label class="mb-0 text-muted">Rated Current</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="dcdb.ratedCurrent" (change)="changeDCDBRatedCurrent()">
+                                        <option label="Select">Rated Voltage</option>
+                                        <option *ngFor="let item of listOfDCDBRatedCurrent" [value]="item">
+                                            {{item}}
+                                        </option>
+                                    </select>
+                                </div> -->
+                                <div class="col-5">
+                                    <label class="mb-0 text-muted">Specification</label>
+                                    <h5 class="mb-0 mt-2">{{dcdb.specifications}}</h5>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Quantity</label>
+                                    <div class="input-wrapper">
+                                        <div class="input-group input-group-prepend">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('dCDBDetails','quantity','minus',dc)"><i
+                                                        class="fa fa-minus fs-11" title="Remove"></i></button>
+                                            </div>
+                                            <input type="text" class="form-control  text-center" placeholder=""
+                                                [(ngModel)]="dcdb.quantity">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('dCDBDetails','quantity','add',dc)"><i
+                                                        class="fa fa-plus fs-11" title="Add"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End DCDB Details Section -->
+
+                    <!-- Start AC Cables Details Section -->
+                    <div class="card body-radius no-shadow title-card p-3 mt-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="details-title mb-1">AC Cables Details</label>
+                            </div>
+                            <div class="col-4">
+                                <span class="float-end"><button class="action-btns add-btn"
+                                        (click)="addModule(this.selectedProductOptionIndex,'aCCableDetails')"
+                                        *ngIf="product.aCCableDetails.length == 0"><i class="fa fa-plus fs-16"
+                                            title="Add"></i></button></span>
+                                <span class="float-end"><button class="action-btns delete-btn"
+                                        (click)="removeAll(this.selectedProductOptionIndex,'aCCableDetails')"
+                                        *ngIf="product.aCCableDetails.length == 1"><i class="fa fa-trash fs-16"
+                                            title="Remove All"></i></button></span>
+                            </div>
+                        </div>
+                        <div class="mt-2"
+                            *ngIf="product.aCCableDetails.length > 0">
+                            <div class="row" *ngFor="let accable of product.aCCableDetails; let a=index">
+                                <div class="col-4 mb-3">
+                                    <label class="mb-0 text-muted">Brand</label>
+                                    <select class="form-control form-select select2"
+                                        (change)="fetchACConductMaterial(accable.brandName)" data-bs-placeholder="Select"
+                                        [(ngModel)]="accable.brandName">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfACCableBrands" [value]="item.name">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-4 mb-2">
+                                    <label class="mb-0 text-muted">Conductor Material</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="accable.conductorMaterialName"
+                                        (change)="fetchACCrossSectionalArea(accable.brandName,accable.conductorMaterialName)">
+                                        <option label="Select">Conductor Material</option>
+                                        <option *ngFor="let item of listOfACCableConductorMaterial" [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-4 mb-2">
+                                    <label class="mb-0 text-muted">Cross Sectional Area</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="accable.crossSectionalArea" (change)="changeACCrossSectionalArea()">
+                                        <option label="Select">Cross Sectional Area</option>
+                                        <option *ngFor="let item of listOfACCrossSectionalArea" [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label class="mb-0 text-muted"># of Cores</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="accable.numberOfCores" (change)="changeACNoOfCores()">
+                                        <option label="Select"># of Cores</option>
+                                        <option *ngFor="let item of listOfACCableNumberOfCores" [value]="item">
+                                            {{item}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label class="mb-0 text-muted">Armoured</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="accable.armoured" (change)="changeACArmoured()">
+                                        <option label="Select">Armoured</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label class="mb-0 text-muted">Length</label>
+                                    <div class="input-wrapper">
+                                        <div class="input-group input-group-prepend mb-3">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('aCCableDetails','quantity','minus',a)"><i
+                                                        class="fa fa-minus fs-11" title="Remove"></i></button>
+                                            </div>
+                                            <input type="text" class="form-control  text-center" placeholder=""
+                                                [(ngModel)]="accable.quantity">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('aCCableDetails','quantity','add',a)"><i
+                                                        class="fa fa-plus fs-11" title="Add"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End AC Cables Details Section -->
+
+                    <!-- Start ACDB Details Section -->
+                    <div class="card body-radius no-shadow title-card p-3 mt-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="details-title mb-1">ACDB Details</label>
+                            </div>
+                            <!-- <div class="col-4">
+                                <span class="float-end"><button class="action-btns add-btn"
+                                        (click)="addModule(this.selectedProductOptionIndex,'aCDBDetails')"
+                                        *ngIf="product.aCDBDetails.length == 0"><i class="fa fa-plus fs-16"
+                                            title="Add"></i></button></span>
+                                <span class="float-end"><button class="action-btns delete-btn"
+                                        (click)="removeAll(this.selectedProductOptionIndex,'aCDBDetails')"
+                                        *ngIf="product.aCDBDetails.length == 1"><i class="fa fa-trash fs-16"
+                                            title="Remove All"></i></button></span>
+                            </div> -->
+                        </div>
+                        <div class="mt-2"
+                            *ngIf="product.aCDBDetails.length > 0">
+                            <div class="row" *ngFor="let acdb of product.aCDBDetails; let ac=index">
+                                <!-- <div class="col-3 mb-3">
+                                    <label class="mb-0 text-muted">Brand</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="acdb.brandName" (change)="changeACDBBrand()">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfACDBBrand" [value]="item.name">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label class="mb-0 text-muted"># of Inputs</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="acdb.numberOfInputs" (change)="changeACDBNoOfInputAndOutput()">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfACDBNoOfInput" [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label class="mb-0 text-muted"># of Outputs</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="acdb.numberOfOutputs" (change)="changeACDBNoOfInputAndOutput()">
+                                        <option label="Select"># of Outputs</option>
+                                        <option *ngFor="let item of listOfACDBNoOfOutput" [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Rated Voltage</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="acdb.ratedVoltage" (change)="changeACDBRatedVoltage()">
+                                        <option label="Select">Rated Voltage</option>
+                                        <option *ngFor="let item of listOfACDBRatedVoltage" [value]="item">
+                                            {{item}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <label class="mb-0 text-muted">Rated Current</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="acdb.ratedCurrent" (change)="changeACDBRatedCurrent()">
+                                        <option label="Select">Rated Voltage</option>
+                                        <option *ngFor="let item of listOfACDBRatedCurrent" [value]="item">
+                                            {{item}}
+                                        </option>
+                                    </select>
+                                </div> -->
+                                <div class="col-5">
+                                    <label class="mb-0 text-muted">Specification</label>
+                                    <h5 class="mb-0 mt-2">{{acdb.specifications}}</h5>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Quantity</label>
+                                    <div class="input-wrapper">
+                                        <div class="input-group input-group-prepend mb-3">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('aCDBDetails','quantity','minus',ac)"><i
+                                                        class="fa fa-minus fs-11" title="Remove"></i></button>
+                                            </div>
+                                            <input type="text" class="form-control  text-center" placeholder=""
+                                                [(ngModel)]="acdb.quantity">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('aCDBDetails','quantity','add',ac)"><i
+                                                        class="fa fa-plus fs-11" title="Add"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End ACDB Details Section -->
+
+                    <!-- Start MC4 Connectors Section -->
+                    <div class="card body-radius no-shadow title-card p-3 mt-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="details-title mb-1">MC4 Connectors</label>
+                            </div>
+                            <!-- <div class="col-4">
+                                <span class="float-end"><button class="action-btns add-btn"
+                                        (click)="addModule(this.selectedProductOptionIndex,'mC4Details')"
+                                        *ngIf="product.mC4Details.length == 0"><i class="fa fa-plus fs-16"
+                                            title="Add"></i></button></span>
+                                <span class="float-end"><button class="action-btns delete-btn"
+                                        (click)="removeAll(this.selectedProductOptionIndex,'mC4Details')"
+                                        *ngIf="product.mC4Details.length == 1"><i class="fa fa-trash fs-16"
+                                            title="Remove All"></i></button></span>
+                            </div> -->
+                        </div>
+                        <div class="mt-2"
+                            *ngIf="product.mC4Details.length > 0">
+                            <div class="row" *ngFor="let mc4 of product.mC4Details; let mci=index">
+                                <!-- <div class="col-3">
+                                    <label class="mb-0 text-muted">Brand</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="mc4.brandName" (change)="changeMC4Brand()">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfMC4Brand" [value]="item.name">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                    
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Rated Voltage</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="mc4.ratedVoltage" (change)="changeMC4RatedVoltage()">
+                                        <option label="Select">Rated Voltage</option>
+                                        <option *ngFor="let item of listOfMC4RatedVoltage" [value]="item">
+                                            {{item}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Rated Current</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="mc4.ratedCurrent" (change)="changeMC4RatedCurrent()">
+                                        <option label="Select">Rated Voltage</option>
+                                        <option *ngFor="let item of listOfMC4RatedCurrent" [value]="item">
+                                            {{item}}
+                                        </option>
+                                    </select>
+                                </div> -->
+                                <div class="col-5">
+                                    <label class="mb-0 text-muted">Specification</label>
+                                    <h5 class="mb-0 mt-2">{{mc4.specifications}}</h5>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Quantity</label>
+                                    <div class="input-wrapper">
+                                        <div class="input-group input-group-prepend mb-3">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('mC4Details','quantity','minus',mci)"><i
+                                                        class="fa fa-minus fs-11" title="Remove"></i></button>
+                                            </div>
+                                            <input type="text" class="form-control  text-center" placeholder=""
+                                                [(ngModel)]="mc4.quantity">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('mC4Details','quantity','add',mci)"><i
+                                                        class="fa fa-plus fs-11" title="Add"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End MC4 Connectors Section -->
+
+                    <!-- Start Lightning Arrestors Section -->
+                    <div class="card body-radius no-shadow title-card p-3 mt-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="details-title mb-1">Lightning Arrestors</label>
+                            </div>
+                            <div class="col-4">
+                                <span class="float-end"><button class="action-btns add-btn"
+                                        (click)="addModule(this.selectedProductOptionIndex,'lightningArrestors')"
+                                        *ngIf="product.lightningArrestors.length == 0"><i class="fa fa-plus fs-16"
+                                            title="Add"></i></button></span>
+                                <span class="float-end"><button class="action-btns delete-btn"
+                                        (click)="removeAll(this.selectedProductOptionIndex,'lightningArrestors')"
+                                        *ngIf="product.lightningArrestors.length == 1"><i class="fa fa-trash fs-16"
+                                            title="Remove All"></i></button></span>
+                            </div>
+                        </div>
+                        <div class="mt-2"
+                            *ngIf="product.lightningArrestors.length > 0">
+                            <div class="row" *ngFor="let lightning of product.lightningArrestors; let sc=index">
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Brand</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="lightning.brandName"  (change)="setListOfProtectionRadius(lightning.brandName)">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfProtectionRadiusBrand" [value]="item.label">
+                                            {{item.label}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Protection Radius</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="lightning.protectionRadius" (change)="onBrandChanges()">
+                                        <option label="Select">Protection Radius</option>
+                                        <option *ngFor="let item of listOfProtectionRadius" [value]="item.protectionRadius">
+                                            {{item.protectionRadius}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Quantity</label>
+                                    <div class="input-wrapper">
+                                        <div class="input-group input-group-prepend">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('lightningArrestors','quantity','minus',sc)"><i
+                                                        class="fa fa-minus fs-11" title="Remove"></i></button>
+                                            </div>
+                                            <input type="text" class="form-control  text-center" placeholder=""
+                                                [(ngModel)]="lightning.quantity">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('lightningArrestors','quantity','add',sc)"><i
+                                                        class="fa fa-plus fs-11" title="Add"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Lightning Arrestors Section -->
+
+                    <!-- Start Earthing Electrodes Section -->
+                    <div class="card body-radius no-shadow title-card p-3 mt-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="details-title mb-1">Earthing Electrodes</label>
+                            </div>
+                            <div class="col-4">
+                                <span class="float-end"><button class="action-btns add-btn"
+                                        (click)="addModule(this.selectedProductOptionIndex,'earthingElectrodes')"
+                                        *ngIf="product.earthingElectrodes.length == 0"><i class="fa fa-plus fs-16"
+                                            title="Add"></i></button></span>
+                                <span class="float-end"><button class="action-btns delete-btn"
+                                        (click)="removeAll(this.selectedProductOptionIndex,'earthingElectrodes')"
+                                        *ngIf="product.earthingElectrodes.length == 1"><i class="fa fa-trash fs-16"
+                                            title="Remove All"></i></button></span>
+                            </div>
+                        </div>
+                        <div class="mt-2"
+                            *ngIf="product.earthingElectrodes.length > 0">
+                            <div class="row" *ngFor="let earthing of product.earthingElectrodes; let e=index">
+                                <div class="col-4 mb-3">
+                                    <label class="mb-0 text-muted">Brand</label>
+                                    <select class="form-control form-select select2"
+                                        (change)="fetchEarthingType(earthing.brandName)" data-bs-placeholder="Select"
+                                        [(ngModel)]="earthing.brandName">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfEarthingElectrodesBrand" [value]="item.name">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-5">
+                                    <label class="mb-0 text-muted">Type</label>
+                                    <select class="form-control form-select select2"
+                                        (change)="fetchEarthingElectrodeLength(earthing.brandName,earthing.type)"
+                                        data-bs-placeholder="Select" [(ngModel)]="earthing.type">
+                                        <option label="Select">Type</option>
+                                        <option *ngFor="let item of listOfEarthingElectrodesType" [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Electrode Length</label>
+                                    <select class="form-control form-select select2"
+                                        (change)="fetchEarthingTerminalSize(earthing.brandName,earthing.typeName,earthing.electrodeLength)"
+                                        data-bs-placeholder="Select" [(ngModel)]="earthing.electrodeLength">
+                                        <option label="Select">Electrode Length</option>
+                                        <option *ngFor="let item of listOfEarthingElectrodesLength" [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+
+                                </div>
+
+                                <!-- <div class="col-3">
+                                    <label class="mb-0 text-muted">Terminal Size</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="earthing.terminalSize" (change)="changeTerminalSize()">
+                                        <option label="Select">Terminal Size</option>
+                                        <option *ngFor="let item of listOfEarthingTerminalSize" [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div> -->
+
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Quantity</label>
+                                    <div class="input-wrapper">
+                                        <div class="input-group input-group-prepend mb-3">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('earthingElectrodes','quantity','minus',e)"><i
+                                                        class="fa fa-minus fs-11" title="Remove"></i></button>
+                                            </div>
+                                            <input type="text" class="form-control  text-center" placeholder=""
+                                                [(ngModel)]="earthing.quantity">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('earthingElectrodes','quantity','add',e)"><i
+                                                        class="fa fa-plus fs-11" title="Add"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Earthing Electrodes Section -->
+
+                    <!--Start Generation Meter Section-->
+                    <div class="card body-radius no-shadow title-card p-3 mt-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="details-title mb-1">Generation Meter</label>
+                            </div>
+                            <div class="col-4">
+                                <span class="float-end"><button class="action-btns add-btn"
+                                        (click)="addModule(this.selectedProductOptionIndex,'generationMeter')"
+                                        *ngIf="product.generationMeter.length == 0"><i class="fa fa-plus fs-16"
+                                            title="Add"></i></button></span>
+                                <span class="float-end"><button class="action-btns delete-btn"
+                                        (click)="removeAll(this.selectedProductOptionIndex,'generationMeter')"
+                                        *ngIf="product.generationMeter.length == 1"><i class="fa fa-trash fs-16"
+                                            title="Remove All"></i></button></span>
+                            </div>
+                        </div>
+                        <div class="mt-2"
+                            *ngIf="product.generationMeter.length > 0">
+                            <div class="row" *ngFor="let generation of product.generationMeter; let e=index">
+                                <div class="col-5 mb-3">
+                                    <label class="mb-0 text-muted">Brand</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="generation.brandName" (change)="onBrandChanges();meterChange(generation,'generationMeter');">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfGenerationMeterBrand" [value]="item.brandName">
+                                            {{item.brandName}}
+                                        </option>
+                                    </select>
+                                </div>
+
+
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Quantity</label>
+                                    <div class="input-wrapper">
+                                        <div class="input-group input-group-prepend mb-3">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('generationMeter','quantity','minus',e)"><i
+                                                        class="fa fa-minus fs-11" title="Remove"></i></button>
+                                            </div>
+                                            <input type="text" class="form-control  text-center" placeholder=""
+                                                [(ngModel)]="generation.quantity">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('generationMeter','quantity','add',e)"><i
+                                                        class="fa fa-plus fs-11" title="Add"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Generation Meter Section-->
+
+                    <!--Start Net Meter Section-->
+                    <div class="card body-radius no-shadow title-card p-3 mt-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="details-title mb-1">Net Meter</label>
+                            </div>
+                            <div class="col-4">
+                                <span class="float-end"><button class="action-btns add-btn"
+                                        (click)="addModule(this.selectedProductOptionIndex,'netMeter')"
+                                        *ngIf="product.netMeter.length == 0"><i class="fa fa-plus fs-16"
+                                            title="Add"></i></button></span>
+                                <span class="float-end"><button class="action-btns delete-btn"
+                                        (click)="removeAll(this.selectedProductOptionIndex,'netMeter')"
+                                        *ngIf="product.netMeter.length == 1"><i class="fa fa-trash fs-16"
+                                            title="Remove All"></i></button></span>
+                            </div>
+                        </div>
+                        <div class="mt-2"
+                            *ngIf="product.netMeter.length > 0">
+                            <div class="row" *ngFor="let net of product.netMeter; let e=index">
+                                <div class="col-5 mb-3">
+                                    <label class="mb-0 text-muted">Brand</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="net.brandName" (change)="onBrandChanges();meterChange(net,'netMeter');">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfNetMeterBrand" [value]="item.brandName">
+                                            {{item.brandName}}
+                                        </option>
+                                    </select>
+                                </div>
+
+
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Quantity</label>
+                                    <div class="input-wrapper">
+                                        <div class="input-group input-group-prepend mb-3">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('netMeter','quantity','minus',e)"><i
+                                                        class="fa fa-minus fs-11" title="Remove"></i></button>
+                                            </div>
+                                            <input type="text" class="form-control  text-center" placeholder=""
+                                                [(ngModel)]="net.quantity">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('netMeter','quantity','add',e)"><i
+                                                        class="fa fa-plus fs-11" title="Add"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Net Meter Section-->
+
+                    <!-- Start Signage & Boards Section -->
+                    <div class="card body-radius no-shadow title-card p-3 mt-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="details-title mb-1">Danger Boards & Signages</label>
+                            </div>
+                            <!-- <div class="col-4">
+                                <span class="float-end"><button class="action-btns add-btn"
+                                        (click)="addModule(this.selectedProductOptionIndex,'dangerSignboard')"
+                                        *ngIf="product.dangerSignboard.length == 0"><i class="fa fa-plus fs-16"
+                                            title="Add"></i></button></span>
+                                <span class="float-end"><button class="action-btns delete-btn"
+                                        (click)="removeAll(this.selectedProductOptionIndex,'dangerSignboard')"
+                                        *ngIf="product.dangerSignboard.length == 1"><i class="fa fa-trash fs-16"
+                                            title="Remove All"></i></button></span>
+                            </div> -->
+                        </div>
+                        <div class="mt-2"
+                            *ngIf="product.dangerSignboard.length > 0">
+                            <div class="row" *ngFor="let signage of product.dangerSignboard; let sc=index">
+                                <div class="col-5">
+                                    <label class="mb-0 text-muted">Specification</label>
+                                    <h5 class="mb-0 mt-2">{{signage.Specifications}}</h5>
+                                </div>
+                                <!-- <div class="col-3">
+                                    <label class="mb-0 text-muted">Brand</label>
+                                    <select class="form-control form-select select2" data-bs-placeholder="Select"
+                                        [(ngModel)]="signage.brandID" (change)="changeSignageAndBoardsBrand()">
+                                        <option label="Select">Brand</option>
+                                        <option *ngFor="let item of listOfSignageAndBoardsBrand" [value]="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div> -->
+                                <div class="col-3">
+                                    <label class="mb-0 text-muted">Quantity</label>
+                                    <div class="input-wrapper">
+                                        <div class="input-group input-group-prepend">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('dangerSignboard','quantity','minus',sc)"><i
+                                                        class="fa fa-minus fs-11" title="Remove"></i></button>
+                                            </div>
+                                            <input type="text" class="form-control  text-center" placeholder=""
+                                                [(ngModel)]="signage.quantity">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-add-minus" type="button"
+                                                    (click)="addorMinusAnyValue('dangerSignboard','quantity','add',sc)"><i
+                                                        class="fa fa-plus fs-11" title="Add"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Signage & Boards Section -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #saveConfirmationModal let-modal>
+    <!-- <div class="modal-header">
+        <h5 class="modal-title" id="example-Modal3">Create BoQ</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div> -->
+    <div class="modal-body p-1">
+        <div class="card body-radius no-shadow title-card p-3">
+            <h5 class="details-title mb-0">Create BoQ</h5>
+        </div>
+        <div class="card body-radius no-shadow title-card p-3 mt-3">
+            <div class="">
+                <label for="recipient-name" class="form-control-label mb-0 text-muted">Title</label>
+                <input type="text" class="form-control" id="projectTitle" [(ngModel)]="title"
+                    [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+        <div class="mt-3">
+            <button type="button" class="btn button-cancelModal float-end"
+                (click)="modal.close('Close click')">Cancel</button>
+            <button type="button" class="btn btn-primary rounded-pill float-end me-2" (click)="saveBoQ()">Save</button>
+        </div>
+    </div>
+    <!-- <div class="modal-footer"> -->
+
+
+    <!-- </div> -->
+</ng-template>

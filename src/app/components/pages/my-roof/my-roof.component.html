@@ -1,0 +1,127 @@
+<main class="loader-container" *ngIf="isLoader">
+  <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#5ebd3e" />
+        <stop offset="33%" stop-color="#ffb900" />
+        <stop offset="67%" stop-color="#f78200" />
+        <stop offset="100%" stop-color="#e23838" />
+      </linearGradient>
+      <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+        <stop offset="0%" stop-color="#e23838" />
+        <stop offset="33%" stop-color="#973999" />
+        <stop offset="67%" stop-color="#009cdf" />
+        <stop offset="100%" stop-color="#5ebd3e" />
+      </linearGradient>
+    </defs>
+    <g fill="none" stroke-linecap="round" stroke-width="16">
+      <g class="ip__track" stroke="#ddd">
+        <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+        <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+      </g>
+      <g stroke-dasharray="180 656">
+        <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0"
+          d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+        <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358"
+          d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+      </g>
+    </g>
+  </svg>
+</main>
+<div class="container-fluid pt-0">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+      <div class="card body-radius mb-3">
+        <div class="card-body p-2">
+          <div class="card-header-section">
+            <div class="row">
+              <div class="col-6">
+                <h4 class="mb-0 header-title"><i class="fa fa-bars btn-listing-icons"></i>Leads</h4>
+              </div>
+              <div class="col-6">
+                <button type="button" class="btn-sm m-2 float-end button-add" (click)="addRoof()">Add </button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="border-radius-25 card shadow-none mt-4">
+            <form class="ngb-table border-radius-25">
+              <div class="table-responsive border-radius-25">
+
+                <table mat-table class="table table-hover border-radius-25">
+
+                  <thead class="mat-elevation-z5">
+                    <tr>
+
+                      <th scope="col">Company Name</th>
+                      <th scope="col">Contact Person</th>
+                      <th mat-header-cell scope="col" style="width: 142px;">Project Capacity</th>
+                      <th scope="col">Location</th>
+                      <th scope="col">Status</th>
+                      <th scope="col" class="text-center" width="150px">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngIf="roofData.length === 0">
+                      <td colspan="6">
+                        <div class="data-center">
+                          No Data Found.
+                        </div>
+                      </td>
+                    </tr>
+                    <tr mat-row row-style *ngFor="let company of roofData">
+                      <td style="text-align: left !important;">{{ company.company_name }}</td>
+                      <td style="text-align: left !important;">{{ company.contact_person }}
+                      </td>
+                      <td style="text-align: right !important;">{{ company.solar_installation_capacity }}</td>
+                      <td style="text-align: left !important;">{{ company.area_name }}, {{company.city}},
+                        {{company.state}}, {{company.pin_code}}</td>
+                      <td style="text-align: left !important;">{{ company.lead_status }}</td>
+                      <td class="text-center" style="text-align: center !important;">
+                        <button type="button" (click)="viewRoofDetails(company.id)" class="table-btn view-btn">
+                          <i class="fa fa-eye fs-16" title="View"></i>
+                        </button>
+                        <button (click)="editRoof(company.id)" class=" table-btn edit-btn">
+                          <!-- <img src="./assets/images/Edit_icon.svg" title="Edit" alt="Edit" /> -->
+                          <i class="fa fa-pencil fs-16" title="Edit"></i>
+                        </button>
+                        <button (click)="deleteRoof(company.id)" class=" table-btn delete-btn">
+                          <!-- <img src="./assets/images/Delete_icon.svg" title="Delete" alt="Delete" /> -->
+                          <i class="fa fa-trash fs-16" title="Delete"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="d-flex justify-content-center between p-2">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="currentPage" [pageSize]="pageSize"
+                  (pageChange)="onPageChange($event)" [maxSize]="4" [ellipses]="true" size="sm">
+                </ngb-pagination>
+
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <ng-template #confirmationModal let-modal>
+  <div class="modal-header p-2">
+    <h4 class="modal-title" id="confirmationModalLabel"><b>Confirmation</b></h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+
+    </button>
+  </div>
+  <div class="modal-body text-center custom-modal-body">
+    Are you sure you want to delete this lead data?
+  </div>
+  <div class="modal-footer p-2">
+    <button type="button" class="button-yes text-white body-radius" (click)="deleteRoof()">Yes</button>
+    <button type="button" class="button-no text-white body-radius" (click)="modal.dismiss()">No</button>
+  </div>
+</ng-template> -->

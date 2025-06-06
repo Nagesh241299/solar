@@ -1,0 +1,67 @@
+// .sidebar-navs a{
+//     padding: 0.6rem !important;
+// }
+::ng-deep{
+  .app.sidebar-mini.sidenav-toggled .side-menu .side-menu__icon{
+      margin-top: -2px;
+  }
+
+  .sidemenu-bgimage.dark-mode .app.sidenav-toggled .app-sidebar:before,
+  .sidemenu-bgimage.dark-mode .app.sidenav-toggled .side-header:before,
+  .sidemenu-bgimage.light-mode .app.sidenav-toggled .app-sidebar:before,
+  .sidemenu-bgimage.light-mode .app.sidenav-toggled .side-header:before,
+  .sidemenu-bgimage.transparent-mode .app.sidenav-toggled .app-sidebar:before,
+  .sidemenu-bgimage.transparent-mode .app.sidenav-toggled .side-header:before
+  {
+      width: inherit !important;
+  }
+  @media (max-width: 767px){
+      .dark-mode.gradient-menu .side-menu {
+          border-top: 1px solid transparent !important;
+      }
+  }
+
+}
+::ng-deep{
+
+.horizontalmenu .hor-menu li.nav-item .nav-link{
+    min-width: max-content;
+}
+
+.horizontalmenu app-sidemenu ng-scrollbar{
+    position: static !important;
+}
+}
+.horizontal .app-sidebar.horizontal-main .side-menu h3 {
+display: none;
+}
+@media (max-width: 991.9px) {
+.sidemenu-logo{
+    display: none;
+}
+}
+
+.sub-slide-menu.open,
+.slide-menu.open{
+display: block !important;
+}
+body:not(.horizontal-hover) .sub-slide-menu.open{
+display: block !important;
+}
+body:not(.horizontal-hover) .slide-menu.open{
+display: block !important;
+}
+
+::ng-deep{
+
+.horizontalmenu .hor-menu li.nav-item .nav-link{
+    min-width: max-content;
+}
+
+.horizontalmenu app-sidemenu ng-scrollbar{
+    position: static !important;
+}
+}
+.side-menu{
+margin-right: 105px;
+}

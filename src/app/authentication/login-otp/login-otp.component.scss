@@ -1,0 +1,228 @@
+/* Mobile view */
+
+/* Global Styles */
+.custom-radio {
+    width: 15px;
+    height: 15px;
+    border-color: black;
+}
+
+.google-logo {
+    width: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.border-box {
+    border: 2px solid black;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
+
+.login-container {
+    display: flex;
+    height: 99vh;
+    overflow: hidden;
+}
+
+.left-half {
+    width: 50vw;
+    height: 100vh;
+    display: inline;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.full-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 5px !important;
+    border-radius: 25px !important;
+}
+
+.right-half {
+    width: 50%;
+    padding: 0px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    flex-direction: column;
+}
+
+.logo {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    width: 140px;
+    height: 60px;
+}
+
+/* Button Styles */
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Input Styles */
+.email-input img {
+    margin-right: 0px;
+}
+
+.element.style {
+    width: 230px !important;
+}
+
+.form-group input[type="radio"]:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Hidden Radio Input Styles */
+::ng-deep .mat-radio-button .mat-radio-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    outline: none;
+    box-shadow: none;
+}
+
+::ng-deep .mat-radio-button .mat-radio-input:focus {
+    outline: none;
+}
+
+.color {
+    color: #1f82d3;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.text {
+    color: #200D63;
+    padding-right: 120px !important;
+    text-align: left;
+    font-weight: bold;
+}
+
+.button-sendOtp {
+    background-color: #200D63;
+    border-radius: 34px;
+    height: 41px;
+    width: 278px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    padding-right: 40px !important;
+}
+
+.email {
+    margin-left: 25px !important;
+}
+
+/* Input Container */
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.input-container .icon {
+    position: absolute;
+    left: 10px;
+    top: 22px;
+    transform: translateY(-50%);
+    color: #888;
+    pointer-events: none;
+}
+
+.input-container .form-control {
+    padding-left: 45px;
+    height: 45px;
+    font-size: 15px;
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+    }
+
+    .left-half,
+    .right-half {
+        width: 100%;
+        height: 50%;
+    }
+
+    /* Center logo on mobile */
+    .logo {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 50px;
+        /* Adjust logo size for mobile */
+    }
+
+    .full-image {
+        border-radius: 0;
+    }
+
+    .text {
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .input-container .form-control {
+        font-size: 14px;
+        height: 40px;
+    }
+
+    .button-sendOtp {
+        width: 90%;
+        height: 45px;
+        font-size: 13px;
+    }
+}
+
+/* Further adjustments for very small screens */
+@media screen and (max-width: 480px) {
+    .text {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .button-sendOtp {
+        width: 100%;
+        font-size: 12px;
+    }
+}

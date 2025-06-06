@@ -1,0 +1,747 @@
+<main class="loader-container" *ngIf="isLoader">
+  <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#5ebd3e" />
+        <stop offset="33%" stop-color="#ffb900" />
+        <stop offset="67%" stop-color="#f78200" />
+        <stop offset="100%" stop-color="#e23838" />
+      </linearGradient>
+      <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+        <stop offset="0%" stop-color="#e23838" />
+        <stop offset="33%" stop-color="#973999" />
+        <stop offset="67%" stop-color="#009cdf" />
+        <stop offset="100%" stop-color="#5ebd3e" />
+      </linearGradient>
+    </defs>
+    <g fill="none" stroke-linecap="round" stroke-width="16">
+      <g class="ip__track" stroke="#ddd">
+        <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+        <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+      </g>
+      <g stroke-dasharray="180 656">
+        <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0"
+          d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+        <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358"
+          d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+      </g>
+    </g>
+  </svg>
+</main>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+      <!-- <div class="card body-radius mb-3"> -->
+      <div class="card-header-section">
+        <div class="row mb-4">
+          <div class="col-12">
+            <h4 class="header-title">
+              <h4 class="header-title m-1"><i class="fa fa-arrow-left btn-back" [routerLink]="'/pages/proposals'"></i>{{
+                isEditMode ? 'Edit Proposal' : 'Create Proposal'}}</h4>
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="card body-radius mt-1 pt-0 paddingBottom">
+        <div class="card-body p-1 main">
+          <div class="card-body p-3 main">
+            <form [formGroup]="proposalForm" (ngSubmit)="proposalSubmit()">
+
+              <!-- <div class="row mb-0">
+              
+                <div class="col-md-6 p-1">
+
+                  <label class="form-label fw-bold mb-1 ">Proposal Brief Description</label>
+                  <textarea type="text" class="form-control fw-bold" rows="1"
+                    formControlName="proposal_brief_description"></textarea>
+                </div>
+
+          
+                <div class="col-md-3 p-1">
+                  <label for="template" class="form-label fw-bold mb-1">Proposal Template <span
+                      style="color: red;">*</span></label>
+                  <select class="form-control form-select" id="template">
+                    <option value="" selected disabled>Select Template</option>
+                    <option *ngFor="let item of templateData" [value]="item.id">{{ item.title }}</option>
+                  </select>
+                </div>
+               
+                <div class="col-md-3 p-1">
+                  <label for="BoQtolink" class="form-label fw-bold mb-1">BoQ To Link To</label>
+                  <select class="form-control form-select" id="BoQtolink" (change)="onTitleSelected($event)">
+                    <option value="" selected disabled>Select BoQ</option>
+                    <option *ngFor="let item of titles" [value]="item.id">{{ item.title }}</option>
+                  </select>
+                </div>
+              </div> -->
+
+              <div class="row pt-0">
+                <!-- Left Column -->
+
+                <div class="col-md-6 p-4 colPadding">
+
+                  <div class="row mb-1">
+                    <div class="card title-card body-radius shadow-none">
+                      <!-- <div class="card-header p-1">
+                      
+                        <div class="col-md-8">
+
+                        </div>
+                      </div> -->
+                      <div class="card-body p-3">
+                        <h5 class="fw-bold mb-3">
+                          Company/Firm Details
+                        </h5>
+                        <div class="row mb-2">
+                          <div class="col-md-6">
+                            <label class="mb-0 text-muted">Name <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" formControlName="company_name">
+                            <small
+                              *ngIf="proposalForm.get('company_name')?.invalid && proposalForm.get('company_name')?.touched"
+                              class="text-danger">
+                              Company Name is Required</small>
+                          </div>
+                          <div class="col-md-6">
+                            <label class="mb-0 text-muted">Address <span style="color: red;">*</span></label>
+                            <textarea type="text" class="form-control" rows="1"
+                              formControlName="company_address"></textarea>
+                            <small
+                              *ngIf="proposalForm.get('company_address')?.invalid && proposalForm.get('company_address')?.touched"
+                              class="text-danger">
+                              Company Address is Required</small>
+                          </div>
+                        </div>
+                        <div class="row mb-2">
+                          <div class="col-md-6">
+                            <label class="mb-0 text-muted">Phone Number <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" formControlName="company_phone_number"
+                              onkeypress="return /[0-9]/.test(event.key)" maxlength="10">
+                            <!-- Error: If input is not empty and not 10 digits -->
+                            <small
+                             *ngIf="proposalForm.get('company_phone_number')?.value && proposalForm.get('company_phone_number')?.hasError('pattern') || proposalForm.get('company_phone_number')?.invalid && proposalForm.get('company_phone_number')?.touched"
+                              class="text-danger">
+                              Phone Number must be exactly 10
+                              digits.
+                            </small>
+                          </div>
+                          <div class="col-md-6">
+                            <label class="mb-0 text-muted">Email Address <span style="color: red;">*</span></label>
+                            <input type="email" class="form-control" formControlName="company_email">
+                            <small
+                              *ngIf="proposalForm.get('company_email')?.value && proposalForm.get('company_email')?.hasError('pattern') || proposalForm.get('company_email')?.invalid && proposalForm.get('company_email')?.touched"
+                              class="text-danger">
+                              Please enter a valid Email
+                              address
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-1">
+                    <div class="card title-card body-radius shadow-none">
+                      <div class="card-body p-3">
+                        <h5 class="fw-bold mb-3 marg">
+                          Contact Person Details
+                        </h5>
+                        <div class="row mb-2">
+                          <div class="col-md-6">
+                            <label class="mb-0 text-muted">Name <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" onkeypress="return/[a-zA-Z\s]/.test(event.key)"
+                              formControlName="contact_person_name">
+                            <small
+                              *ngIf="proposalForm.get('contact_person_name')?.invalid && proposalForm.get('contact_person_name')?.touched"
+                              class="text-danger">
+                              Name is Required</small>
+                          </div>
+                          <div class="col-md-6">
+                            <label class="mb-0 text-muted">Phone Number <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" onkeypress="return /[0-9]/.test(event.key)"
+                              maxlength="10" formControlName="contact_person_phone_number">
+                            <small
+                             *ngIf="proposalForm.get('contact_person_phone_number')?.value && proposalForm.get('contact_person_phone_number')?.hasError('pattern') || proposalForm.get('contact_person_phone_number')?.invalid && proposalForm.get('contact_person_phone_number')?.touched"
+                              class="text-danger">
+                              Phone Number must be exactly 10
+                              digits.
+                            </small>
+                          </div>
+                        </div>
+                        <div class="row mb-2">
+                          <div class="col-md-6">
+                            <label class="mb-0 text-muted">Email Address <span style="color: red;">*</span></label>
+                            <input type="email" class="form-control" formControlName="contact_person_email">
+                            <small
+                              *ngIf="proposalForm.get('contact_person_email')?.value && proposalForm.get('contact_person_email')?.hasError('pattern') || proposalForm.get('contact_person_email')?.invalid && proposalForm.get('contact_person_email')?.touched"
+                              class="text-danger">
+                              Please enter a valid Email address
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Electricity Connection Details Card -->
+                  <div class="row mb-1 ">
+                    <div class="card title-card body-radius shadow-none">
+                      <div class="card-body p-3">
+                        <h5 class="fw-bold mb-3">
+                          Proposed System
+                        </h5>
+                        <div class="row mb-2">
+                          <div class="col-md-6">
+                            <label class="mb-0 text-muted">Capacity <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" onkeypress="return /[0-9]/.test(event.key)"
+                              formControlName="project_size" readonly>
+                            <small
+                              *ngIf="proposalForm.get('project_size')?.hasError('required') && proposalForm.get('project_size')?.touched"
+                              class="text-danger">
+                              Project Capacity is required
+                            </small>
+                          </div>
+
+                          <div class="col-md-6">
+                            <label class="mb-0 text-muted">Generation Per kW Per Year <span
+                                style="color: red;">*</span></label>
+                            <input type="text" class="form-control" onkeypress="return /[0-9.]/.test(event.key) && !(event.key === '.' && this.value.includes('.'))"
+                              formControlName="generation_per_year">
+                            <small
+                              *ngIf="proposalForm.get('generation_per_year')?.hasError('required') && proposalForm.get('generation_per_year')?.touched"
+                              class="text-danger">
+                              Generation Per Year is required
+                            </small>
+                          </div>
+                        </div>
+
+                        <div class="row mb-2">
+                          <div class="col-md-6">
+                            <label class="mb-0 text-muted">Degradation in Generation Per Year (%) <span
+                                style="color: red;">*</span></label>
+                            <input type="text" class="form-control" onkeypress="return /[0-9.]/.test(event.key) && !(event.key === '.' && this.value.includes('.'))"
+                              formControlName="degradation_per_year">
+                            <small
+                              *ngIf="proposalForm.get('degradation_per_year')?.hasError('required') && proposalForm.get('degradation_per_year')?.touched"
+                              class="text-danger">
+                              Degradation Per Year is required
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- Right Column -->
+                <div class="col-md-6 p-4 colPadding">
+
+
+                  <!-- Other Details Card -->
+                  <div class="row mb-1">
+                    <div class="card title-card body-radius shadow-none">
+                      <div class="card-body p-3">
+                        <h5 class="fw-bold mb-2">
+                          Project Site Details
+                        </h5>
+                        <div class="row mb-2">
+                          <div class="col-md-6">
+                            <label class="mb-0 text-muted">Template
+                              <span style="color: red;">*</span>
+                            </label>
+                            <select class="form-control form-select" id="template" formControlName="template">
+                              <option value="" selected disabled>Select Template</option>
+                              <option *ngFor="let item of templateData" [value]="item.id">
+                                {{ item.title }}</option>
+                            </select>
+                            <small
+                              *ngIf="proposalForm.get('template')?.invalid && proposalForm.get('template')?.touched"
+                              class="text-danger">
+                              Proposal Template is required</small>
+                          </div>
+                          <div class="col-md-6">
+                            <label class="mb-0 text-muted">BoQ To Link To <span style="color: red;"> *</span> </label>
+                            <select class="form-control form-select" id="boQToLinkTo" (change)="onTitleSelected($event)"
+                              formControlName="boQToLinkTo">
+                              <option value="" selected disabled>Select BoQ</option>
+                              <option *ngFor="let item of titles" [value]="item.id">{{ item.title }}</option>
+                            </select>
+                            <small
+                              *ngIf="proposalForm.get('boQToLinkTo')?.invalid && proposalForm.get('boQToLinkTo')?.touched"
+                              class="text-danger">
+                              BoQ To Link To is required</small>
+                          </div>
+                        </div>
+
+                        <div class="row mb-2">
+                          <div class="col-md-12">
+                            <label class="mb-0 text-muted">Address <span style="color: red;">*</span></label>
+                            <textarea type="text" class="form-control" formControlName="project_site_address"
+                              row="1"></textarea>
+                            <small
+                              *ngIf="proposalForm.get('project_site_address')?.invalid && proposalForm.get('project_site_address')?.touched"
+                              class="text-danger">
+                              Address is required
+                            </small>
+                          </div>
+                        </div>
+
+                        <div class="row mb-2">
+                          <div class="col-md-3">
+                            <label class="mb-0 text-muted">Pin Code <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control w-100" onkeypress="return /[0-9]/.test(event.key)"
+                              (blur)="getAreaByPinCode()" maxlength="6" formControlName="pin_code">
+                            <small
+                              *ngIf="proposalForm.get('pin_code')?.invalid && proposalForm.get('pin_code')?.touched"
+                              class="text-danger">
+                              Pin Code is required
+                            </small>
+                          </div>
+                          <div class="col-md-3 p-0">
+                            <label class="mb-0 text-muted">Area <span style="color: red;">*</span></label>
+                            <select class="form-control form-select select2" formControlName="area"
+                              (change)="areaSelected()">
+                              <option *ngFor="let area of areaNames" [value]="area">{{ area }}</option>
+                            </select>
+                            <small *ngIf="proposalForm.get('area')?.invalid && proposalForm.get('area')?.touched"
+                              class="text-danger">
+                              Area is required
+                            </small>
+                          </div>
+                          <div class="col-md-3">
+                            <label class="mb-0 text-muted">City <span style="color: red;">*</span></label>
+                            <div class="w-100">
+                              <input type="text" class="form-control" onkeypress="return /[a-zA-Z]/.test(event.key)"
+                                formControlName="city">
+                              <small *ngIf="proposalForm.get('city')?.invalid && proposalForm.get('city')?.touched"
+                                class="text-danger">
+                                City is required
+                              </small>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <label class="mb-0 text-muted">State <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" onkeypress="return /[a-zA-Z]/.test(event.key)"
+                              formControlName="state">
+                            <small *ngIf="proposalForm.get('state')?.invalid && proposalForm.get('state')?.touched"
+                              class="text-danger">
+                              State is required</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-0">
+                    <div class="card title-card body-radius shadow-none">
+                      <div class="card-body p-3">
+                        <h6 class="fw-bold mb-2">
+                          AMC Details
+                        </h6>
+                        <div class="row mb-2">
+                          <div class="col-md-4">
+                            <label class="mb-0 text-muted">Free For Number of Years <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" onkeypress="return /[0-9]/.test(event.key)"
+                              formControlName="amc_free_number_of_years">
+                               <small *ngIf="proposalForm.get('amc_free_number_of_years')?.invalid && proposalForm.get('amc_free_number_of_years')?.touched"
+                              class="text-danger">
+                               Free For Number of Years is required</small>
+                          </div>
+
+                          <div class="col-md-4">
+                            <label class="mb-0 text-muted">Cost (₹) <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" onkeypress="return /[0-9.]/.test(event.key) && !(event.key === '.' && this.value.includes('.'))"
+                              formControlName="amc_cost">
+                               <small *ngIf="proposalForm.get('amc_cost')?.invalid && proposalForm.get('amc_cost')?.touched"
+                              class="text-danger">
+                              Cost is required</small>
+                          </div>
+
+
+
+                          <div class="col-md-4">
+                            <label class="mb-0 text-muted">Yearly Escalation (%) <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" onkeypress="return /[0-9.]/.test(event.key) && !(event.key === '.' && this.value.includes('.'))"
+                              formControlName="amc_yearly_escalation">
+                              <small *ngIf="proposalForm.get('amc_yearly_escalation')?.invalid && proposalForm.get('amc_yearly_escalation')?.touched"
+                              class="text-danger">
+                              Yearly Escalation is required</small>
+                          </div>
+                        </div>
+
+
+
+
+                        <!-- Financing Details -->
+                        <h6 class="fw-bold mb-2">
+                          Financing Details
+                        </h6>
+                        <div class="row mb-2">
+                          <div class="col-md-4">
+                            <label class="mb-0 text-muted">Total Cost (₹)</label>
+                            <input type="text" class="form-control" onkeypress="return /[0-9]/.test(event.key)" readonly
+                              formControlName="finance_total_cost">
+                          </div>
+                          <div class="col-md-4">
+                            <label class="mb-0 text-muted">Down Payment (%) <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" onkeypress="return /[0-9.]/.test(event.key) && !(event.key === '.' && this.value.includes('.'))"
+                              formControlName="finance_down_payment">
+                              <small *ngIf="proposalForm.get('finance_down_payment')?.invalid && proposalForm.get('finance_down_payment')?.touched"
+                              class="text-danger">
+                              Down Payment is required</small>
+                          </div>
+
+                          <div class="col-md-4">
+                            <label class="mb-0 text-muted">Finance Type <span style="color: red;">*</span></label>
+                            <select class="form-control form-select select2" formControlName="finance_type"
+                              (change)="onFinanceTypeChange()">
+                              <option value="" selected disabled>Select Finance Type</option>
+                              <option *ngFor="let option of selectFinanceTypeArray" [value]="option">
+                                {{ option }}
+                              </option>
+                            </select>
+                            <small
+                              *ngIf="proposalForm.get('finance_type')?.invalid && proposalForm.get('finance_type')?.touched"
+                              class="text-danger">Finance Type is required</small>
+                          </div>
+                        </div>
+
+                        <!-- Loan Details - Conditionally shown based on finance type -->
+                        <div *ngIf="proposalForm.get('finance_type')?.value === 'Capex'">
+                          <h6 class="fw-bold mb-2">
+                            Capex Details
+                          </h6>
+                          <div class="row mb-1">
+                            <div class="col-md-4">
+                              <label class="mb-0 text-muted">Amount (₹)</label>
+                              <input type="text" class="form-control" onkeypress="return /[0-9.]/.test(event.key) && !(event.key === '.' && this.value.includes('.'))"
+                                formControlName="loan_amount" readonly>
+                            </div>
+                            <div class="col-md-4">
+                              <label class="mb-0 text-muted">Rate <span style="color: red;">*</span></label>
+                              <input type="text" class="form-control" onkeypress="return /[0-9.]/.test(event.key) && !(event.key === '.' && this.value.includes('.'))"
+                                formControlName="loan_rate">
+                                <small *ngIf="proposalForm.get('loan_rate')?.invalid && proposalForm.get('loan_rate')?.touched"
+                              class="text-danger">
+                              Rate is required</small>
+                            </div>
+                            <div class="col-md-4">
+                              <label class="mb-0 text-muted">Tenure (Years) <span style="color: red;">*</span></label>
+                              <input type="text" class="form-control" onkeypress="return /[0-9]/.test(event.key)"
+                                formControlName="loan_tenure">
+                                <small *ngIf="proposalForm.get('loan_tenure')?.invalid && proposalForm.get('loan_tenure')?.touched"
+                              class="text-danger">
+                              Tenure is required</small>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div *ngIf="proposalForm.get('finance_type')?.value === 'Opex'">
+                          <h6 class="fw-bold mb-2">
+                            Opex Details
+                          </h6>
+                          <div class="row mb-1">
+                            <div class="col-md-4">
+                              <label class="mb-0 text-muted">Rate <span style="color: red;">*</span></label>
+                              <input type="text" class="form-control" onkeypress="return /[0-9.]/.test(event.key) && !(event.key === '.' && this.value.includes('.'))"
+                                formControlName="loan_rate">
+                                 <small *ngIf="proposalForm.get('loan_rate')?.invalid && proposalForm.get('loan_rate')?.touched"
+                              class="text-danger">
+                              Rate is required</small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 leftrightpadding">
+                  <div class="row mb-1">
+                    <div class="card title-card body-radius shadow-none">
+                      <div class="card-body p-3">
+                        <!-- ... (keep your existing Project Site Details content) ... -->
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                          <h5 class="fw-bold mb-0">
+                            Commercial Details
+                          </h5>
+                          <button type="button" class="table-btn delete-btn"
+                            (click)="openAddcomdetailModal(smallsizemodal)">
+                            <i class="fa fa-plus fs-16" title="Add"></i>
+                          </button>
+                        </div>
+
+                        <div class="border-radius-25 card shadow-none mt-4">
+                          <form class="ngb-table border-radius-25">
+                            <div class="table-responsive border-radius-25">
+                              <table mat-table class="table table-hover border-radius-25">
+                                <thead class="mat-elevation-z5">
+                                  <tr>
+                                    <th style="font-size: 14px;">Description</th>
+                                    <th style="font-size: 14px;">Cost</th>
+                                    <th style="font-size: 14px; text-align: center;">Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let detail of comdetail; let i = index">
+                                    <td>{{detail.comm_description}}</td>
+                                    <td>{{detail.comm_cost}}</td>
+                                    <td style="text-align: center;">
+                                      <button class="table-btn edit-btn"
+                                        (click)="openEditcomdetailModal(smallsizemodal, i)">
+                                        <i class="fa fa-pencil fs-16" title="Edit"></i>
+                                      </button>
+                                      <button class="table-btn delete-btn" (click)="deleteCommercialDetail(i)">
+                                        <i class="fa fa-trash fs-16"></i>
+                                      </button>
+                                    </td>
+                                  </tr>
+                                  <tr *ngIf="comdetail.length === 0">
+                                    <td colspan="3" class="text-center">No Data Found.</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 leftrightpadding">
+                  <div class="row">
+                    <div class="card title-card body-radius shadow-none">
+                      <div class="card-body p-3">
+                        <!-- ... (keep your existing Project Site Details content) ... -->
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                          <h5 class="fw-bold mb-0">
+                            Existing Meters <span style="color: red;">*</span>
+                          </h5>
+                          <button type="button" class="table-btn delete-btn" (click)="openAddMeterModal(largesizemodal)"
+                            [style.display]="meters.length >= maxMetersAllowed ? 'none' : 'inline-block'">
+                            <i class="fa fa-plus fs-16" title="Add"></i>
+                          </button>
+
+                        </div>
+
+
+
+                        <div class="border-radius-25 card shadow-none mt-4">
+                          <form class="ngb-table border-radius-25">
+                            <div class="table-responsive border-radius-25">
+                              <table mat-table class="table table-hover border-radius-25">
+                                <thead class="mat-elevation-z5">
+                                  <tr>
+                                    <th style="font-size: 14px;">Consumer Number</th>
+                                    <th style="font-size: 14px;">Name</th>
+                                    <th style="font-size: 14px;">Sanctioned Load</th>
+                                    <th style="font-size: 14px;">Avg. Monthly Consumption</th>
+                                    <th style="font-size: 14px;">Tariff</th>
+                                    <th style="font-size: 14px;">Avg. Monthly Bill</th>
+                                    <th style="font-size: 14px;">Required Solar PV System</th>
+                                    <th style="font-size: 14px;">Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let meter of meters; let i = index">
+                                    <td>{{meter.consumer_number}}</td>
+                                    <td>{{meter.consumer_name}}</td>
+                                    <td>{{meter.sanctioned_load}}</td>
+                                    <td>{{meter.avg_monthly_consumption}}</td>
+                                    <td>{{meter.tariff}}</td>
+                                    <td>{{meter.avg_monthly_bill}}</td>
+                                    <td>{{meter.required_solar_system}}</td>
+                                    <td>
+                                      <button class="table-btn edit-btn"
+                                        (click)="openEditMeterModal(largesizemodal, i)">
+                                        <i class="fa fa-pencil fs-16" title="Edit"></i>
+                                      </button>
+                                      <button class="table-btn delete-btn" (click)="deleteMeter(i)">
+                                        <i class="fa fa-trash fs-16"></i>
+                                      </button>
+                                    </td>
+                                  </tr>
+                                  <tr *ngIf="meters.length === 0">
+                                    <td colspan="8" class="text-center">No Data Found.</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="p-0 d-flex justify-content-end">
+                <mat-card-actions>
+                  <!-- <button type="button" class="btn-sm m-2 float-end button-cancelProposal" (click)="cancelProposalForm()">
+            Cancel
+          </button> -->
+                  <button type="submit" class="btn-sm m-2 float-end button-generate" *ngIf="isEditMode == true">
+                    Update
+                  </button>
+                  <button type="submit" class="btn-sm m-2  float-end button-generate" *ngIf="isEditMode == false">
+                    Generate Proposal
+                  </button>
+                </mat-card-actions>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <ng-template #largesizemodal let-modal>
+
+    <div class="modal-body p-2">
+      <div class="card body-radius title-card p-3 no-shadow">
+        <h5 class="details-title mb-0" tabindex="1">{{isEditMeter ? 'Edit Meter' : 'Add Meter'}}</h5>
+      </div>
+
+      <div class="card body-radius title-card p-3 no-shadow mt-2">
+        <form [formGroup]="meterForm">
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <label class="mb-0 text-muted">Consumer Number <span style="color: red;">*</span></label>
+              <input type="text" class="form-control" formControlName="consumer_number">
+              <small *ngIf="meterForm.get('consumer_number')?.invalid && meterForm.get('consumer_number')?.touched"
+                class="text-danger">
+                Consumer Number is required</small>
+            </div>
+            <div class="col-md-6">
+              <label class="mb-0 text-muted">Name <span style="color: red;">*</span></label>
+              <input type="text" class="form-control" formControlName="consumer_name">
+              <small *ngIf="meterForm.get('consumer_name')?.invalid && meterForm.get('consumer_name')?.touched"
+                class="text-danger">
+                Consumer Name is required</small>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <label class="mb-0 text-muted">Sanctioned Load (kW) <span style="color: red;">*</span></label>
+              <input type="text" onkeypress="return /[0-9.]/.test(event.key) && !(event.key === '.' && this.value.includes('.'))" class="form-control" formControlName="sanctioned_load">
+              <small *ngIf="meterForm.get('sanctioned_load')?.invalid && meterForm.get('sanctioned_load')?.touched"
+                class="text-danger">
+                Sanctioned Load is required</small>
+            </div>
+            <div class="col-md-6">
+              <label class="mb-0 text-muted">Average Monthly Consumption <span style="color: red;">*</span></label>
+              <input type="text" onkeypress="return /[0-9.]/.test(event.key) && !(event.key === '.' && this.value.includes('.'))" class="form-control" formControlName="avg_monthly_consumption">
+              <small
+                *ngIf="meterForm.get('avg_monthly_consumption')?.invalid && meterForm.get('avg_monthly_consumption')?.touched"
+                class="text-danger">
+                Average Monthly Consumption is required</small>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <label class="mb-0 text-muted">Tariff (kWh) <span style="color: red;">*</span></label>
+              <input type="text" class="form-control" onkeypress="return /[0-9.]/.test(event.key) && !(event.key === '.' && this.value.includes('.'))" formControlName="tariff">
+              <small *ngIf="meterForm.get('tariff')?.invalid && meterForm.get('tariff')?.touched" class="text-danger">
+                Tariff is required</small>
+            </div>
+            <div class="col-md-6">
+              <label class="mb-0 text-muted">Average Monthly Bill <span style="color: red;">*</span></label>
+              <input type="text" onkeypress="return /[0-9.]/.test(event.key) && !(event.key === '.' && this.value.includes('.'))" class="form-control" formControlName="avg_monthly_bill" readonly>
+              <small *ngIf="meterForm.get('avg_monthly_bill')?.invalid && meterForm.get('avg_monthly_bill')?.touched"
+                class="text-danger">
+                Average Monthly Bill is required</small>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <label class=" mb-0 text-muted">Required Solar PV System <span style="color: red;">*</span></label>
+              <input type="text" class="form-control" formControlName="required_solar_system" readonly>
+              <small
+                *ngIf="meterForm.get('required_solar_system')?.invalid && meterForm.get('required_solar_system')?.touched"
+                class="text-danger">
+                Required Solar PV System is required</small>
+            </div>
+          </div>
+
+
+          <div class="p-2 mt-1">
+            <button class="btn button-cancelModal float-end" (click)="closeModal()" autofocus>
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary rounded-pill float-end me-2 p" (click)="saveMeter()"
+              *ngIf="isEditMeter == false">
+              Save
+            </button>
+            <button type="submit" class="btn btn-primary rounded-pill float-end me-2 p" *ngIf="isEditMeter == true"
+              (click)="saveMeter()">
+              Update
+            </button>
+
+          </div>
+        </form>
+
+      </div>
+
+
+
+      <!-- </div> -->
+    </div>
+  </ng-template>
+
+  <ng-template #smallsizemodal let-modal>
+
+    <div class="modal-body p-2">
+      <div class="card body-radius title-card p-3 no-shadow">
+        <h5 class="details-title mb-0">{{isEditcomdetail ? 'Edit Commercial Details' : 'Add Commercial Details'}}</h5>
+      </div>
+
+      <div class="card body-radius title-card p-3 no-shadow mt-2">
+        <form [formGroup]="comdetailForm">
+          <div class="row">
+            <div class="col-md-12">
+              <label class="form-label text-muted">Description</label>
+              <textarea type="text" class="form-control" rows="3" formControlName="comm_description"></textarea>
+              <!-- <small *ngIf="comdetailForm.get('description')?.invalid && comdetailForm.get('description')?.touched"
+              class="text-danger">
+              Description is required</small> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label class="form-label text-muted">Cost (₹)</label>
+              <input type="text" class="form-control" formControlName="comm_cost"
+                onkeypress="return /[0-9.]/.test(event.key) && !(event.key === '.' && this.value.includes('.'))">
+              <!-- <small *ngIf="comdetailForm.get('cost')?.invalid && comdetailForm.get('cost')?.touched"
+              class="text-danger">
+              cost is required</small> -->
+            </div>
+          </div>
+
+          <div class="p-2 mt-1">
+            <button class="btn button-cancelModal float-end" (click)="closeModal()">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary rounded-pill float-end me-2 p" (click)="saveCommercialDetail()"
+              *ngIf="isEditcomdetail == false">
+              Save
+            </button>
+            <button type="submit" class="btn btn-primary rounded-pill float-end me-2 p" *ngIf="isEditcomdetail == true"
+              (click)="saveCommercialDetail()">
+              Update
+            </button>
+
+          </div>
+        </form>
+
+      </div>
+
+
+
+      <!-- </div> -->
+    </div>
+  </ng-template>

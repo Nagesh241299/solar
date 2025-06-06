@@ -1,0 +1,36 @@
+<app-header-breadcrumb title="Wishlist"title1="Ecommerce" activeitem="Wishlist"></app-header-breadcrumb>
+
+<!-- ROW-1 OPEN -->
+<div class="row" >
+    <div class="col-md-6 col-xl-3 alert" id={{obj.id}} *ngFor="let obj of objectArray">
+        <div class="card item-card">
+            <div class="product-grid6  card-body">
+                <div class="product-image6">
+                    <ul class="icons-wishlist" >
+                        <li><a (click)="RemoveElementFromObjectArray(obj.id)" href="javascript:;" class="bg-danger text-white border-danger border" data-bs-dismiss="alert"
+                                aria-hidden="true"><i class="fe fe-trash"></i></a></li>
+                    </ul>
+                    <a routerLink="/ecommerce/product-details">
+                        <img class="img-fluid" src="{{obj.image}}" alt="img">
+                    </a>
+                </div>
+                <div class="product-content text-center">
+                    <div class="mb-2 text-warning">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <h4 class="title"><a href="javascript:;">{{obj.title}}</a></h4>
+                    <div class="price">{{obj.price1}}<span class="ms-4">{{obj.price2}}</span></div>
+                </div>
+                <ul class="icons">
+                    <li><a routerLink="/ecommerce/product-details" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+                    <li><a routerLink="/ecommerce/shopping-cart" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ROW-1 CLOSED -->

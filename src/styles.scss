@@ -1,0 +1,555 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/ngx-toastr/toastr.css";
+@import "./assets/css/style.css";
+@import "./assets/switcher/demo.css";
+@import "./assets/switcher/css/switcher.css";
+@import "./assets/css/icons.css";
+@import "./assets/css/plugins.css";
+@import "./assets/scss/variables";
+
+@import "./node_modules/angular-calendar/scss/angular-calendar.scss";
+@import "../node_modules/keen-slider/keen-slider.min.css";
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+// ... or
+@import "~@ng-select/ng-select/themes/material.theme.css";
+// ngx bar rating
+@import "../node_modules/ngx-bar-rating/themes/br-default-theme.scss";
+@import "../node_modules/ngx-bar-rating/themes/br-horizontal-theme.scss";
+@import "../node_modules/ngx-bar-rating/themes/br-vertical-theme.scss";
+@import "../node_modules/ngx-bar-rating/themes/br-movie-theme.scss";
+@import "../node_modules/ngx-bar-rating/themes/br-square-theme.scss";
+//owl-carousel
+@import "../node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "../node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+@import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    background-color: rgb(var(--volgh-white-rgb));
+    font-family: "Noto Sans" !important;
+}
+
+.card {
+    border: 1px solid #f1f1f1;
+    box-shadow: 0px 11px 3px -6px #e5e4e6;
+}
+
+
+.mat-mdc-form-field-error-wrapper {
+    padding: 0% !important;
+}
+
+
+// .table th {
+//     text-transform: none !important;
+//     padding: 5px !important;
+//     text-align: center !important;
+//     vertical-align: middle !important
+// }
+
+// .table td {
+//     padding: 5px !important;
+//     vertical-align: middle !important;
+//     text-align: left !important;
+// }
+
+/* Custom styles to remove the horizontal lines in the modal */
+.custom-modal-header,
+.custom-modal-body,
+.custom-modal-footer {
+    border: none !important;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    /* Adjust the gap between buttons if needed */
+}
+
+.btn-custom-yes {
+    color: #FFFFFF;
+    background-color: #22A447;
+    border-radius: 34px;
+    height: 35px;
+    width: 100px;
+}
+
+.btn-custom-no {
+    color: #FFFFFF;
+    background-color: #FF4752;
+    border-radius: 34px;
+    height: 35px;
+    width: 100px;
+}
+
+.tabs-menu1 {
+    background-color: rgba(247, 246, 255, 1) !important;
+    padding: 0px !important;
+}
+
+
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+    color: black !important
+}
+
+.mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after,
+.mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
+    color: black !important;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.mat-mdc-form-field-infix {
+    min-height: 42px;
+}
+
+.panel-body {
+    padding: 0px !important;
+}
+
+.container-fluid {
+    padding-top: 10px !important;
+}
+
+.mat-radio-button .mat-radio-input:focus {
+    outline: none;
+}
+
+
+.body-radius {
+    border-radius: 25px;
+}
+
+.radio-group label:before {
+    border: none;
+    height: 0 px !important;
+    width: 0px !important;
+}
+
+
+
+.mat-mdc-radio-button.mat-accent {
+    --mdc-radio-disabled-selected-icon-color: #000;
+    --mdc-radio-disabled-unselected-icon-color: #000;
+    --mdc-radio-unselected-hover-icon-color: #212121;
+    --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-radio-selected-focus-icon-color: #200D63;
+    ;
+    --mdc-radio-selected-hover-icon-color: #200D63;
+    ;
+    --mdc-radio-selected-icon-color: #200D63;
+    ;
+    --mdc-radio-selected-pressed-icon-color: #200D63;
+    ;
+    --mat-radio-ripple-color: #000;
+    --mat-radio-checked-ripple-color: #200D63;
+    ;
+    --mat-radio-disabled-label-color: rgba(0, 0, 0, 0.38);
+}
+
+.cal-month-view .cal-open-day-events {
+    padding: 0;
+}
+
+.cal-month-view .cal-header {
+    text-align: center;
+    font-weight: bolder;
+    color: #200D63;
+    font-size: medium;
+}
+
+b,
+strong {
+    font-weight: bolder;
+    color: #200D63;
+    font-size: medium;
+}
+
+.text-success {
+    color: #22A447 !important;
+}
+
+.table {
+    border-radius: 26px;
+
+    thead tr th {
+
+        font-weight: 600;
+        font-size: 15px;
+        color: #200D63;
+        text-transform: capitalize;
+
+        &:first-child {
+            padding-left: 1.3rem !important;
+        }
+    }
+
+
+
+    tbody tr td {
+        color: #434343;
+        font-size: 13px;
+        font-weight: 400;
+
+        &:first-child {
+            padding-left: 1.3rem !important;
+        }
+
+        .table-btn {
+            width: 32px;
+            height: 32px;
+            background-color: #E9E9E9;
+            color: #5A5A5A;
+            border-radius: 50%;
+            margin: 0px 5px;
+
+            i {
+                margin: 4px;
+            }
+
+            &.view-btn {
+                i {
+                    margin: 2px;
+                }
+            }
+
+            &.view-btn:hover {
+                background-color: #2B84C5;
+                color: #fff;
+            }
+
+            &.edit-btn:hover {
+                background-color: #2B84C5;
+                color: #fff;
+            }
+
+            &.delete-btn:hover {
+                background-color: #200D63;
+                color: #fff;
+            }
+
+            &.view-btn:hover {
+                background-color: #2B84C5;
+                color: #fff;
+
+            }
+        }
+    }
+}
+
+
+
+
+.border-radius-25 {
+    border-radius: 25px;
+}
+
+.button-yes {
+    background-color: #22A447;
+    font-size: 14px;
+    width: 50px;
+    height: 28px;
+}
+
+.button-no {
+    background-color: #FF4747;
+    font-size: 14px;
+    width: 50px;
+    height: 28px;
+}
+
+.button-save {
+    background-color: #22A447;
+    border-radius: 33px;
+    width: 80px;
+    height: 30px
+}
+
+.button-cancel {
+    background-color: #FF4747;
+    border-radius: 33px;
+    width: 80px;
+    height: 30px
+}
+
+.button-add {
+    background-color: #200D63;
+    border-radius: 34px;
+    height: 41px;
+    width: 117px;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.button-calculate {
+    background-color: #200D63;
+    border-radius: 34px;
+    height: 41px;
+    width: 117px;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.button-generate {
+    background-color: #200D63;
+    border-radius: 34px;
+    height: 41px;
+    width: 130px;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.button-cancelProposal {
+    // background-color: #FF4747;
+    border-radius: 34px;
+    height: 41px;
+    width: 130px;
+    color: #200D63;
+    font-size: 12px;
+    font-weight: 600;
+    border-color: #200D63;
+    border: 2px solid #200D63;
+
+    /* Darker color with thicker border */
+    &:hover {
+        color: #fff;
+        background-color: #200D63;
+    }
+}
+
+.button-cancelModal {
+    // background-color: #FF4747;
+    border-radius: 34px;
+    // height: 41px;
+    width: 80px;
+    color: #200D63;
+    font-size: 12px;
+    font-weight: 600;
+    border-color: #200D63;
+    border: 1px solid #200D63;
+
+    /* Darker color with thicker border */
+    &:hover {
+        color: #fff;
+        background-color: #200D63;
+    }
+}
+
+.button-back {
+    background-color: #FF4747;
+    border-radius: 34px;
+    height: 32px;
+    width: 80px;
+    color: #FFFFFF;
+}
+
+.button-add-proposal {
+    background-color: #200D63;
+    border-radius: 34px;
+    height: 41px;
+    width: 117px;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/*********** Loader CSS Start****************/
+.loader-container {
+    position: fixed;
+    /* Fixes the loader in place */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    /* Full viewport width */
+    height: 100vh;
+    /* Full viewport height */
+    display: flex;
+    align-items: center;
+    /* Vertical centering */
+    justify-content: center;
+    /* Horizontal centering */
+    background: rgb(0 0 0 / 11%);
+    /* Semi-transparent background */
+    z-index: 9999 !important;
+    /* High z-index to ensure it appears above all other content */
+}
+
+.ip {
+    width: 16em;
+    height: 8em;
+}
+
+.ip__track {
+    stroke: hsl(var(--hue), 90%, 90%);
+    transition: stroke var(--trans-dur);
+}
+
+.ip__worm1,
+.ip__worm2 {
+    animation: worm1 2s linear infinite;
+}
+
+.ip__worm2 {
+    animation-name: worm2;
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: hsl(var(--hue), 90%, 5%);
+        --fg: hsl(var(--hue), 90%, 95%);
+    }
+
+    .ip__track {
+        stroke: hsl(var(--hue), 90%, 15%);
+    }
+}
+
+/* Animation */
+@keyframes worm1 {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        animation-timing-function: steps(1);
+        stroke-dashoffset: -358;
+    }
+
+    50.01% {
+        animation-timing-function: linear;
+        stroke-dashoffset: 358;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes worm2 {
+    from {
+        stroke-dashoffset: 358;
+    }
+
+    50% {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: -358;
+    }
+}
+
+/*********** Loader CSS End****************/
+::ng-deep .swal2-container {
+    z-index: 99999 !important;
+}
+
+
+
+/**********  New Figma Design Classes  ***************/
+.card-header-section {
+    width: 100%;
+    background: #252B421F;
+    border-radius: 25px;
+    // height: 63px;
+
+    .header-title {
+        color: #200D63;
+        font-weight: 700;
+        font-size: 20px;
+        margin: 14px 20px;
+    }
+
+    .chat-header-title {
+        color: #200D63;
+        font-weight: 600;
+        font-size: 20px;
+        margin: 10px 20px;
+    }
+}
+
+.msg_time_send {
+    width: max-content;
+}
+
+.msg_time {
+    width: max-content;
+}
+
+.chatbox .msg_card_body {
+    overflow-y: scroll;
+    max-height: 60vh;
+}
+
+.tabs-menu ul li .active {
+    box-shadow: none !important;
+    border-top-left-radius: 22px !important;
+    border-top-right-radius: 22px !important;
+}
+
+.tab-menu-heading {
+    margin-bottom: 10px;
+}
+
+.no-shadow {
+    box-shadow: none !important;
+}
+
+.data-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#file {
+    padding: 0.375rem 1.75rem !important;
+}
+
+.btn-back {
+    background: #fff;
+    border-radius: 50%;
+    width: 31px;
+    height: 31px;
+    padding: 7px !important;
+    font-size: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.btn-listing-icons {
+    background: #fff;
+    border-radius: 50%;
+    width: 31px;
+    height: 31px;
+    padding: 7px !important;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.carousel-indicators {
+    bottom: -60px !important;
+    /* Adjust the value as needed */
+
+}
+
+#testimonialCarousel .carousel-indicators {
+    display: none !important;
+}
+
+#back-to-top {
+    background-color: #200D63 !important;
+
+    &:hover {
+        background-color: #200D63 !important;
+        border-color: #200D63 !important;
+    }
+}

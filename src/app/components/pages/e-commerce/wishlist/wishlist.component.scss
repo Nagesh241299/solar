@@ -1,0 +1,89 @@
+.product-grid6 .icons-wishlist {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  right: 10px;
+  top: 14px;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  transition: all .5s ease 0s;
+  text-align: right;
+  opacity: 1;
+  bottom: 33px;
+}
+
+.product-grid6 .icons-wishlist li {
+  display: block;
+  margin: 5px;
+}
+
+.product-grid6 .icons-wishlist li a {
+  font-size: 15px;
+  line-height: 35px;
+  text-align: center;
+  height: 35px;
+  width: 35px;
+  margin: 2px 7px;
+  padding: 0;
+  border-radius: 50px;
+  display: block;
+  position: relative;
+  transition: all .3s ease-in-out;
+}
+
+.product-grid6 .icons-wishlist li a:after,
+.product-grid6 .icons-wishlist li a:before {
+  content: attr(data-tip);
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 1px;
+  line-height: 20px;
+  padding: 1px 5px;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-50%);
+  position: absolute;
+  left: 50%;
+  top: -30px;
+}
+
+.product-grid6 .icons-wishlist li a i {
+  color: inherit;
+}
+
+.product-grid6 .icons-wishlist li a:after {
+  content: '';
+  height: 15px;
+  width: 15px;
+  border-radius: 0;
+  transform: translateX(-50%) rotate( 45deg);
+  top: -20px;
+  z-index: -1;
+}
+
+.card-pay .tabs-menu {
+  margin-bottom: 25px;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.card-pay .tabs-menu li {
+  width: 33.3%;
+  display: block;
+}
+
+.card-pay .tabs-menu li a.active {
+  background: #5e2dd8;
+  color: #fff;
+  text-align: center;
+}
+
+.card-pay .tabs-menu li a {
+  padding: .7rem 1rem;
+  display: block;
+  text-align: center;
+  border: 1px solid #eaedf1;
+  color: #282f53;
+}

@@ -1,0 +1,1579 @@
+<main class="loader-container" *ngIf="isLoader">
+    <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5ebd3e" />
+                <stop offset="33%" stop-color="#ffb900" />
+                <stop offset="67%" stop-color="#f78200" />
+                <stop offset="100%" stop-color="#e23838" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0%" stop-color="#e23838" />
+                <stop offset="33%" stop-color="#973999" />
+                <stop offset="67%" stop-color="#009cdf" />
+                <stop offset="100%" stop-color="#5ebd3e" />
+            </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-width="16">
+            <g class="ip__track" stroke="#ddd">
+                <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+            <g stroke-dasharray="180 656">
+                <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0"
+                    d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358"
+                    d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+        </g>
+    </svg>
+</main>
+
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+
+            <div class="card-header-section">
+                <div class="row">
+                    <div class="col-6">
+                        <h4 class="header-title"><i class="fa fa-arrow-left btn-back" (click)="cancel()"></i>{{
+                            isEditMode ? 'Edit Lead' : 'Create Lead'}}</h4>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card body-radius mt-4 pt-0">
+                <div class="card-body pt-0 mt-2">
+                    <div class="panel panel-primary">
+                        <div class="tab-menu-heading">
+                            <div class="tabs-menu">
+                                <!-- Tabs -->
+                                <ul ngbNav #nav1="ngbNav" (click)="tab()" [(activeId)]="TabStyle1">
+                                    <li [ngbNavItem]="1"><a ngbNavLink>Basic</a>
+                                        <ng-template ngbNavContent>
+                                            <form [formGroup]="roofForm" (ngSubmit)="roofSubmit()">
+                                                <div class="card p-4 body-radius top-remove-padding">
+
+
+                                                    <div class="row">
+                                                        <div class="col-md-6 p-4 colPadding">
+                                                            <div class="row">
+                                                                <div class="card no-shadow title-card body-radius">
+                                                                    <div class="card-body p-3">
+                                                                        <h5 class="fw-bold mb-2 marg">
+                                                                            Lead Details
+                                                                        </h5>
+
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-12">
+                                                                                <label for="description"
+                                                                                    class="text-muted mb-0">Description</label>
+                                                                                <textarea type="text"
+                                                                                    class="form-control" rows="1"
+                                                                                    id="description"
+                                                                                    formControlName="description"></textarea>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-6">
+                                                                                <label for="leadType"
+                                                                                    class=" text-muted mb-0">Type</label>
+                                                                                <select
+                                                                                    class="form-control form-select select2"
+                                                                                    id="leadType"
+                                                                                    formControlName="lead_type">
+                                                                                    <option value="" selected disabled>
+                                                                                        Select Type</option>
+                                                                                    <option
+                                                                                        *ngFor="let type of roofTypes"
+                                                                                        [value]="type">{{ type }}
+                                                                                    </option>
+                                                                                </select>
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <label for="leadStatus"
+                                                                                    class=" text-muted mb-0">Status
+                                                                                    <span
+                                                                                        style="color: red;">*</span></label>
+                                                                                <select
+                                                                                    class="form-control form-select select2"
+                                                                                    id="leadStatus"
+                                                                                    formControlName="lead_status">
+                                                                                    <option value="" selected disabled>
+                                                                                        Select Status</option>
+                                                                                    <option
+                                                                                        *ngFor="let type of leadTypes"
+                                                                                        [value]="type">{{ type }}
+                                                                                    </option>
+                                                                                </select>
+                                                                                <small
+                                                                                    *ngIf="roofForm.get('lead_status')?.invalid && roofForm.get('lead_status')?.touched"
+                                                                                    class="text-danger">Lead Status is
+                                                                                    required</small>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mt-1">
+                                                                <div class="card no-shadow title-card body-radius">
+                                                                    <div class="card-body p-3">
+
+                                                                        <h5 class="fw-bold mb-2 marg">
+                                                                            Contact Details
+                                                                        </h5>
+
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-6">
+                                                                                <label
+                                                                                    class="mb-0 text-muted">Company/Firm
+                                                                                    Name <span
+                                                                                        style="color: red;">*</span></label>
+                                                                                <input type="text" class="form-control"
+                                                                                    formControlName="company_name">
+                                                                                <small
+                                                                                    *ngIf="roofForm.get('company_name')?.invalid && roofForm.get('company_name')?.touched"
+                                                                                    class="text-danger">Company Name is
+                                                                                    required</small>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted">Contact
+                                                                                    Person <span
+                                                                                        style="color: red;">*</span>
+                                                                                </label>
+                                                                                <div>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        onkeypress="return /^[a-zA-Z\s]*$/.test(event.key)"
+                                                                                        formControlName="contact_person">
+                                                                                    <small
+                                                                                        *ngIf="roofForm.get('contact_person')?.invalid && roofForm.get('contact_person')?.touched"
+                                                                                        class="text-danger">Contact
+                                                                                        Person is
+                                                                                        required</small>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted">Contact
+                                                                                    Number</label>
+                                                                                <div>
+                                                                                    <input type="text"
+                                                                                        class="form-control w-100"
+                                                                                        onkeypress="return /[0-9]/.test(event.key)"
+                                                                                        formControlName="contact_number"
+                                                                                        maxlength="10">
+                                                                                    <small
+                                                                                        *ngIf="roofForm.get('contact_number')?.invalid && roofForm.get('contact_number')?.touched"
+                                                                                        class="text-danger">
+                                                                                        Contact number is required
+                                                                                    </small>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted">Contact
+                                                                                    Email
+                                                                                </label>
+                                                                                <div>
+                                                                                    <input type="email"
+                                                                                        class="form-control w-100"
+                                                                                        formControlName="contact_email">
+                                                                                    <small
+                                                                                        *ngIf="roofForm.get('contact_email')?.value && roofForm.get('contact_email')?.hasError('pattern')"
+                                                                                        class="text-danger">
+                                                                                        Please enter a valid Email
+                                                                                        address
+                                                                                    </small>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row mt-1">
+                                                                <div class="card no-shadow title-card body-radius">
+
+                                                                    <div class="card-body p-3">
+                                                                        <h5 class="fw-bold mb-2 marg">
+                                                                            Electricity Connection Details
+                                                                        </h5>
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted">Supplier
+                                                                                </label>
+                                                                                <input type="text"
+                                                                                    class="form-control w-100"
+                                                                                    formControlName="supplier"
+                                                                                    onkeypress="return /^[a-zA-Z\s]*$/.test(event.key)">
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted">Consumer
+                                                                                    Number
+                                                                                </label>
+                                                                                <input type="text"
+                                                                                    class="form-control w-100"
+                                                                                    formControlName="consumer_number"
+                                                                                    onkeypress="return /[0-9]/.test(event.key)">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted">
+                                                                                    Sanctioned Load (kW)</label>
+                                                                                <input type="text"
+                                                                                    class="form-control w-100"
+                                                                                    onkeypress="return /[0-9]/.test(event.key)"
+                                                                                    formControlName="sanctioned_load">
+                                                                                <!-- <div *ngIf="profileBasicInfoForm.get('pin_code')?.invalid"
+                                                                                    class="text-danger">
+                                                                                    Pin Code is required
+                                                                                </div> -->
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted">Current
+                                                                                    Tariff (kWh)
+                                                                                    <span
+                                                                                        style="color: red;">*</span></label>
+                                                                                <input type="text" class="form-control"
+                                                                                    onkeypress="return /[0-9]/.test(event.key)"
+                                                                                    formControlName="current_tariff">
+                                                                                <small
+                                                                                    *ngIf="roofForm.get('current_tariff')?.invalid && roofForm.get('current_tariff')?.touched"
+                                                                                    class="text-danger">Current Tariff
+                                                                                    is
+                                                                                    required</small>
+                                                                            </div>
+
+
+
+
+
+                                                                        </div>
+
+
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6 p-4 colPadding">
+                                                            <div class="row">
+                                                                <div class="card no-shadow title-card body-radius">
+
+                                                                    <div class="card-body p-3">
+                                                                        <h5 class="fw-bold mb-2 marg">
+                                                                            Project Details
+                                                                        </h5>
+
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-12">
+
+                                                                                <label class="mb-0 text-muted">Address
+                                                                                    Line 1</label>
+                                                                                <textarea class="form-control w-100"
+                                                                                    rows="2"
+                                                                                    formControlName="address"></textarea>
+                                                                                <small
+                                                                                    *ngIf="roofForm.get('address')?.invalid && roofForm.get('address')?.touched"
+                                                                                    class="text-danger">
+                                                                                    Address is required
+                                                                                </small>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-12">
+
+                                                                                <label class="mb-0 text-muted">Address
+                                                                                    Line 2</label>
+                                                                                <textarea class="form-control w-100"
+                                                                                    rows="2"
+                                                                                    formControlName="addressline2"></textarea>
+                                                                                <small
+                                                                                    *ngIf="roofForm.get('addressline2')?.invalid && roofForm.get('addressline2')?.touched"
+                                                                                    class="text-danger">
+                                                                                    Address is required
+                                                                                </small>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-6">
+
+                                                                                <label class="mb-0 text-muted">Pin Code
+                                                                                    <span style="color: red;">*</span>
+                                                                                </label>
+                                                                                <input class="form-control w-100"
+                                                                                    rows="1" formControlName="pin_code"
+                                                                                    onkeypress="return /[0-9]/.test(event.key)"
+                                                                                    maxlength="6"
+                                                                                    (change)="getAreaByPinCode()">
+                                                                                <small
+                                                                                    *ngIf="roofForm.get('pin_code')?.invalid && roofForm.get('pin_code')?.touched"
+                                                                                    class="text-danger">
+                                                                                    Pin Code is required
+                                                                                </small>
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted">Area
+                                                                                    <span
+                                                                                        style="color: red;">*</span></label>
+                                                                                <select
+                                                                                    class="form-control form-select select2"
+                                                                                    formControlName="area"
+                                                                                    (change)="areaSelected()">
+                                                                                    <!-- <option value="" disabled selected>Select Area
+                                                                              </option> -->
+                                                                                    <option
+                                                                                        *ngFor="let option of areaNames"
+                                                                                        [value]="option">
+                                                                                        {{ option }}
+                                                                                    </option>
+                                                                                </select>
+                                                                                <small
+                                                                                    *ngIf="roofForm.get('area')?.invalid && roofForm.get('area')?.touched"
+                                                                                    class="text-danger">
+                                                                                    Area is required
+                                                                                </small>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row mb-2">
+
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted">City
+                                                                                    <span style="color: red;">*</span>
+                                                                                </label>
+                                                                                <div class="w-100">
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        onkeypress="return /[a-zA-Z]/.test(event.key)"
+                                                                                        formControlName="city"
+                                                                                        [(ngModel)]="cityName">
+                                                                                    <small
+                                                                                        *ngIf="roofForm.get('city')?.invalid && roofForm.get('city')?.touched"
+                                                                                        class="text-danger">
+                                                                                        City is required
+                                                                                    </small>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted">State
+                                                                                    <span
+                                                                                        style="color: red;">*</span></label>
+                                                                                <input type="text" class="form-control"
+                                                                                    onkeypress="return /[a-zA-Z]/.test(event.key)"
+                                                                                    formControlName="state"
+                                                                                    [(ngModel)]="stateN">
+                                                                                <small
+                                                                                    *ngIf="roofForm.get('state')?.invalid && roofForm.get('state')?.touched"
+                                                                                    class="text-danger">
+                                                                                    State is required</small>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted">Project
+                                                                                    Capacity (kW)
+                                                                                    <span style="color: red;">*</span>
+                                                                                </label>
+                                                                                <input type="text" class="form-control"
+                                                                                    onkeypress="return /[0-9]/.test(event.key)"
+                                                                                    formControlName="project_capacity">
+                                                                                <small
+                                                                                    *ngIf="roofForm.get('project_capacity')?.hasError('required') && roofForm.get('project_capacity')?.touched"
+                                                                                    class="text-danger">
+                                                                                    Project Capacity is required
+                                                                                </small>
+
+
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted"
+                                                                                    for="fundedBy">Funded By</label>
+                                                                                <select id="fundedBy"
+                                                                                    class="form-control form-select select2"
+                                                                                    formControlName="funded_by">
+                                                                                    <option
+                                                                                        *ngFor="let type of fundsArray"
+                                                                                        [value]="type">
+                                                                                        {{ type }}
+                                                                                    </option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted">Module
+                                                                                    Preference
+                                                                                    <span style="color: red;">*</span>
+                                                                                </label>
+                                                                                <div>
+                                                                                    <textarea type="text"
+                                                                                        class="form-control w-100 mb-1"
+                                                                                        rows="4"
+                                                                                        formControlName="module_preference"></textarea>
+                                                                                </div>
+                                                                                <small
+                                                                                    *ngIf="roofForm.get('module_preference')?.invalid && roofForm.get('module_preference')?.touched"
+                                                                                    class="text-danger">
+                                                                                    Module Preference is
+                                                                                    required</small>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted">Inverter
+                                                                                    Preference <span
+                                                                                        style="color: red;">*</span>
+                                                                                </label>
+                                                                                <div>
+                                                                                    <textarea type="text"
+                                                                                        class="form-control w-100 mb-1"
+                                                                                        formControlName="inverter_preference"
+                                                                                        rows="4"></textarea>
+                                                                                </div>
+                                                                                <small
+                                                                                    *ngIf="roofForm.get('inverter_preference')?.invalid && roofForm.get('inverter_preference')?.touched"
+                                                                                    class="text-danger">
+                                                                                    Inverter Preference is
+                                                                                    required</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class=" p-0 d-flex justify-content-end">
+                                                    <mat-card-actions>
+                                                        <!-- Update Button -->
+                                                        <button class="button-add mt-2 " type="submit"
+                                                            *ngIf="isEditMode">Update</button>&nbsp;
+
+                                                        <!-- Submit Button -->
+                                                        <button class="button-add mt-2" type="submit"
+                                                            *ngIf="!isEditMode">Save</button>
+
+                                                        <!-- Cancel Button -->
+                                                        <!-- <button class="button-backone m-2"
+                                                        
+                                                        (click)="cancelRoofForm()">Back</button> -->
+                                                    </mat-card-actions>
+                                                </div>
+
+
+                                            </form>
+
+
+                                        </ng-template>
+                                    </li>
+
+
+
+                                    <li [ngbNavItem]="2"><a *ngIf="isEditModeShow == true" ngbNavLink>Generation </a>
+                                        <ng-template ngbNavContent>
+
+                                            <div class="row p-4 gen-pad">
+
+
+                                                <div class="row">
+                                                    <!-- <div class="col-md-1"></div> -->
+
+                                                    <div class="col-md-6">
+                                                        <div class="left-heading">
+                                                            <h4 class=" m-t-3">First Year Total
+                                                                Generation:
+                                                                &nbsp;
+                                                                <span id="capacity" class="data-color">
+                                                                    {{ monthTotal.toLocaleString('en-IN')
+                                                                    }} kWh
+                                                                </span>
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+
+                                                        <div class="left-heading">
+                                                            <h4 class=" m-t-3">Lifetime Total
+                                                                Generation:
+                                                                &nbsp;
+                                                                <span id="capacity" class="data-color">
+                                                                    {{yearTotal.toLocaleString('en-IN')
+                                                                    }} kWh
+
+                                                                </span>
+                                                            </h4>
+                                                        </div>
+
+
+                                                    </div>
+
+
+
+                                                </div>
+                                                <!-- <div class="container"> -->
+                                                <div class="row m-2">
+                                                    <!-- First graph -->
+
+                                                    <div class="col-md-6 left-padding">
+                                                        <div
+                                                            class="card body-radius no-shadow title-card overflow-hidden">
+                                                            <div class="card-body">
+                                                                <div class="main-content-label tx-12 mg-b-15">
+                                                                    <p class="left-margin">Energy
+                                                                        Generation
+                                                                        Per
+                                                                        Month
+                                                                        (kWh/month)
+                                                                    </p>
+                                                                    &nbsp;
+                                                                </div>
+                                                                <div class="ht-600 ht-lg-500 wd-600">
+                                                                    <canvas baseChart [data]="solidColorChartData"
+                                                                        [options]="solidColorChartOptions"
+                                                                        [type]="solidColorChartType">
+                                                                    </canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- Second graph -->
+
+
+
+                                                    <div class="col-md-6 left-padding padding-right">
+                                                        <div
+                                                            class="card body-radius no-shadow title-card overflow-hidden">
+                                                            <div class="card-body">
+                                                                <div class="main-content-label tx-12 mg-b-15">
+                                                                    <!-- <h5>25 Year Generation</h5> -->
+                                                                    <p class="left-margin1">Energy
+                                                                        Generation
+                                                                        Per
+                                                                        Year
+                                                                        (In
+                                                                        kWh)
+                                                                    </p>
+                                                                    &nbsp;
+                                                                </div>
+                                                                <div class="ht-600 ht-lg-500 wd-600">
+                                                                    <canvas baseChart [data]="solidColorChartDataYear"
+                                                                        [options]="solidColorChartOptions"
+                                                                        [type]="solidColorChartType">
+                                                                    </canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <!-- </div> -->
+
+
+
+                                            </div>
+                                        </ng-template>
+                                    </li>
+                                    <li [ngbNavItem]="3" *ngIf="isEditModeShow == true">
+                                        <a ngbNavLink (click)="tabSaving()">Savings
+                                        </a>
+                                        <ng-template ngbNavContent>
+                                            <div class="row p-4 padding-card">
+
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="tariff-width">
+                                                            <p class="m-t-3 tariff-para">
+                                                                Current
+                                                                Tariff </p>
+                                                            <input [(ngModel)]="current_tariff"
+                                                                class="form-control color-text" style="width: 150px;"
+                                                                type="number" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Escalation Rate Options -->
+                                                <div class="row m-2">
+                                                    <!-- Option 1 -->
+                                                    <div class="col-md-12 graph-pad">
+                                                        <div class="card-body body-radius no-shadow title-card">
+                                                            <div class="main-content-label tx-12 mg-b-15">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 ms-3">
+                                                                        <div class="row">
+                                                                            <div class="d-flex align-items-center"
+                                                                                style="padding-right: 0;">
+                                                                                <!-- Label for Year Escalation Rate -->
+                                                                                <label class="mt-2 me-3"
+                                                                                    for="escalationRateInput">
+                                                                                    Year Escalation Rate (%)
+                                                                                </label>
+
+                                                                                <!-- Input Field and Percentage Symbol -->
+                                                                                <div class="d-flex align-items-center"
+                                                                                    style="padding-left: 0;">
+
+                                                                                    <input id="escalationRateInput"
+                                                                                        type="number"
+                                                                                        [(ngModel)]="escalationRate1"
+                                                                                        class="form-control color-text"
+                                                                                        step="1"
+                                                                                        oninput="this.value = this.value.replace(/\D/g, '')"
+                                                                                        min="0" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <p class="mt-2 me-6 mb-0">
+                                                                                    Lifetime Savings (₹)
+                                                                                </p>
+                                                                                <div class="mt-2 p-0">
+                                                                                    <span
+                                                                                        class="color-text left-margin">{{
+                                                                                        totalYearlySavingUIOne }}
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="col-md-4 mt-5 left-padding">
+                                                                                <button
+                                                                                    class="btn button-cal btn-sm px-4 rounded-pill"
+                                                                                    (click)="calculateSavings(escalationRate1, 1)">Calculate
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-7" *ngIf="graphHide">
+                                                                        <p class="para-left">Energy Savings Per Year
+                                                                            (kWh/month)</p>
+
+                                                                        <div
+                                                                            class="ht-600 ht-lg-600 wd-500 graph-height">
+                                                                            <canvas baseChart
+                                                                                [data]="solidColorChartDataYearSavingOne"
+                                                                                [options]="solidColorChartOptions"
+                                                                                [type]="solidColorChartType"></canvas>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- Repeat for Option 2 and Option 3 -->
+                                                    <!-- Option 2 -->
+                                                    <div class="col-md-12 graph-pad mt-2">
+                                                        <div class="card-body body-radius no-shadow title-card">
+                                                            <div class="main-content-label tx-12 mg-b-15">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 ms-3">
+                                                                        <div class="row">
+                                                                            <div class=" d-flex align-items-center"
+                                                                                style="padding-right: 0;">
+                                                                                <p class="mt-2 me-3">
+                                                                                    Year Escalation Rate (%)
+
+                                                                                </p>
+
+                                                                                <div class=" d-flex align-items-center"
+                                                                                    style="padding-left: 0;">
+                                                                                    <input type="number"
+                                                                                        [(ngModel)]="escalationRate2"
+                                                                                        class="form-control color-text"
+                                                                                        step="1"
+                                                                                        oninput="this.value = this.value.replace(/\D/g, '')"
+                                                                                        min="0" />
+
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <p class="mt-2 me-6 mb-0">
+                                                                                    Lifetime Savings (₹)
+                                                                                </p>
+                                                                                <div class="mt-2 p-0">
+                                                                                    <span
+                                                                                        class="color-text left-margin">{{
+                                                                                        totalYearlySavingUIThree }}
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="col-md-4 mt-5 left-padding">
+                                                                                <button
+                                                                                    class="btn button-cal btn-sm px-4 rounded-pill"
+                                                                                    (click)="calculateSavings(escalationRate2, 2)">Calculate
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-7" *ngIf="graphHide">
+                                                                        <p class="para-left">Energy Savings Per Year
+                                                                            (kWh/month)</p>
+
+                                                                        <div
+                                                                            class="ht-600 ht-lg-600 wd-500 graph-height">
+                                                                            <canvas baseChart
+                                                                                [data]="solidColorChartDataYearSavingThree"
+                                                                                [options]="solidColorChartOptions"
+                                                                                [type]="solidColorChartType"></canvas>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- Option 3 -->
+                                                    <div class="col-md-12 graph-pad mt-2">
+                                                        <div class="card-body body-radius no-shadow title-card">
+                                                            <div class="main-content-label tx-12 mg-b-15">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 ms-3">
+                                                                        <div class="row">
+                                                                            <div class=" d-flex align-items-center"
+                                                                                style="padding-right: 0;">
+                                                                                <p class="mt-2 me-3">
+                                                                                    Year Escalation Rate (%)
+
+                                                                                </p>
+
+                                                                                <div class=" d-flex align-items-center"
+                                                                                    style="padding-left: 0;">
+                                                                                    <input type="number"
+                                                                                        [(ngModel)]="escalationRate3"
+                                                                                        class="form-control color-text"
+                                                                                        step="1"
+                                                                                        oninput="this.value = this.value.replace(/\D/g, '')"
+                                                                                        min="0" />
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <p class="mt-2 me-6 mb-0">
+                                                                                    Lifetime Savings (₹)
+                                                                                </p>
+                                                                                <div class="mt-2 p-0">
+                                                                                    <span
+                                                                                        class="color-text left-margin">{{
+                                                                                        totalYearlySavingUIFive
+                                                                                        }}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="col-md-4 mt-5 left-padding">
+                                                                                <button
+                                                                                    class="btn button-cal btn-sm px-4 rounded-pill"
+                                                                                    (click)="calculateSavings(escalationRate3, 3)">Calculate
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-7" *ngIf="graphHide">
+                                                                        <p class="para-left">Energy Savings Per Year
+                                                                            (kWh/month)</p>
+
+                                                                        <div
+                                                                            class="ht-600 ht-lg-600 wd-500 graph-height">
+                                                                            <canvas baseChart
+                                                                                [data]="solidColorChartDataYearSavingFive"
+                                                                                [options]="solidColorChartOptions"
+                                                                                [type]="solidColorChartType"></canvas>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </li>
+                                    <li [ngbNavItem]="4" *ngIf="isEditModeShow == true"><a ngbNavLink>BoQs </a>
+                                        <ng-template ngbNavContent>
+                                            <p></p>
+                                        </ng-template>
+                                    </li>
+
+                                    <li [ngbNavItem]="5" *ngIf="isEditModeShow == true"><a ngbNavLink>Proposal</a>
+                                        <ng-template ngbNavContent>
+                                            <div class="row p-4">
+                                                <div class="card body-radius" style="min-height: 340px !important">
+
+                                                    <p><button class="text-white mt-8 me-4 button-download"
+                                                            (click)="downloadProposal(companyId)">
+                                                            Download Proposal&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                                                title="Download Proposal"></i>
+                                                        </button></p>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </li>
+
+                                    <li [ngbNavItem]="6" *ngIf="isEditModeShow == true">
+                                        <a ngbNavLink>Financing Details
+                                        </a>
+                                        <ng-template ngbNavContent>
+
+                                            <div class="container p-4 padding-card">
+                                                <!-- Total Project Cost -->
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <!-- Left Section: Label and Input -->
+                                                    <div class="d-flex align-items-center">
+                                                        <label for="totalProjectCost"
+                                                            class="me-2 mb-0 text-muted text-width">Total Project Cost
+                                                            (₹)</label>
+                                                        <input [(ngModel)]="totalProjectCost" id="totalProjectCost"
+                                                            type="number" class="form-control"
+                                                            (change)="onTotalProjectCostChange()" />
+                                                    </div>
+
+                                                    <!-- Right Section: Add Button -->
+                                                    <button type="button" class="btn-sm button-add"
+                                                        (click)="addFinancingOption()">Add</button>
+                                                </div>
+
+                                                <!-- Financing Options -->
+                                                <div *ngFor="let option of options; let i = index"
+                                                    class="card body-radius p-5 colPadding-card">
+                                                    <div class="row">
+                                                        <!-- Left Half: Input Fields -->
+                                                        <div class="col-md-6 p-4 colPadding1">
+                                                            <div class="row">
+                                                                <div class="card body-radius no-shadow title-card">
+                                                                    <div class="card-body p-3">
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted"
+                                                                                    for="downPayment{{ i }}">Down
+                                                                                    Payment (%)</label>
+                                                                                <input [(ngModel)]="option.downPayment"
+                                                                                    id="downPayment{{ i }}"
+                                                                                    type="number" class="form-control"
+                                                                                    (change)="option.isRecalculated = false" />
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted"
+                                                                                    for="rateOfInterest{{ i }}">Rate of
+                                                                                    Interest (%)</label>
+                                                                                <input
+                                                                                    [(ngModel)]="option.rateOfInterest"
+                                                                                    id="rateOfInterest{{ i }}"
+                                                                                    type="number" step="0.01"
+                                                                                    class="form-control"
+                                                                                    (change)="option.isRecalculated = false" />
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted"
+                                                                                    for="tenure{{ i }}">Tenure
+                                                                                    (Years)</label>
+                                                                                <input [(ngModel)]="option.tenure"
+                                                                                    id="tenure{{ i }}" type="number"
+                                                                                    class="form-control"
+                                                                                    (change)="option.isRecalculated = false" />
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted"
+                                                                                    for="escalation_rate{{ i }}">Escalation
+                                                                                    Rate</label>
+                                                                                <input
+                                                                                    [(ngModel)]="option.escalation_rate"
+                                                                                    id="escalation_rate{{ i }}"
+                                                                                    type="number" class="form-control"
+                                                                                    (change)="option.isRecalculated = false" />
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted"
+                                                                                    for="unitPrice{{ i }}">Current
+                                                                                    Tariff</label>
+                                                                                <input [(ngModel)]="current_tariff"
+                                                                                    id="current_tariff{{ i }}"
+                                                                                    type="number" class="form-control"
+                                                                                    readonly />
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted"
+                                                                                    for="emi{{ i }}">EMI</label>
+                                                                                <input [(ngModel)]="option.emi"
+                                                                                    id="emi{{ i }}" type="number"
+                                                                                    class="form-control" readonly />
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted"
+                                                                                    for="totalPayment{{ i }}">Total
+                                                                                    Payment</label>
+                                                                                <input [(ngModel)]="option.totalPayment"
+                                                                                    id="totalPayment{{ i }}"
+                                                                                    type="number" class="form-control"
+                                                                                    readonly />
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label class="mb-0 text-muted"
+                                                                                    for="lifetimeSavings{{ i }}">Life
+                                                                                    Time Savings</label>
+                                                                                <input
+                                                                                    [(ngModel)]="option.lifetimeSavings"
+                                                                                    id="lifetimeSavings{{ i }}"
+                                                                                    type="number" class="form-control"
+                                                                                    readonly />
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mt-3">
+                                                                            <div
+                                                                                class="col-md-12 d-flex justify-content-end">
+                                                                                <!-- Remove Button -->
+                                                                                <button class="btn-sm button-add"
+                                                                                    *ngIf="options.length > 1"
+                                                                                    (click)="removeFinancingOption(i)">Remove</button>
+
+                                                                                <!-- Calculate Button -->
+                                                                                <button
+                                                                                    class="btn-sm button-backone ms-2"
+                                                                                    (click)="calculateFinancingForOption(i)">Calculate</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Right Half: Yearly and Lifetime Net Savings -->
+                                                        <div class="col-md-6 p-4 colPadding1">
+                                                            <div class="row">
+                                                                <div class="card body-radius no-shadow title-card">
+                                                                    <div class="card-body p-3">
+                                                                        <h6 class="fw-bold">Yearly and Lifetime Net
+                                                                            Savings</h6>
+
+                                                                        <!-- Table header -->
+                                                                        <div class="table-responsive">
+                                                                            <table
+                                                                                class="table table-bordered border-radius-25"
+                                                                                style="table-layout: fixed; width: 100%;">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th class="table-align">Year
+                                                                                        </th>
+                                                                                        <th class="table-align">Yearly
+                                                                                            Savings</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                            </table>
+                                                                        </div>
+
+                                                                        <!-- Table body -->
+                                                                        <div class="table-responsive"
+                                                                            style="max-height: 225px; overflow-y: auto;">
+                                                                            <table
+                                                                                class="table table-bordered border-radius-25"
+                                                                                style="table-layout: fixed; width:100%;">
+                                                                                <tbody>
+                                                                                    <tr
+                                                                                        *ngFor="let saving of option.saving; let year = index">
+                                                                                        <td class="table-align">{{ year
+                                                                                            + 1 }}</td>
+                                                                                        <td class="table-align">₹ {{
+                                                                                            saving.toLocaleString('en-IN')
+                                                                                            }}</td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Save All Options Button -->
+                                                <div class="d-flex justify-content-end mt-2">
+                                                    <button class="button-add" (click)="saveOrUpdateAllOptions()">{{
+                                                        saveButtonText }}</button>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+
+
+                                        </ng-template>
+                                    </li>
+
+                                    <li [ngbNavItem]="7"><a *ngIf="isEditModeShow == true" ngbNavLink>Activities </a>
+                                        <ng-template ngbNavContent>
+
+                                            <div class="card body-radius p-4 mt-3 margin-border">
+
+                                                <div class="row">
+                                                    <div class="col-md-6 pad-right">
+                                                        <div class="card no-shadow title-card body-radius">
+                                                            <div class="table-responsive border-radius-25">
+                                                                <table class="table table-hover border-radius-25">
+                                                                    <thead class="mat-elevation-z5">
+                                                                        <tr>
+
+                                                                            <th style="text-align:left !important"
+                                                                                scope="col">
+                                                                                Date
+
+                                                                            </th>
+                                                                            <th style="text-align:left !important;width: 200px;"
+                                                                                scope="col">
+
+                                                                                Type
+                                                                            </th>
+                                                                            <th style="text-align:left !important"
+                                                                                scope="col">
+                                                                                Notes
+                                                                            </th>
+                                                                            <th style="text-align:center !important"
+                                                                                scope="col">
+                                                                                Actions
+                                                                            </th>
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr *ngIf="interactionData.length === 0">
+                                                                            <td colspan="4">
+                                                                                <div class="data-center">No Data Found.
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr *ngFor="let data of interactionData">
+
+                                                                            <td style="text-align:left !important">
+                                                                                {{data.interaction_datetime|
+                                                                                date:'dd/MM/yyyy'}}
+                                                                            </td>
+                                                                            <td style="text-align:left !important">
+
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'Text Message'">
+
+                                                                                    <img class="image-width" src="./assets/images/text message.svg"
+                                                                                    alt="Description of the image" />&nbsp;{{data.interaction_type
+                                                                                }}
+                                                                                </ng-container>
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'Text Note To Self'">
+
+                                                                                    <img class="image-width" src="./assets/images/text note for self.png"
+                                                                                        alt="Description of the image" />&nbsp;{{data.interaction_type
+                                                                                    }}
+                                                                                </ng-container>
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'Voice Note To Self'">
+
+                                                                                    <img class="image-width" src="./assets/images/microphone.png"
+                                                                                        alt="Description of the image" />&nbsp;{{data.interaction_type
+                                                                                    }}
+                                                                                </ng-container>
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'Task For Self'">
+
+                                                                                    <img class="image-width" src="./assets/images/task for self.png"
+                                                                                        alt="Description of the image" />&nbsp;{{data.interaction_type
+                                                                                    }}
+                                                                                </ng-container>
+
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'WhatsApp Message'">
+
+                                                                                    <img src="./assets/images/whatsapp.svg"
+                                                                                        alt="Description of the image" />&nbsp;{{data.interaction_type
+                                                                                    }}
+                                                                                </ng-container>
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'Call'">
+                                                                                    <img src="./assets/images/call.svg"
+                                                                                        alt="Description of the image" />&nbsp;
+                                                                                    {{data.interaction_type
+                                                                                    }}
+                                                                                </ng-container>
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'Email'">
+                                                                                    <img src="./assets/images/message.svg"
+                                                                                        alt="Description of the image" />&nbsp;
+                                                                                    {{data.interaction_type
+                                                                                    }}
+                                                                                </ng-container>
+                                                                            </td>
+
+
+
+                                                                            <td style="text-align:left !important">
+                                                                                <span [ngStyle]="{ 'font-weight': data.interaction_type === 'Voice Note To Self' ? 'bold' : 'normal' }">
+                                                                                  <!-- Check for 'Voice Note To Self', 'Call', and 'Task For Self' -->
+                                                                                  {{ 
+                                                                                    data.interaction_type === 'Voice Note To Self' 
+                                                                                      ? '-' 
+                                                                                      : (data.interaction_type === 'Call' || data.interaction_type === 'Task For Self') 
+                                                                                        ? (data.notifications?.length ? data.notifications[0]?.notes || '-' : '-') 
+                                                                                        : data.notes || '-' 
+                                                                                  }} 
+                                                                                </span>
+                                                                              </td>
+                                                                              
+                                                                              
+                                                                              
+
+                                                                            <td style="text-align:center !important">
+                                                                                <!-- ✅ Edit Button -->
+                                                                                <button (click)="editInteraction(data.id)" class="table-btn edit-btn">
+                                                                                    <i class="fa fa-pencil fs-16" title="Edit"></i>
+                                                                                </button>
+                                                                            
+                                                                                <!-- ✅ Delete Button -->
+                                                                                <button class="table-btn delete-btn" (click)="deleteInteraction(data.id)">
+                                                                                    <i class="fa fa-trash fs-16" title="Delete"></i>
+                                                                                </button>
+                                                                            
+                                                                                <!-- ✅ Speaker Button (Only Shows for "Voice Note To Self") -->
+                                                
+                                                                                <button
+                                                                                *ngIf="data.interaction_type === 'Voice Note To Self' && data.voice_recording_path"
+                                                                                (click)="openAudioModal(data)"
+                                                                                class="table-btn play-audio-btn">
+                                                                                <i class="fa fa-volume-up fs-16" title="Play Audio"></i>
+                                                                              </button>
+                                                                                
+                                                                                  
+                                                                            </td>
+                                                                            
+                                                                            
+                                                                        </tr>
+                                                                    </tbody>
+
+                                                                </table>
+                                                            </div>
+
+                                                            <div class="d-flex justify-content-center">
+                                                                <ngb-pagination [collectionSize]="totalItems"
+                                                                    [(page)]="currentPage" [pageSize]="pageSize"
+                                                                    (pageChange)="onPageChange($event)" [maxSize]="4"
+                                                                    [ellipses]="true" size="sm">
+                                                                </ngb-pagination>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-md-6 pad-left">
+                                                        <div class="card body-radius no-shadow title-card">
+                                                            <div class="card-body">
+                                                                <form [formGroup]="myInteractionsForm"
+                                                                    (ngSubmit)="submitInteractionsForm(myInteractionsForm)">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group">
+                                                                                <label class="mb-0 text-muted">Type<span
+                                                                                        style="color: red;">
+                                                                                        *</span></label>
+                                                                                <select
+                                                                                    class="form-control form-select select2"
+                                                                                    placeholder="Interaction Type"
+                                                                                    formControlName="interactionType">
+                                                                                    <option
+                                                                                        *ngFor="let type of interactionTypes"
+                                                                                        [value]="type">{{ type }}
+                                                                                    </option>
+                                                                                </select>
+                                                                                <small
+                                                                                    *ngIf="myInteractionsForm.get('interactionType')?.invalid && myInteractionsForm.get('interactionType')?.touched"
+                                                                                    class="text-danger">Type is
+                                                                                    required</small>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label class="mb-0 text-muted" for="dateTime">
+                                                                                  Date & Time<span style="color: red;">*</span>
+                                                                                </label>
+                                                                                <input 
+                                                                                  type="datetime-local"
+                                                                                  id="dateTime"
+                                                                                  formControlName="dateTime"
+                                                                                  class="form-control"
+                                                                                  [min]="minDateTime"
+                                                                                  [max]="maxDateTime"
+                                                                                  required
+                                                                                  (keydown)="preventManualEdit($event)">
+                                                                                <small *ngIf="myInteractionsForm.get('dateTime')?.invalid && myInteractionsForm.get('dateTime')?.touched" 
+                                                                                       class="text-danger">
+                                                                                  Date & Time is required
+                                                                                </small>
+                                                                            </div>
+                                                                              
+
+                                                                            <!-- Notifications Section -->
+                                                                            <div *ngIf="myInteractionsForm.contains('notifications')">
+                                                                                <div class="form-group" *ngIf="showNotificationSection()">
+                                                                                  <div class="row mb-1">
+                                                                                    <div class="col-md-11">
+                                                                                      <label class="mb-0 text-muted">Notifications<span style="color: red;"> *</span></label>
+                                                                                    </div>
+                                                                                    <div class="col-md-1">
+                                                                                      <button
+                                                                                        type="button"
+                                                                                        class="table-btn delete-btn"
+                                                                                        [disabled]="notifications.length >= 2"
+                                                                                        (click)="addNotification()"
+                                                                                      >
+                                                                                        <i class="fa fa-plus fs-16" title="Add"></i>
+                                                                                      </button>
+                                                                                    </div>
+                                                                                  </div>
+                                                                              
+                                                                                  <!-- Loop through notifications -->
+                                                                                  <div
+                                                                                    *ngFor="let notification of notifications.controls; let i = index"
+                                                                                    [formGroup]="getNotificationFormGroup(i)"
+                                                                                    class="mb-3"
+                                                                                  >
+                                                                                    <div class="row">
+                                                                                      <div class="col-md-4">
+                                                                                        <select
+                                                                                          class="form-control form-select select2"
+                                                                                          formControlName="interactionNote"
+                                                                                        >
+                                                                                          <option *ngFor="let type of interactionNote" [value]="type">{{ type }}</option>
+                                                                                        </select>
+                                                                                      </div>
+                                                                              
+                                                                                      <div class="col-md-3">
+                                                                                        <select
+                                                                                          class="form-control form-select select2"
+                                                                                          formControlName="interactionTime"
+                                                                                          (change)="onInteractionTimeChange($event, i)"
+                                                                                        >
+                                                                                          <option *ngFor="let type of interactionTime" [value]="type">{{ type }}</option>
+                                                                                        </select>
+                                                                                      </div>
+                                                                              
+                                                                                      <div class="col-md-4">
+                                                                                        <select
+                                                                                          class="form-control form-select select2"
+                                                                                          formControlName="interactionDays"
+                                                                                        >
+                                                                                          <option *ngFor="let day of filteredInteractionDays[i]" [value]="day">{{ day }}</option>
+                                                                                        </select>
+                                                                                      </div>
+                                                                              
+                                                                                      <div class="col-md-1">
+                                                                                        <button
+                                                                                          type="button"
+                                                                                          class="table-btn delete-btn"
+                                                                                          (click)="deleteNotification(i)"
+                                                                                        >
+                                                                                          <i class="fa fa-trash fs-16" title="Delete"></i>
+                                                                                        </button>
+                                                                                      </div>
+                                                                                    </div>
+                                                                                  </div>
+                                                                                </div>
+                                                                                <small
+                                                                                  *ngIf="myInteractionsForm.get('notifications')?.invalid && myInteractionsForm.get('notifications')?.touched"
+                                                                                  class="text-danger"
+                                                                                >
+                                                                                  Notifications are required
+                                                                                </small>
+                                                                              </div>
+
+                                                                            <!-- ✅ Check interaction type before displaying fields -->
+                                                                            <div
+                                                                                *ngIf="myInteractionsForm.contains('notes')">
+                                                                                <div *ngIf="myInteractionsForm.get('interactionType')?.value !== 'Voice Note To Self'"
+                                                                                    class="form-group">
+                                                                                    <label
+                                                                                        class="mb-0 text-muted">Notes<span
+                                                                                            style="color: red;">
+                                                                                            *</span></label>
+                                                                                    <textarea type="text"
+                                                                                        class="form-control" rows="3"
+                                                                                        formControlName="notes"></textarea>
+                                                                                    <small
+                                                                                        *ngIf="myInteractionsForm.get('notes')?.invalid && myInteractionsForm.get('notes')?.touched"
+                                                                                        class="text-danger">Notes are
+                                                                                        required</small>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- ✅ Show Voice Recording field when "Voice" is selected -->
+                                                                            <div *ngIf="myInteractionsForm.contains('voiceRecording')">
+                                                                                <div class="form-group" *ngIf="myInteractionsForm.get('interactionType')?.value == 'Voice Note To Self'">
+                                                                                  <label class="mb-0 text-muted">Voice Recording<span style="color: red;"> *</span></label>
+                                                                              
+                                                                                  <!-- 🎧 Show Recorded Audio Preview and Delete Button in One Row -->
+                                                                                  <div *ngIf="audioURL && !isDeleteMode" class="mt-2 d-flex align-items-center">
+                                                                                    <audio [src]="audioURL" controls class="me-3"></audio>
+                                                                                    <button class="btn btn-warning" (click)="deleteRecording()">❌ Delete & Re-Record</button>
+                                                                                  </div>
+                                                                              
+                                                                                  <div class="row">
+                                                                                    <!-- 🎤 Start Recording Button (Show only if no recording exists or after delete) -->
+                                                                                    <div class="col-md-3">
+                                                                                      <button class="btn btn-primary" (click)="startRecording()" [disabled]="isRecording" *ngIf="!audioURL || isDeleteMode">
+                                                                                        🎤 Start Recording
+                                                                                      </button>
+                                                                                    </div>
+                                                                              
+                                                                                    <!-- ⏹ Stop Recording Button (Show only when recording is in progress) -->
+                                                                                    <div class="col-md-3">
+                                                                                      <button class="btn btn-danger" *ngIf="isRecording" (click)="stopRecording()">⏹ Stop Recording</button>
+                                                                                    </div>
+                                                                                  </div>
+                                                                              
+                                                                                  <!-- ❌ Validation Message (Shows if user didn't record audio) -->
+                                                                                  <small *ngIf="isFormSubmitted && myInteractionsForm.get('voiceRecording')?.invalid" class="text-danger">
+                                                                                    Voice recording is required
+                                                                                  </small>
+                                                                                </div>
+                                                                              </div>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="p-0 d-flex justify-content-end">
+                                                                        <mat-card-actions>
+                                                                            <button class="mt-0 me-4 button-save"
+                                                                                type="submit">
+                                                                                {{ isEditModeInt ? 'Update' : 'Save' }}
+                                                                            </button>
+                                                                            <button class="mt-1 me-4 button-can"
+                                                                                type="button"
+                                                                                (click)="cancelInteraction()">
+                                                                                Cancel
+                                                                            </button>
+                                                                        </mat-card-actions>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                        <div [ngbNavOutlet]="nav1" class="tabs-menu-body tab-content panel-body tabs-menu-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #audioModal let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title">Play Audio</h4>
+                  <button type="button" class="close" (click)="modal.dismiss()">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <p><strong>Date & Time:</strong> <br>{{datetime|
+                    date: 'dd/MM/yyyy hh:mm a'}}</p>
+                  
+                  <audio class="audio-width" controls>
+                    <source [src]="audioURL" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
+              </ng-template>
+              
+
+            <!-- <ng-template #confirmationModal let-modal>
+            <div class="modal-header custom-modal-header">
+                <p class="modal-title" id="confirmationModalLabel">Confirmation</p>
+                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <img src="./assets/images/confirmation-crossmark.svg" alt="Description of the image" />
+                </button>
+            </div>
+            <div class="modal-body text-center custom-modal-body">
+                Are you sure you want to delete this interaction data?
+            </div>
+            <div class="modal-footer custom-modal-footer">
+                <button type="button" (click)="deleteInteraction()" class=" btn-custom-yes">Yes</button>
+                <button type="button" class="btn-custom-no" (click)="modal.dismiss()">No</button>
+            </div>
+        </ng-template> -->
+
+
+
+            <ng-template #DirectorModal let-modal>
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="DirectorModal">Add Director Information</h5>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="DirectorForm" (ngSubmit)="submitDirectorForm(DirectorForm)">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div>
+                                    <mat-label>Director Name<span
+                                            style="color: red;margin-left: 2px;">*</span></mat-label>
+                                </div>
+                                <div>
+                                    <mat-form-field class="w-100" appearance="outline">
+                                        <input matInput placeholder="Director Name"
+                                            onkeypress="return/[a-zA-Z\s]/.test(event.key)"
+                                            formControlName="director_name">
+                                        <mat-error *ngIf="DirectorForm.get('director_name')?.hasError('pattern')">
+                                            Only letters are allowed
+                                        </mat-error>
+                                        <mat-error *ngIf="DirectorForm.get('director_name')?.hasError('required')">
+                                            Directors Name is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div>
+                                    <mat-label>Director Contact</mat-label>
+                                </div>
+
+                                <div>
+                                    <mat-form-field class="w-100" appearance="outline">
+                                        <input oninput="this.value = this.value.replace(/\D/g, '').substring(0, 10)"
+                                            matInput placeholder="Director Contact"
+                                            onkeypress="return /[0-9]/.test(event.key)"
+                                            formControlName="director_contact">
+
+                                        <mat-error
+                                            *ngIf="DirectorForm.get('director_contact')?.value && DirectorForm.get('director_contact')?.hasError('pattern')">
+                                            Please enter a valid 10 digit Contact Number
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div>
+                                    <mat-label>Director Email</mat-label>
+                                </div>
+
+                                <div>
+                                    <mat-form-field class="w-100" appearance="outline">
+                                        <input matInput placeholder="Director Email" formControlName="director_email">
+
+                                        <mat-error
+                                            *ngIf="DirectorForm.get('director_email')?.value && DirectorForm.get('director_email')?.hasError('pattern')">
+                                            Please enter a valid Gmail address
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer p-0 d-flex justify-content-end">
+                            <mat-card-actions>
+                                <button class="btn btn-primary mt-1 me-2" type="submit"
+                                    *ngIf="isEditModeDirector == true" [disabled]="DirectorForm.invalid">Update</button>
+                                <button class="btn btn-primary mt-1 me-2 text-white " type="submit"
+                                    style="background-color: #22A447; border-radius:35px;width:90px;height: 35px !important"
+                                    type="submit" [disabled]="DirectorForm.invalid"
+                                    *ngIf="isEditModeDirector == false">Submit</button>
+
+                                <button class=" btn btn-danger text-white mt-1 me-2"
+                                    style="background-color: #FF4747; border-radius:35px;width:100px;height: 35px !important"
+                                    (click)="closeModal()">Cancel</button>
+                            </mat-card-actions>
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </ng-template>
+        </div>
+        <ng-template #DirectorConfirmationModal let-modal>
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="DirectorConfirmationModalLabel">Confirmation</h5>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this director data?
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="deleteDirector()" class="btn btn-primary">Yes</button>
+                <button type="button" class="btn btn-danger" (click)="modal.dismiss()">No</button>
+
+            </div>
+        </ng-template>
+    </div>
+</div>

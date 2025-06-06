@@ -1,0 +1,6 @@
+.header-light .header .form-inline .form-control {
+    color: var(--volgh-default-color) !important;
+    background-color: rgb(var(--volgh-fixed-white-rgb)) !important;
+    border-color: var(--volgh-default-border) !important;
+}
+/*# sourceMappingURL=light-header.css.map */

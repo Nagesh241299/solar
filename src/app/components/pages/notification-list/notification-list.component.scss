@@ -1,0 +1,67 @@
+.highlight-date {
+  background-color: lightblue;
+}
+
+.reminder-title {
+  font-size: smaller;
+  color: darkblue;
+  text-align: center;
+}
+
+mwl-calendar-month-view {
+  // background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+mwl-calendar-week-view {
+  // background-color: #e0f7fa;
+  margin-top: 10px;
+  padding: 15px;
+}
+
+.cancel-btn{
+  margin-right: 10px;
+}
+
+.cal-month-view .cal-header {
+  text-align: center;
+  font-weight: bolder;
+  color: green;
+  font-size: medium;
+}
+
+b, strong {
+  font-weight: bolder;
+  color: green;
+}
+
+.table tbody tr td:first-child {
+  padding-left: 11px !important;
+}
+
+.button-backone {
+  // background-color: #FF4747;
+  border-radius: 34px;
+  height: 41px;
+   width: 117px;
+  color: #200D63;
+  font-size: 12px;
+  font-weight: 600;
+  border-color: #200D63;
+  border: 2px solid #200D63;
+  /* Darker color with thicker border */
+
+  &:hover
+  {
+      color: #fff;
+      background-color: #200D63;
+  }
+}
+
+.remainder{
+  font-size: 20px;
+  font-weight: 600;
+  color: #200D63;
+}
+

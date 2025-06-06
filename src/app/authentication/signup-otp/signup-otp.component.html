@@ -1,0 +1,167 @@
+<main class="loader-container" *ngIf="isLoader">
+    <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5ebd3e" />
+                <stop offset="33%" stop-color="#ffb900" />
+                <stop offset="67%" stop-color="#f78200" />
+                <stop offset="100%" stop-color="#e23838" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0%" stop-color="#e23838" />
+                <stop offset="33%" stop-color="#973999" />
+                <stop offset="67%" stop-color="#009cdf" />
+                <stop offset="100%" stop-color="#5ebd3e" />
+            </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-width="16">
+            <g class="ip__track" stroke="#ddd">
+                <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+            <g stroke-dasharray="180 656">
+                <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0"
+                    d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358"
+                    d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+        </g>
+    </svg>
+</main>
+<div>
+    <!-- <div class="">
+
+        <div class="col col-login mx-auto mt-5">
+            <div class="text-center">
+                <img src="./assets/images/solar_junction_logo.png" style="width:20%" class="header-brand-img" alt="">
+            </div>
+        </div>
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills container-login100">
+            <li ngbNavItem="Angular">
+
+                <ng-template ngbNavContent>
+                    <form [formGroup]="otpForm" class="login100-form validate-form" (ngSubmit)="Submit()">
+                        <span>
+                            Signup OTP
+                        </span>
+
+
+                        <div class="wrap-input100 validate-input" *ngIf="nextStep == 'email'"
+                            style="margin-top:10px !important">
+                            <input type="text" maxlength="6" onkeypress="return /[0-9]/.test(event.key)"
+                                class="form-control input100" placeholder="Email OTP" autocomplete
+                                formControlName="Otp">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i style="color: rgba(15, 146, 66, 0.5)" class="zmdi zmdi-email" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" *ngIf="nextStep != 'email'">
+                            <input type="text" maxlength="6" onkeypress="return /[0-9]/.test(event.key)"
+                                class="form-control input100" placeholder="Mobile OTP" autocomplete
+                                formControlName="Otp">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i style="color: rgba(15, 146, 66, 0.5)" class="zmdi zmdi-phone" aria-hidden="true"></i>
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <p *ngIf="errorMessage.length > 0" class="text-danger">{{ errorMessage }}</p>
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            <button type="submit"
+                                style="border-radius: 34px;color:#FFFFFF;background-color:rgba(15, 146, 66, 0.5);border-radius: 34px;height: 37px;width: 340px;">Verify</button>
+
+                            <div class="text-center pt-3">
+                                <p class="text-dark mb-0"><a routerLink="/auth/login" class="ms-1"
+                                        style="color: #22A447">Back</a></p>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </ng-template>
+            </li>
+        </ul>
+        <div class="container-login100">
+            <div class="wrap-login100 p-6">
+                <div [ngbNavOutlet]="nav" class="ml-4"></div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+    <div class="login-container">
+        <div class="left-half">
+            <img src="./assets/images/Left%20Content%20(1).svg" alt="Image" class="full-image">
+        </div>
+        <div class="right-half">
+            <img src="./assets/images/solar_junction_logo.png" alt="Logo" class="logo">
+
+            <!-- <h1 class="text" style="display:block;">Hello Again!</h1> -->
+            <form [formGroup]="otpForm" (ngSubmit)="Submit()" class="mt-4">
+                <h1 class="text mt-4" style="display:block;">Hello Again!</h1>
+
+
+                <div>
+                    <div class="form-group">
+                        <div class="row">
+                            <!-- <div class="col md-6"> -->
+                            <div>
+                                <!-- <h4 for="loginType"> SignUp OTP
+                            </h4> -->
+                            </div>
+
+                            <div class="row mt-4">
+
+                                <div class="w-90 email input-container mb-2" *ngIf="nextStep == 'email'">
+                                    <i class="fa fa-shield fs-24 icon" aria-hidden="true"></i>
+                                    <input type="text" [maxlength]="6" onkeypress="return /[0-9]/.test(event.key)"
+                                        [(ngModel)]="otp" placeholder="Enter 6-digit Email OTP" formControlName="Otp"
+                                        class="form-control" (keydown.enter)="Submit()" autofocus>
+                                </div>
+                                <div class="w-90 email input-container mb-2" *ngIf="nextStep != 'email'">
+                                    <i class="fa fa-shield fs-24 icon" aria-hidden="true"></i>
+                                    <input type="text" maxlength="6" onkeypress="return /[0-9]/.test(event.key)"
+                                        [(ngModel)]="otp" [maxlength]="6" placeholder="Enter 6-digit Mobile OTP"
+                                        formControlName="Otp" class="form-control" (keydown.enter)="Submit()" autofocus>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div *ngIf="nextStep == 'email'">
+
+                    <button type="submit" class="button-sendOtp">
+                        Verify OTP
+                    </button>
+                </div>
+
+                <div *ngIf="nextStep != 'email'">
+                    <button type="submit" class="button-sendOtp">
+                        Verify OTP
+                    </button>
+                </div>
+
+
+                <div>
+                    <p class="text-dark mb-0 mt-2">
+                        <a routerLink="/auth/login" class="ms-1 color fw-bold">
+                            Back</a>
+                    </p>
+                </div>
+
+                <div class="mt-2">
+                    <small *ngIf="errorMessage.length > 0" class="text-danger">{{ errorMessage }}</small>
+                </div>
+
+            </form>
+        </div>
+    </div>

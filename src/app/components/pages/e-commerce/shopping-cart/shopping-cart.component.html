@@ -1,0 +1,84 @@
+
+<app-header-breadcrumb title="Shopping-Cart" title1="Ecommerce" activeitem="Shopping-CART"></app-header-breadcrumb>
+
+
+<!-- ROW-1 OPEN -->
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="card cart">
+            <div class="card-header">
+                <h3 class="card-title">Shopping Cart</h3>
+            </div>
+            <div class="card-body overflow-auto">
+                <div class="table-responsive overflow-visible">
+                    <table class="table table-bordered table-vcenter">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th >Sub Total</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of Products">
+                                <td>
+                                    <img src={{product.src}} alt="" class="h-8 br-5"> <span class="ms-2">{{product.item}}</span>
+                                </td>
+                                
+                                <td class="font-weight-bold">{{product.price}}</td>
+                                <td >
+                                    <ng-select placeholder="1" name="quantity" id="select-countries" class="select2 selectState">
+                                        <!--custom-select form-control -->
+                                        <ng-option value="1" selected>1</ng-option>
+                                        <ng-option value="2">2</ng-option>
+                                        <ng-option value="3" >3</ng-option>
+                                        <ng-option value="4">4</ng-option>
+                                    </ng-select>
+                                     
+                                </td>
+                                <td class="font-weight-bold">{{product.subtotal}}</td>
+															<td class="btn-list">
+																<a href="javascript:void(0);" class="btn btn-primary-light border-0 me-3 " ngbTooltip="Save for whishlist" data-bs-toggle="tooltip" data-bs-placement="top" title="Save for Washlist"><i class="icon icon-heart align-middle"></i></a>
+																<a href="javascript:void(0);" class="btn btn-secondary-light border-0 me-3" ngbTooltip="Remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove" (click)="click(product.item)"><i class="icon icon-trash align-middle"></i></a>
+															</td>
+                             
+                            </tr>
+                          
+                        </tbody>
+                    </table>
+                </div><br>
+                <div class="row">
+                    <div class="col-6"><input class="productcart form-control" type="text" placeholder="Coupon Code"></div>
+                    <div class="col-6"><a href="javascript:;" class="btn btn-primary btn-md">Apply Coupon</a></div>
+                </div><br>
+                <div class="mt-3">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            Sub Total
+                            <span class="badgetext h4 font-weight-bold mb-0">$4,360</span>
+                        </li>
+                        <li class="list-group-item">
+                            Discount
+                            <span class="badgetext h4 font-weight-bold mb-0">5%</span>
+                        </li>
+                        <li class="list-group-item">
+                            Shipping
+                            <span class="badgetext h4 font-weight-bold mb-0">Free</span>
+                        </li>
+                        <li class="list-group-item">
+                            Total
+                            <span class="badgetext h4 font-weight-bold mb-0">$3,976</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-footer text-end btn-list">
+                <a routerLink="/ecommerce/products" class="btn btn-primary mx-1"><i class="fa fa-arrow-left me-2"></i>Continue Shopping</a>
+                <a routerLink="/ecommerce/checkout" class="btn btn-success mx-1">Check out<i class="fa fa-arrow-right ms-2 "></i></a>
+            </div>
+        </div>
+    </div>
+</div><!-- COL-END -->
+<!-- ROW-1 CLOSED -->

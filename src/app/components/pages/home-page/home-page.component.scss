@@ -1,0 +1,197 @@
+/* Add this to your styles.css or styles.scss */
+
+.header-and-logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.toggle-icon {
+  cursor: pointer;
+}
+
+.arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 4px 0 4px 7px;
+  /* Adjust the width here */
+  border-color: transparent transparent transparent #000;
+  /* Adjust the color here */
+  margin-top: 2px;
+  margin-right: 7px;
+}
+
+.arrow-down {
+  transform: rotate(90deg);
+}
+
+.arrow-right {
+  transform: rotate(0deg);
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.google-input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  /* Changed color to a lighter shade */
+  border-radius: 24px;
+  /* Increased border-radius for rounded corners */
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Added a subtle box shadow */
+}
+
+.google-input+.fa-search {
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.container-fluid {
+  overflow: hidden;
+}
+
+
+.google-search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  // background-image: url('../../../assets/images/logoCompany.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+
+.google-logo img {
+  max-width: 100px;
+  /* Adjust the size as needed */
+  margin-right: 10px;
+}
+
+.google-search-box {
+  max-width: 600px;
+  width: 90%;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.google-logo {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+.google-header {
+
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+
+  color: #34a853;
+  /* Google green color */
+
+}
+
+.google-search-button {
+  padding: 8px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}
+
+@media (max-width: 768px) {
+  .google-search-box {
+    width: 100%;
+  }
+}
+
+.icon {
+  width: 54px;
+  height: 54px;
+  position: absolute;
+  top: 15px;
+  right: 13px;
+  transform: translateY(-5px);
+
+}
+
+// .img-card {
+//   background-color: rgba(254, 212, 106, 1) !important
+// }
+
+.card-img4 {
+  width: 100%;
+  border-radius: 75px;
+  background-color: rgba(254, 212, 106, 1) !important
+}
+
+.img-card-orange {
+  position: relative;
+}
+
+
+.mt-auto img {
+  filter: invert(0%);
+  // position: absolute;
+  bottom: 5px;
+  top: 120px;
+  margin-top: 100px;
+}
+
+.height {
+  min-height: 142px !important;
+}
+
+
+.card-bg-1
+{
+  background-color: #005B93 !important;
+}
+
+.card-bg-2
+{
+  background-color: #AD97FF !important;
+}
+
+.card-bg-3
+{
+  background-color: #186338 !important;
+}
+
+.card-bg-4
+{
+  background-color: #69BBED !important;
+}
+
+.cursor-pointer
+{
+  cursor: pointer;
+}

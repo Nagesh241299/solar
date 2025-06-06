@@ -1,0 +1,117 @@
+<main class="loader-container" *ngIf="isLoader">
+    <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5ebd3e" />
+                <stop offset="33%" stop-color="#ffb900" />
+                <stop offset="67%" stop-color="#f78200" />
+                <stop offset="100%" stop-color="#e23838" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0%" stop-color="#e23838" />
+                <stop offset="33%" stop-color="#973999" />
+                <stop offset="67%" stop-color="#009cdf" />
+                <stop offset="100%" stop-color="#5ebd3e" />
+            </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-width="16">
+            <g class="ip__track" stroke="#ddd">
+                <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+            <g stroke-dasharray="180 656">
+                <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0"
+                    d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358"
+                    d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+        </g>
+    </svg>
+</main>
+<div class="login-container mt-0">
+    <div class="left-half">
+        <img src="./assets/images/Left%20Content%20(1).svg" alt="Image" class="full-image">
+    </div>
+    <div class="right-half">
+
+        <img src="./assets/images/solar_junction_logo.png" alt="Logo" class="logo">
+
+
+        <form [formGroup]="loginForm">
+            <h1 class="text">Hello Again!
+            </h1>
+
+            <div>
+                <!-- Add Radio Buttons -->
+                <div class="form-group" style="text-align: left;">
+                    <h4 class="mb-4 fw-bold" style="display: block;">Login with</h4>
+                    <mat-radio-group class="radio-group custom-radio-group" (change)="radioChange($event.value)">
+                        <!-- Email Option -->
+                        <mat-radio-button value="email" [checked]="activeTab === 'email'"></mat-radio-button>
+                        <span>Email</span>
+                        &nbsp;&nbsp;
+                        <!-- Mobile Option -->
+                        <mat-radio-button value="mobile" [checked]="activeTab === 'mobile'"></mat-radio-button>
+                        <span>Mobile</span>
+                    </mat-radio-group>
+                </div>
+
+                <div class="row mt-2">
+
+                    <div *ngIf="activeTab === 'email'" class="w-80 email input-container mb-2">
+                        <i class="fa fa-envelope icon fs-24"></i> <!-- Email icon inside input -->
+
+                        <input placeholder=" Enter Email Address" type="email" name="email" class="form-control"
+                            required formControlName="email" (input)="onInput()" (keydown.enter)="submit()" #emailInput
+                            autofocus>
+
+                        <small *ngIf="errorMessage.length > 0 && activeTab === 'email'" class="text-danger">
+                            {{ errorMessage }}
+                        </small>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div *ngIf="activeTab === 'mobile'" class="w-80 email input-container mb-2">
+                        <i class="fa fa-phone icon fs-24"></i>
+
+                        <input type="tel" [maxlength]="10" placeholder="Enter Mobile Number" formControlName="mobile"
+                            required pattern="^\d{10}$" onkeypress="return /[0-9]/.test(event.key)" class="form-control"
+                            (input)="onInput()" (keydown.enter)="submit()" #mobileInput>
+
+
+                        <small *ngIf="errorMessage.length > 0 && activeTab === 'mobile'" class="text-danger">
+                            {{ errorMessage }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+
+                <button type="button" (click)="submit()" class="button-sendOtp">
+                    Send OTP
+                </button>
+
+            </div>
+
+
+            <div class="form-group d-flex flex-row align-items-left mt-2">
+                <mat-error class="text-danger">
+                    {{ userLoginError.message }}</mat-error>
+
+                <!-- <p *ngIf="errorMessage.length > 0" class="text-danger">
+                    {{errorMessage}} </p> -->
+            </div>
+            <div style="text-align:left !important;">
+                <p class="text-dark mb-0">Not a member?
+                    <a routerLink="/auth/register" class="ms-1 fw-bold color">Sign
+                        Up</a>
+                </p>
+            </div>
+            <h6 class="align-items-left color-text mt-5">v{{ version ? version : '0.0.0'}}</h6>
+
+        </form>
+
+    </div>
+</div>

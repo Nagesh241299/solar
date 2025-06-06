@@ -1,0 +1,499 @@
+<main class="loader-container" *ngIf="isLoader">
+    <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5ebd3e" />
+                <stop offset="33%" stop-color="#ffb900" />
+                <stop offset="67%" stop-color="#f78200" />
+                <stop offset="100%" stop-color="#e23838" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0%" stop-color="#e23838" />
+                <stop offset="33%" stop-color="#973999" />
+                <stop offset="67%" stop-color="#009cdf" />
+                <stop offset="100%" stop-color="#5ebd3e" />
+            </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-width="16">
+            <g class="ip__track" stroke="#ddd">
+                <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+            <g stroke-dasharray="180 656">
+                <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0"
+                    d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358"
+                    d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+        </g>
+    </svg>
+</main>
+<form [formGroup]="configurationForm" (ngSubmit)="configFormSubmit()">
+    <div class="card body-radius p-4 no-shadow remove-pad">
+        <div class="row">
+            <div class="col-md-6 p-4 colPadding">
+
+                <div class="row">
+                    <div class="card title-card no-shadow body-radius">
+
+                        <div class="card-body p-3 no-shadow">
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">Username
+                                        <span style="color: red; margin-left: 2px;">*</span></label>
+                                    <div>
+                                        <input type="text" class="form-control w-100" formControlName="username"
+                                            onkeypress="return /^[a-zA-Z0-9-_]+$/.test(event.key)">
+                                        <small
+                                            *ngIf="configurationForm.get('username')?.invalid && configurationForm.get('username')?.touched"
+                                            class="text-danger"> Username is
+                                            required</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted"> Theme
+                                        <span style="color: red; margin-left: 2px;">*</span></label>
+                                    <select class="form-control form-select select2" formControlName="select_template"
+                                        (change)="updateColors($event)">
+                                        <option label="Select Theme" value="" selected disabled>Select Theme</option>
+                                        <option *ngFor="let option of selectTemplateArray" [value]="option">
+                                            {{ option }}
+                                        </option>
+                                    </select>
+
+                                    <small
+                                        *ngIf="configurationForm.get('select_template')?.invalid && configurationForm.get('select_template')?.touched"
+                                        class="text-danger"> Theme is
+                                        required</small>
+                                </div>
+
+                                <!-- <div class="col-md-6">
+                                    <label class="mb-0 text-muted">Logo
+                                        <span style="color: red; margin-left: 2px;">*</span></label>
+                                    <div class="photo-upload text-center"> -->
+                                <!-- File Input -->
+                                <!-- <input type="file" class="form-control" (change)="onPhotoUpload($event)"
+                                            accept="image/*" /> -->
+
+                                <!-- Image Preview -->
+                                <!-- <img *ngIf="photoPreview" [src]="photoPreview" alt="Photo Preview"
+                                            class="img-fluid rounded-square mt-2"
+                                            style="width: 150px; height: 150px; object-fit: cover; border: 1px solid #ccc;" />
+                                    </div>
+                                </div> -->
+
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <label class="mb-0 text-muted">Color</label>
+                                    <div class="d-flex gap-3 mt-3 flex-wrap">
+                                        <div *ngFor="let color of availableColors" class="color-box"
+                                            (click)="selectColor(color)"
+                                            [ngClass]="{'selected-color-box': selectedColor?.primary === color.primary && selectedColor?.secondary === color.secondary}">
+                                            <div class="color-primary" [ngStyle]="{'background-color': color.primary}">
+                                                Primary Color
+                                            </div>
+                                            <div class="color-secondary"
+                                                [ngStyle]="{'background-color': color.secondary}">
+                                                Secondary Color
+                                            </div>
+                                            <div *ngIf="selectedColor?.primary === color.primary && selectedColor?.secondary === color.secondary"
+                                                class="checkmark">✔</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <label class="mb-0 mt-3 text-muted" *ngIf="url">Site Builder URL</label>
+                                    <div *ngIf="url" class="d-flex align-items-center mt-1">
+                                        <a [href]="url" target="_blank" class="btn btn-link p-0 text-decoration-none">{{
+                                            url }}</a>
+                                        <button (click)="copyToClipboard($event, url)" title="Copy URL"
+                                            class="btn btn-outline-primary btn-sm ms-2 copy-btn">
+                                            <i class="fa fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 p-4 colPadding">
+
+                <div class="row">
+                    <div class="card title-card no-shadow body-radius">
+
+                        <div class="card-body p-3 no-shadow">
+
+                            <h5 class="fw-bold mb-2 marg">
+                                Preferred Sections
+                            </h5>
+                            <div class="row mb-2">
+
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">
+                                        Inverter
+                                        <span style="color: red; margin-left: 2px;">*</span>
+                                    </label>
+
+                                    <ng-select [multiple]="true" [closeOnSelect]="false" [searchable]="true"
+                                        [clearable]="true" formControlName="preferred_inverter">
+
+                                        <ng-option label="Select Inverter" value="" selected disabled>Select
+                                            Inverter</ng-option>
+                                        <ng-option *ngFor="let inverter of inverterArrays" [value]="inverter">
+                                            {{ inverter }}
+                                        </ng-option>
+                                    </ng-select>
+
+                                    <!-- Required field validation -->
+                                    <small *ngIf="configurationForm.get('preferred_inverter')?.invalid 
+                                                && configurationForm.get('preferred_inverter')?.touched"
+                                        class="text-danger">
+                                        Inverter is required
+                                    </small>
+
+                                    <!-- Error for only one selected inverter -->
+                                    <small *ngIf="selectionOneOnly" class="text-danger">
+                                        {{ selectionErrorMessage }}
+                                    </small>
+
+                                    <!-- Error for selecting more than 2 -->
+                                    <small *ngIf="selectionLimitReached" class="text-danger">
+                                        {{ selectionErrorMessage }}
+                                    </small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">
+                                        Module
+                                        <span style="color: red; margin-left: 2px;">*</span>
+                                    </label>
+
+                                    <ng-select [multiple]="true" [closeOnSelect]="false" [searchable]="true"
+                                        [clearable]="true" formControlName="preferred_modules">
+                                        <ng-option label="Select Inverter" value="" selected disabled>Select
+                                            Module</ng-option>
+                                        <ng-option *ngFor="let module of moduleArrays" [value]="module">
+                                            {{ module }}
+                                        </ng-option>
+
+
+                                    </ng-select>
+                                    <small
+                                        *ngIf="configurationForm.get('preferred_modules')?.invalid 
+                                                                                                                && configurationForm.get('preferred_modules')?.touched"
+                                        class="text-danger">
+                                        Module is required
+                                    </small>
+
+                                    <small *ngIf="moduleOneOnly" class="text-danger">
+                                        {{ moduleErrorMessage }}
+                                    </small>
+                                    <small *ngIf="moduleSelectionLimitReached" class="text-danger">
+                                        {{ moduleErrorMessage }}
+                                    </small>
+                                </div>
+
+
+
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">
+                                        AC Cable
+                                        <span style="color: red; margin-left: 2px;">*</span>
+                                    </label>
+
+                                    <ng-select [multiple]="true" [closeOnSelect]="false" [searchable]="true"
+                                        [clearable]="true" formControlName="preferred_ac_cable">
+
+                                        <ng-option label="Select AC Cable" value="" selected disabled>Select
+                                            AC Cable</ng-option>
+                                        <ng-option *ngFor="let accable of accableArrays" [value]="accable">
+                                            {{ accable }}
+                                        </ng-option>
+                                    </ng-select>
+
+                                    <!-- Required field validation -->
+                                    <small *ngIf="configurationForm.get('preferred_ac_cable')?.invalid 
+                                                && configurationForm.get('preferred_ac_cable')?.touched"
+                                        class="text-danger">
+                                        AC Cable is required
+                                    </small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">
+                                        DC Cable
+                                        <span style="color: red; margin-left: 2px;">*</span>
+                                    </label>
+
+                                    <ng-select [multiple]="true" [closeOnSelect]="false" [searchable]="true"
+                                        [clearable]="true" formControlName="preferred_dc_cable">
+                                        <ng-option label="Select DC Cable" value="" selected disabled>Select
+                                            DC Cable</ng-option>
+                                        <ng-option *ngFor="let dccable of dccableArrays" [value]="dccable">
+                                            {{ dccable }}
+                                        </ng-option>
+
+
+                                    </ng-select>
+                                    <small *ngIf="configurationForm.get('preferred_dc_cable')?.invalid 
+                                                && configurationForm.get('preferred_dc_cable')?.touched"
+                                        class="text-danger">
+                                        DC Cable is required
+                                    </small>
+
+                                </div>
+
+
+
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">
+                                        MC4
+                                        <span style="color: red; margin-left: 2px;">*</span>
+                                    </label>
+
+                                    <ng-select [multiple]="true" [closeOnSelect]="false" [searchable]="true"
+                                        [clearable]="true" formControlName="preferred_mc4">
+
+                                        <ng-option label="Select mc4" value="" selected disabled>Select
+                                            MC4</ng-option>
+                                        <ng-option *ngFor="let mc4 of mc4Arrays" [value]="mc4">
+                                            {{ mc4 }}
+                                        </ng-option>
+                                    </ng-select>
+
+                                    <!-- Required field validation -->
+                                    <small *ngIf="configurationForm.get('preferred_mc4')?.invalid 
+                                                && configurationForm.get('preferred_mc4')?.touched"
+                                        class="text-danger">
+                                        MC4 is required
+                                    </small>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">
+                                        ACDB
+                                        <span style="color: red; margin-left: 2px;">*</span>
+                                    </label>
+
+                                    <ng-select [multiple]="true" [closeOnSelect]="false" [searchable]="true"
+                                        [clearable]="true" formControlName="preferred_acdb">
+
+                                        <ng-option label="Select acdb" value="" selected disabled>Select
+                                            ACDB</ng-option>
+                                        <ng-option *ngFor="let acdb of acdbArrays" [value]="acdb">
+                                            {{ acdb }}
+                                        </ng-option>
+                                    </ng-select>
+
+                                    <!-- Required field validation -->
+                                    <small *ngIf="configurationForm.get('preferred_acdb')?.invalid 
+                                                && configurationForm.get('preferred_acdb')?.touched"
+                                        class="text-danger">
+                                        ACDB is required
+                                    </small>
+                                </div>
+
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">
+                                        DCDB
+                                        <span style="color: red; margin-left: 2px;">*</span>
+                                    </label>
+
+                                    <ng-select [multiple]="true" [closeOnSelect]="false" [searchable]="true"
+                                        [clearable]="true" formControlName="preferred_dcdb">
+                                        <ng-option label="Select dcdb" value="" selected disabled>Select
+                                            DCDB</ng-option>
+                                        <ng-option *ngFor="let dcdb of dcdbArrays" [value]="dcdb">
+                                            {{ dcdb }}
+                                        </ng-option>
+
+
+                                    </ng-select>
+                                    <small *ngIf="configurationForm.get('preferred_dcdb')?.invalid 
+                                                && configurationForm.get('preferred_dcdb')?.touched"
+                                        class="text-danger">
+                                        DCDB is required
+                                    </small>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">
+                                        Signage
+                                        <span style="color: red; margin-left: 2px;">*</span>
+                                    </label>
+
+                                    <ng-select [multiple]="true" [closeOnSelect]="false" [searchable]="true"
+                                        [clearable]="true" formControlName="preferred_signage">
+                                        <ng-option label="Select Signage" value="" selected disabled>Select
+                                            Signage</ng-option>
+                                        <ng-option *ngFor="let Signage of SignageArrays" [value]="Signage">
+                                            {{ Signage }}
+                                        </ng-option>
+
+
+                                    </ng-select>
+                                    <small *ngIf="configurationForm.get('preferred_signage')?.invalid 
+                                                && configurationForm.get('preferred_signage')?.touched"
+                                        class="text-danger">
+                                        Signage is required
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">
+                                        Generation Meter
+                                        <span style="color: red; margin-left: 2px;">*</span>
+                                    </label>
+
+                                    <ng-select [multiple]="true" [closeOnSelect]="false" [searchable]="true"
+                                        [clearable]="true" formControlName="preferred_uni_meter">
+
+                                        <ng-option label="Select UNI Meter" value="" selected disabled>Select
+                                            UNI Meter</ng-option>
+                                        <ng-option *ngFor="let UNI of unidirectionArrays " [value]="UNI">
+                                            {{ UNI }}
+                                        </ng-option>
+                                    </ng-select>
+
+                                    <!-- Required field validation -->
+                                    <small *ngIf="configurationForm.get('preferred_uni_meter')?.invalid 
+                                                && configurationForm.get('preferred_uni_meter')?.touched"
+                                        class="text-danger">
+                                        UNI Meter is required
+                                    </small>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">
+                                        Net Meter
+                                        <span style="color: red; margin-left: 2px;">*</span>
+                                    </label>
+
+                                    <ng-select [multiple]="true" [closeOnSelect]="false" [searchable]="true"
+                                        [clearable]="true" formControlName="preferred_bi_meter">
+
+                                        <ng-option label="Select BI Meter" value="" selected disabled>Select
+                                            BI Meter</ng-option>
+                                        <ng-option *ngFor="let BI of bidirectionArrays" [value]="BI">
+                                            {{ BI }}
+                                        </ng-option>
+                                    </ng-select>
+
+                                    <!-- Required field validation -->
+                                    <small *ngIf="configurationForm.get('preferred_bi_meter')?.invalid 
+                                                && configurationForm.get('preferred_bi_meter')?.touched"
+                                        class="text-danger">
+                                        BI Meter is required
+                                    </small>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="row mb-2">
+                                <div class="col-md-12">
+                                    <label class="mb-0 text-muted">
+                                        Lightning Arrestors
+                                        <span style="color: red; margin-left: 2px;">*</span>
+                                    </label>
+
+                                    <ng-select [multiple]="true" [closeOnSelect]="false" [searchable]="true"
+                                        [clearable]="true" formControlName="preferred_lightning_arrestors">
+                                        <ng-option label="Select Lightning Arrestors" value="" selected disabled>Select
+                                            Lightning Arrestors</ng-option>
+                                        <ng-option *ngFor="let Arrestor of lightningArrays" [value]="Arrestor">
+                                            {{ Arrestor }}
+                                        </ng-option>
+
+
+                                    </ng-select>
+                                    <small *ngIf="configurationForm.get('preferred_lightning_arrestors')?.invalid 
+                                                && configurationForm.get('preferred_lightning_arrestors')?.touched"
+                                        class="text-danger">
+                                        Lightning Arrestors is required
+                                    </small>
+                                </div>
+                            </div>
+
+
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">Shadow-Free Area Required per kW (sq ft) <span
+                                            style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" formControlName="shadow_free_area"
+                                    onkeypress="return /[0-9.]$/.test(event.key)" maxlength="10">
+                                    <!-- Error: If input is not empty and not 10 digits -->
+                                    <small *ngIf="configurationForm.get('shadow_free_area')?.invalid 
+                                                && configurationForm.get('shadow_free_area')?.touched"
+                                        class="text-danger">
+                                        Shadow Free Area is Required
+                                    </small>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">Generation per kW per year <span
+                                            style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" formControlName="generation_per_year"
+                                    onkeypress="return /[0-9.]$/.test(event.key)" maxlength="10">
+                                    <!-- Error: If input is not empty and not 10 digits -->
+                                    <small *ngIf="configurationForm.get('generation_per_year')?.invalid 
+                                                && configurationForm.get('generation_per_year')?.touched"
+                                        class="text-danger">
+                                        Generation Per Year is Required
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">Degradation in Generation per year (%) <span
+                                            style="color: red;">*</span></label>
+                                            <input type="text" class="form-control" formControlName="degradation_per_year"
+                                            onkeypress="return /[0-9.]$/.test(event.key)" maxlength="10">
+                                     
+                                    <!-- Error: If input is not empty and not 10 digits -->
+                                    <small *ngIf="configurationForm.get('degradation_per_year')?.invalid 
+                                    && configurationForm.get('degradation_per_year')?.touched"
+                                        class="text-danger">
+                                        Degradation Per Year is Required
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="p-0 d-flex justify-content-end">
+                <mat-card-actions>
+                    <!-- Update Button -->
+                    <button class="button-add" type="submit" *ngIf="isEditMode == true">Update</button>&nbsp;
+
+                    <!-- Submit Button -->
+                    <button class="button-add" type="submit" *ngIf="isEditMode == false">Save</button>
+
+                    <!-- Cancel Button -->
+                    <button class="button-cancelProposal m-2" (click)="cancelBasicForm()">Cancel</button>
+                </mat-card-actions>
+            </div>
+        </div>
+    </div>
+</form>

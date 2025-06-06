@@ -1,0 +1,49 @@
+.alert-success .btn-close {
+    color: rgb(var(--volgh-success-rgb)) !important;
+}
+
+.avatar {
+    flex: none;
+}
+
+.counter-icon {
+    flex: none;
+}
+
+@media (max-width: 480px) {
+    .br-movie {
+        --br-width: 50px !important;
+    }
+}
+
+.alert-dismissible {
+    padding-inline-end: 1.08rem !important;
+}
+
+.alert button.close {
+    color: inherit;
+}
+
+.NgxEditor__MenuBar {
+    border: 1px solid #ddd;
+}
+
+.owl-theme .owl-nav [class*=owl-] {
+    display: block;
+    font-size: 1.3rem !important;
+    line-height: 2em;
+    border-radius: 50%;
+    width: 50px !important;
+    height: 50px !important;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.5) !important;
+    border: 1px solid #e8ebf3 !important;
+    z-index: 99;
+    color: #000 !important;
+    padding: 0 !important;
+}
+
+.sub-slide .is-expanded .sub-angle {
+    transform: rotate(90deg) !important;
+}
+/*# sourceMappingURL=bootstrap.css.map */

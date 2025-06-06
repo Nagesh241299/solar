@@ -1,0 +1,130 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+        <div class="card-header-section">
+          <div class="row">
+            <div class="col-6">
+              <h4 class="header-title">
+                <i class="fa fa-arrow-left btn-back" (click)="cancel()"></i>
+                {{ isEditMode ? 'Edit Notification Reminder' : 'Add Notification Reminder' }}
+              </h4>
+            </div>
+          </div>
+        </div>
+  
+        <div class="card body-radius p-4 mt-3 margin-border">
+        <div class="row">
+        <div class="col-md-6 pad-left">
+         <div class="card body-radius no-shadow title-card">
+            <div class="card-body">
+            <form [formGroup]="reminderForm" class="poppins-regulartable">
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- Interaction Type -->
+                  <div class="form-group">
+                    <label class="mb-0 text-muted">Interaction Type<span style="color: red;"> *</span></label>
+                    <input class="form-control" formControlName="interactionType" readonly>
+                    <small *ngIf="reminderForm.get('interactionType')?.invalid && reminderForm.get('interactionType')?.touched"
+                      class="text-danger">Interaction Type is required</small>
+                  </div>
+  
+                  <!-- Date & Time -->
+                  <div class="form-group">
+                    <label class="mb-0 text-muted" for="dateTime">Date & Time<span style="color: red;"> *</span></label>
+                    <input type="datetime-local" id="reminder_date" formControlName="reminder_date" class="form-control" required readonly>
+                    <small *ngIf="reminderForm.get('reminder_date')?.invalid && reminderForm.get('reminder_date')?.touched"
+                      class="text-danger">Date & Time is required</small>
+                  </div>
+  
+                  <!-- Notifications Section -->
+                  <div *ngIf="showNotificationSection()">
+                    <div class="form-group">
+                      <div class="row mb-1">
+                        <div class="col-md-11">
+                          <label class="mb-0 text-muted">Notifications<span style="color: red;"> *</span></label>
+                        </div>
+                        <div class="col-md-1">
+                          <button type="button" class="table-btn delete-btn" [disabled]="notifications.length >= 2"
+                            (click)="addNotification()">
+                            <i class="fa fa-plus fs-16" title="Add"></i>
+                          </button>
+                        </div>
+                      </div>
+  
+                      <!-- Loop through notifications -->
+                      <div *ngFor="let notification of notifications.controls; let i = index"
+                        [formGroup]="getNotificationFormGroup(i)" class="mb-3">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <select class="form-control form-select select2" formControlName="interactionNote">
+                              <option *ngFor="let type of interactionNote" [value]="type">{{ type }}</option>
+                            </select>
+                          </div>
+  
+                          <div class="col-md-3">
+                            <select class="form-control form-select select2" formControlName="interactionTime"
+                              (change)="onInteractionTimeChange($event, i)">
+                              <option *ngFor="let type of interactionTime" [value]="type">{{ type }}</option>
+                            </select>
+                          </div>
+  
+                          <div class="col-md-4">
+                            <select class="form-control form-select select2" formControlName="interactionDays">
+                              <option *ngFor="let day of filteredInteractionDays[i]" [value]="day">{{ day }}</option>
+                            </select>
+                          </div>
+  
+                          <div class="col-md-1">
+                            <button type="button" class="table-btn delete-btn" (click)="deleteNotification(i)">
+                              <i class="fa fa-trash fs-16" title="Delete"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <small *ngIf="reminderForm.get('notifications')?.invalid && reminderForm.get('notifications')?.touched"
+                      class="text-danger">Notifications are required</small>
+                  </div>
+  
+                  <!-- Notes -->
+                  <div *ngIf="reminderForm.get('interactionType')?.value !== 'Voice Note To Self'" class="form-group">
+                    <label class="mb-0 text-muted">Notes<span style="color: red;"> *</span></label>
+                    <textarea type="text" class="form-control" rows="3" formControlName="notes"></textarea>
+                    <small *ngIf="reminderForm.get('notes')?.invalid && reminderForm.get('notes')?.touched"
+                      class="text-danger">Notes are required</small>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- Buttons -->
+              <div class="question-section">
+                <div class="question"></div>
+                <div class="answer" *ngIf="!isEditMode">
+                  <button class="btn btn-primary mt-1 me-2 mb-3 poppins-semibold text-white"
+                    (click)="submit(reminderForm)"
+                    style="background-color: #22A447; border-radius:35px;width:100px;height: 35px !important"
+                    [disabled]="reminderForm.invalid">Save</button>
+                  <button
+                    style="background-color: #FF4747; border-radius:35px;width:100px;height: 35px !important"
+                    class="btn btn-danger poppins-semibold text-white mt-1 me-2 mb-3" (click)="cancel()">Cancel</button>
+                </div>
+                <div class="p-0 d-flex justify-content-end" *ngIf="isEditMode">
+                  <button class="mt-1 me-4 button-save"
+                  type="submit"
+                    (click)="submit(reminderForm)"
+                    
+                    [disabled]="reminderForm.invalid">Update</button>
+                  <button
+                    
+                    class="mt-1 me-4 button-can" (click)="cancel()">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>

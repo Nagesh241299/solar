@@ -1,0 +1,213 @@
+.pr-10
+{
+    padding-right: 10px !important;
+}
+
+
+.recording-gif
+{
+    height: 30px;
+    width: 30px;
+    border: 1.5px solid #f5f6fa;
+}
+
+.chatbox .bot_img_msg {
+    height: 45px;
+        width: 45px;
+        // border: 1.5px solid #3397c8;
+        padding: 2px;
+}
+
+.chatbox .user_img_msg {
+    height: 40px;
+    width: 40px;
+    border: 1.5px solid #7a47fc;
+}
+
+.chat .msg_cotainer-bot {
+    background-color: #3397c824 !important;
+    border: 1px solid #3397c8 !important;
+}
+
+.chat .msg_cotainer-user {
+    background-color: #7a47fc0d !important;
+    border: 1px solid #7a47fc !important;
+}
+
+
+
+.input-group-prepend>.btn, .input-group-append>.btn, .input-group-btn>.btn {
+    height: 100%;
+    border-color: #9E9E9E !important;
+}
+
+.input-group>.input-group-prepend>.btn, .input-group>.input-group-prepend>.input-group-text {
+    border-start-start-radius: 5px;
+    border-end-start-radius: 5px;
+}
+
+.ml-15
+{
+    margin-left: 15px;
+}
+
+.chat .msb-reply textarea {
+    background: transparent !important;
+    border: 1px solid #ccc !important;
+    color: #000;
+}
+
+.icon-mic
+{
+    margin-inline-end: 2px !important;
+    margin-inline-start: 3px !important;
+
+}
+.chat .msb-reply textarea
+{
+    border-radius: 25px;
+}
+
+.btn-attach-mic
+{
+    color:#5A5A5A;
+    background: #D2D3D6;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+::ng-deep .swal2-container {
+    z-index: 99999 !important;
+}
+
+
+.input-group-text-stop
+{
+    padding: 0.37rem 0.5rem !important;
+}
+
+.reply-submit-btn
+{
+    background: #200D63;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding: 10px 15px 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.padding-top {
+    padding: 0rem 0.5rem 0.5rem 0.5rem;
+}
+
+.padding-bottom
+{
+    padding-bottom: 0px !important;
+}
+
+.chatbox .msg_card_body {
+    max-height: 60vh !important
+}
+
+.cursor-pointer
+{
+    cursor: pointer;
+}
+
+/************ New Figma Design **************/
+.title-card
+{
+    background-color: #F6F6F6;
+    border: 1px solid #CBCBCB;
+}
+
+.title-text
+{
+    font-weight: 600;
+    font-size: 16px;
+    color:#969696;
+}
+
+.title-value
+{
+    font-weight: 600;
+    font-size: 20px;
+    color:#000000;
+}
+
+.title-amount
+{
+    font-weight: 600;
+    font-size: 22px;
+    color:#200D63;
+}
+
+.details-title
+{
+    font-weight: 600;
+    font-size: 18px;
+    color:#000000;
+}
+
+.action-btns
+{
+    width: 32px;
+    height: 32px;
+    background-color: #E9E9E9;
+    color: #5A5A5A;
+    border-radius: 50%;
+    margin: 0px 5px;
+
+    i
+    {
+        margin: 4px;
+    }
+
+    &.add-btn:hover
+    {
+        background-color: #2B84C5;
+        color: #fff;
+    }
+
+    &.delete-btn:hover
+    {
+        background-color: #200D63;
+        color: #fff;
+    }
+}
+.btn-add-minus
+{
+    background-color: #D8D8D8;
+    &:hover
+    {
+       background-color: #5A5A5A;
+       color: #fff;
+    }
+}
+
+.product-details-section
+{
+    max-height: 47.5vh;
+    overflow-y: scroll;
+}
+
+.section-border-1
+{
+    border: 1px solid #B7B7B7 !important;
+}
+
+.no-shadow
+{
+    box-shadow: none !important;
+}
+
+
+.btn-send-cost {
+    background-color: #200D63;
+    border-radius: 34px;
+    height: 41px;
+    width: 160px;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 600;
+}

@@ -1,0 +1,1286 @@
+<main class="loader-container" *ngIf="isLoader">
+    <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5ebd3e" />
+                <stop offset="33%" stop-color="#ffb900" />
+                <stop offset="67%" stop-color="#f78200" />
+                <stop offset="100%" stop-color="#e23838" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0%" stop-color="#e23838" />
+                <stop offset="33%" stop-color="#973999" />
+                <stop offset="67%" stop-color="#009cdf" />
+                <stop offset="100%" stop-color="#5ebd3e" />
+            </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-width="16">
+            <g class="ip__track" stroke="#ddd">
+                <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+            <g stroke-dasharray="180 656">
+                <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0"
+                    d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358"
+                    d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+        </g>
+    </svg>
+</main>
+<div class="container-fluid" style="margin-top: 10px;padding-top:0px !important">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+            <div class="card-header-section">
+                <div class="row">
+
+                    
+                    <div class="col-6 ">
+                       
+                        <h4 class="header-title"><i class="fa fa-arrow-left btn-back" (click)="cancel()"></i>View Lead</h4>
+                    </div>
+                    
+                    
+
+                    <!-- <div class="col-6">
+                        <button type="button" class="btn-sm m-2 float-end button-backone" (click)="cancel()">Back
+                        </button>
+                    </div> -->
+
+                </div>
+            </div>
+            <div class="card body-radius mt-2">
+                <div class="card-body remove-pad ">
+                    <div class="row">
+                        <!-- <div class="col-md-8" style="margin: 0px !important;">
+                             <p class="float-left poppins-title" style="margin-bottom: 5px !important;"
+                            style="color: #22A447">View Leads Details</p> -->
+                        <!-- <h4 class="breadcrumb-item active fw-bold mt-2"
+                                style="margin-top: 0px ;padding-top: 0px !important;" aria-current="page"
+                                style="color: #22A447;">
+                                {{customer_first_name}} {{customer_last_name}}</h4>  -->
+                        <!-- <nav aria-label="breadcrumb"> -->
+                        <!-- <ol class="breadcrumb"> -->
+                        <!-- <li class="breadcrumb-item"><a href="/pages/homepage">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page" style="color: #374173;">View
+                                    Leads Details</li> -->
+                        <!-- <li class="breadcrumb-item active poppins-confirmation" style="margin-top: 0px !important;"
+                            aria-current="page" style="color: #22A447;">
+                            {{customer_first_name}} {{customer_last_name}}</li> -->
+                        <!-- </ol> -->
+                        <!-- </nav> -->
+                        <!-- </div> -->
+
+
+
+
+
+
+
+                        <!-- {{leadStatus}} -->
+                        <!-- <div class="col-md-2">
+
+                            <mat-form-field class="w-100 poppins-tableadStatus"
+                                style="margin-left: 110px !important;margin-top: 7px !important;" appearance="outline">
+                           
+                                <mat-select placeholder="Lead Status" [(ngModel)]="leadStatus"
+                                    (selectionChange)="onStatusSelectionChange($event)">
+                                    <mat-option *ngFor="let type of leadTypes" [value]="type">{{type}}</mat-option>
+                                </mat-select>
+
+                            </mat-form-field>
+                        </div> -->
+
+                        <!-- <div class="col-md-1 ms-md-auto">
+                            <button class="button-back" (click)="cancel()">
+                                Back</button>
+                        </div> -->
+                    </div>
+
+
+                    <div class="panel panel-primary">
+                        <div class="tab-menu-heading">
+                            <div class="tabs-menu">
+                                <!-- Tabs -->
+                                <ul ngbNav #nav1="ngbNav" (click)="tab()" [(activeId)]="TabStyle1">
+                                    <li [ngbNavItem]="1"> <a ngbNavLink> Basic </a>
+                                        <ng-template ngbNavContent>
+
+
+                                            <div class="card body-radius">
+                                                <div class="row p-4 top-remove-padding">
+
+
+                                                    <!-- Lead Description -->
+
+                                                    <!-- Lead Type -->
+
+
+                                                    <!-- Lead Status -->
+
+
+                                                    <div class="col-md-6 p-4 colPadding">
+                                                        <div class="row">
+                                                            <div class="card no-shadow title-card body-radius">
+                                                                <div class="card-body p-3">
+                                                                    <h5 class="fw-bold mb-2 marg">
+                                                                        Lead Details
+                                                                    </h5>
+                                                                    <div class="row mb-2">
+                                                                        <div class="col-md-6"
+                                                                            >
+                                                                            <div>
+                                                                                <label class=" mb-0 text-muted">
+                                                                                    Description</label>
+                                                                                <h5 class="mb-0">
+                                                                                    {{description? description: '-'}}
+
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6 ">
+                                                                            <label class=" mb-0 text-muted">
+                                                                                Type</label>
+                                                                            <h5 class="mb-0">
+                                                                                {{ lead_type ? lead_type : '-' }}
+                                                                            </h5>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mb-2">
+
+
+                                                                        <div class="col-md-6 ">
+                                                                            <label for="leadStatus"
+                                                                                class="mb-0 text-muted">
+                                                                                Status</label>
+                                                                            <h5 class="mb-0">
+                                                                                {{ leadStatus ? leadStatus : '-' }}
+                                                                            </h5>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-1">
+                                                            <div class="card body-radius no-shadow title-card">
+
+
+                                                                <div class="card-body p-3">
+                                                                    <h5 class="fw-bold mb-2 marg">Contact Details</h5>
+                                                                    <div class="row mb-2">
+                                                                        <div class="col-md-6"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Company
+                                                                                    Name</label>
+
+                                                                                <h5 class="mb-0">
+                                                                                    {{ companyname ? companyname : '-'
+                                                                                    }}
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Contact
+                                                                                    Person
+                                                                                    Name
+                                                                                </label>
+                                                                                <h5 class="mb-0"> {{
+                                                                                    contact_person ? contact_person :
+                                                                                    '-'
+                                                                                    }}
+                                                                                </h5>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row mb-2">
+                                                                        <div class="col-md-6"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Contact
+                                                                                    Email
+                                                                                </label>
+                                                                                <h5 class="mb-0"> {{
+                                                                                    email_addr ? email_addr : '-'
+                                                                                    }}
+                                                                                </h5>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Contact
+                                                                                    Number
+                                                                                </label>
+                                                                                <h5 class="mb-0">
+                                                                                    {{
+                                                                                    contact_number ? contact_number :'-'
+                                                                                    }}
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="row mt-1">
+                                                            <div class="card no-shadow title-card body-radius">
+
+
+
+                                                                <div class="card-body p-3">
+                                                                    <h5 class="fw-bold mb-2 marg">Project
+                                                                        Details</h5>
+                                                                    <div class="row mb-2">
+                                                                        <div class="col-md-6"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Address
+                                                                                    Line
+                                                                                    1</label>
+
+                                                                                <h5 class="mb-0">
+                                                                                    {{
+                                                                                    address_line_1 ? address_line_1 :
+                                                                                    '-'
+                                                                                    }}
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Address
+                                                                                    Line
+                                                                                    2</label>
+
+                                                                                <h5 class="mb-0">
+                                                                                    {{ address_line_2 &&
+                                                                                    address_line_2.trim() ?
+                                                                                    address_line_2 :
+                                                                                    '-' }}
+                                                                                </h5>
+
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mb-2">
+                                                                        <div class="col-md-6"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Area
+                                                                                </label>
+                                                                                <h5 class="mb-0"
+                                                                                    id="customer_last_name">
+                                                                                    {{
+                                                                                    area_name ? area_name : '-'
+                                                                                    }}
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">City
+                                                                                </label>
+                                                                                <h5 class="mb-0"
+                                                                                    id="customer_last_name">
+                                                                                    {{
+                                                                                    city ? city : '-'
+                                                                                    }}
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="row mb-2">
+                                                                        <div class="col-md-6" style="margin-left: px;"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Pin
+                                                                                    Code
+
+                                                                                </label>
+                                                                                <h5 class="mb-0"
+                                                                                    id="customer_last_name">
+                                                                                    {{
+                                                                                    pin_code ? pin_code : '-'
+                                                                                    }}
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6" style="margin-left: 0px;"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">State
+                                                                                </label>
+                                                                                <h5 class="mb-0"
+                                                                                    id="customer_first_name">
+                                                                                    {{
+                                                                                    state ? state : '-'
+                                                                                    }}
+                                                                                </h5>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row mb-2">
+                                                                        <div class="col-md-6" style="margin-left: px;"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Project
+                                                                                    Capacity
+                                                                                </label>
+                                                                                <h5 class="mb-0"
+                                                                                    id="customer_last_name">
+                                                                                    {{
+                                                                                    project_size ? project_size : '-'
+                                                                                    }}
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6" style="margin-left: px;"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Funded
+                                                                                    By
+                                                                                </label>
+                                                                                <h5 class="mb-0"
+                                                                                    id="customer_last_name">
+                                                                                    {{
+                                                                                    funded_by ? funded_by : '-'
+                                                                                    }}
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row mb-2">
+                                                                        <div class="col-md-6" style="margin-left: px;"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Module
+                                                                                    Preference
+
+                                                                                </label>
+                                                                                <h5 class="mb-0"
+                                                                                    id="customer_last_name">
+                                                                                    {{
+                                                                                    module_preference ?
+                                                                                    module_preference :
+                                                                                    '-'
+                                                                                    }}
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6" style="margin-left: 0px;"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Inverter
+                                                                                    Preference
+
+                                                                                </label>
+                                                                                <h5 class="mb-0"
+                                                                                    id="customer_first_name">
+                                                                                    {{
+                                                                                    inverter_preference ?
+                                                                                    inverter_preference : '-'
+                                                                                    }}
+                                                                                </h5>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                </div>
+
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 p-4 colPadding">
+                                                        <div class="row">
+                                                            <div class="card body-radius no-shadow title-card">
+                                                                <div class="card-body p-3">
+                                                                    <h5 class="fw-bold mb-2 marg">Electricity
+                                                                        Details</h5>
+                                                                    <div class="row mb-2">
+                                                                        <div class="col-md-6"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Supplier
+                                                                                </label>
+
+                                                                                <h5 class="mb-0">
+                                                                                    {{
+                                                                                    supplier_name ? supplier_name : '-'
+                                                                                    }}
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Consumer
+                                                                                    Number
+
+                                                                                </label>
+                                                                                <h5 class="mb-0"> {{
+                                                                                    consumer_number ? consumer_number :
+                                                                                    '-'
+                                                                                    }}
+                                                                                </h5>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row mb-2">
+                                                                        <div class="col-md-6"
+                                                                            >
+                                                                            <div>
+                                                                                <label
+                                                                                    class="mb-0 text-muted">Sanctioned
+                                                                                    Load
+
+                                                                                </label>
+                                                                                <h5 class="mb-0"> {{
+                                                                                    sanctioned_load ? sanctioned_load :
+                                                                                    '-'
+                                                                                    }}
+                                                                                </h5>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6"
+                                                                            >
+                                                                            <div>
+                                                                                <label class="mb-0 text-muted">Current
+                                                                                    Tariff
+
+                                                                                </label>
+                                                                                <h5 class="mb-0">
+                                                                                    {{
+                                                                                    current_tariff ? current_tariff :
+                                                                                    '-'
+                                                                                    }}
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mt-1">
+                                                            <div class="card no-shadow body-radius title-card">
+
+                                                                <div class="card-body p-3" style="overflow: hidden;">
+                                                                    <h5 class="fw-bold mb-2 marg">Map</h5>
+                                                                    <div class="row mb-2">
+                                                                        <div class="col-md-12">
+                                                                            <div class="map-container"
+                                                                                style="position: relative; width: 100%; height: 375px; overflow: hidden;">
+                                                                                <google-map [height]="'100%'"
+                                                                                    [width]="'100%'"
+                                                                                    [center]="{ lat: lat, lng: lng }"
+                                                                                    [zoom]="10">
+                                                                                    <map-marker
+                                                                                        [position]="{ lat: lat, lng: lng }"
+                                                                                        [title]="'Current Location'">
+                                                                                    </map-marker>
+                                                                                </google-map>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </li>
+
+
+
+                                    <li [ngbNavItem]="2">
+                                        <a ngbNavLink>Generation
+                                        </a>
+                                        <ng-template ngbNavContent>
+                                            <div class="row p-4 gen-pad">
+
+
+                                                <div class="row" style="margin: top 30px !important ;">
+                                                    <!-- <div class="col-md-1"></div> -->
+
+                                                    <div class="col-md-6">
+                                                        <div class="left-heading">
+                                                            <h4 class=" m-t-3">First Year Total
+                                                                Generation:
+                                                                &nbsp;
+                                                                <span id="capacity" class="data-color">
+                                                                    {{ monthTotal.toLocaleString('en-IN')
+                                                                    }} kWh
+                                                                </span>
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+
+                                                        <div class="left-heading">
+                                                            <h4 class=" m-t-3">Lifetime Total
+                                                                Generation:
+                                                                &nbsp;
+                                                                <span id="capacity" class="data-color">
+                                                                    {{yearTotal.toLocaleString('en-IN')
+                                                                    }} kWh
+
+                                                                </span>
+                                                            </h4>
+                                                        </div>
+
+
+                                                    </div>
+
+
+
+                                                </div>
+                                                <!-- <div class="container"> -->
+                                                <div class="row m-2" style="margin: top 0px !important">
+                                                    <!-- First graph -->
+
+                                                    <div class="col-md-6 left-padding">
+                                                        <div
+                                                            class="card body-radius no-shadow title-card overflow-hidden">
+                                                            <div class="card-body">
+                                                                <div class="main-content-label tx-12 mg-b-15">
+                                                                    <p class="left-margin">Energy
+                                                                        Generation
+                                                                        Per
+                                                                        Month
+                                                                        (kWh/month)
+                                                                    </p>
+                                                                    &nbsp;
+                                                                </div>
+                                                                <div class="ht-600 ht-lg-500 wd-600">
+                                                                    <canvas baseChart [data]="solidColorChartData"
+                                                                        [options]="solidColorChartOptions"
+                                                                        [type]="solidColorChartType">
+                                                                    </canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- Second graph -->
+
+
+
+                                                    <div class="col-md-6 left-padding padding-right">
+                                                        <div
+                                                            class="card body-radius no-shadow title-card overflow-hidden">
+                                                            <div class="card-body">
+                                                                <div class="main-content-label tx-12 mg-b-15">
+                                                                    <!-- <h5>25 Year Generation</h5> -->
+                                                                    <p class="left-margin1">Energy
+                                                                        Generation
+                                                                        Per
+                                                                        Year
+                                                                        (In
+                                                                        kWh)
+                                                                    </p>
+                                                                    &nbsp;
+                                                                </div>
+                                                                <div class="ht-600 ht-lg-500 wd-600">
+                                                                    <canvas baseChart [data]="solidColorChartDataYear"
+                                                                        [options]="solidColorChartOptions"
+                                                                        [type]="solidColorChartType">
+                                                                    </canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <!-- </div> -->
+
+
+
+                                            </div>
+                                        </ng-template>
+                                    </li>
+                                    <li [ngbNavItem]="3">
+                                        <a ngbNavLink (click)="tabSaving()">Savings
+                                        </a>
+                                        <ng-template ngbNavContent>
+
+                                            <div class="row p-4 padding-card">
+
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div
+                                                            style="display: flex; align-items: center; margin-left: 45px !important;">
+                                                            <p class="m-t-3" style="margin: 0; margin-right: 10px;">
+                                                                Current
+                                                                Tariff </p>
+                                                            <input [(ngModel)]="current_tariff" class="form-control color-text"
+                                                                style="width: 150px;"
+                                                                placeholder="Enter current tariff" disabled />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Escalation Rate Options -->
+                                                <div class="row m-2">
+                                                    <!-- Option 1 -->
+                                                    <div class="col-md-12 graph-pad">
+                                                        <div class="card-body body-radius no-shadow title-card">
+                                                            <div class="main-content-label tx-12 mg-b-15">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 ms-3">
+                                                                        <div class="row">
+                                                                            <div class=" d-flex align-items-center"
+                                                                                style="padding-right: 0;">
+                                                                                <p class="mt-2 me-3">
+                                                                                    Year Escalation Rate (%)
+
+                                                                                </p>
+
+                                                                                <div class=" d-flex align-items-center"
+                                                                                    style="padding-left: 0;">
+                                                                                    <input type="number"
+                                                                                        [(ngModel)]="escalationRate1"
+                                                                                        class="form-control color-text" step="1"
+                                                                                        oninput="this.value = this.value.replace(/\D/g, '')"
+                                                                                        min="0"  disabled/>
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="d-flex align-items-center">
+                                                                              <p class="mt-2 me-6 mb-0">
+                                                                                Lifetime Savings (₹)
+                                                                              </p>
+                                                                              <div class="mt-2 p-0">
+                                                                                <span class="color-text left-margin">{{ totalYearlySavingUIOne }} </span>
+                                                                              </div>
+                                                                            </div>
+                                                                          </div>
+                                                                          
+                                                                        <!-- <div class="row">
+                                                                            <div class="col-md-4 mt-5 left-padding">
+                                                                                <button
+                                                                                    class="btn button-cal btn-sm px-4 rounded-pill"
+                                                                                    (click)="calculateSavings(escalationRate1, 1)">Calculate
+                                                                                </button>
+                                                                            </div>
+                                                                        </div> -->
+                                                                    </div>
+                                                                    <div class="col-md-7" *ngIf="graphHide">
+                                                                        <p class="para-left">Energy Savings Per Year
+                                                                            (kWh/month)</p>
+
+                                                                            <div class="ht-600 ht-lg-600 wd-500 graph-height" >
+                                                                                <canvas baseChart
+                                                                                        [data]="solidColorChartDataYearSavingOne"
+                                                                                        [options]="solidColorChartOptions"
+                                                                                        [type]="solidColorChartType"></canvas>
+                                                                            </div>
+                                                                            
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- Repeat for Option 2 and Option 3 -->
+                                                    <!-- Option 2 -->
+                                                    <div class="col-md-12 graph-pad mt-2">
+                                                        <div class="card-body body-radius no-shadow title-card">
+                                                            <div class="main-content-label tx-12 mg-b-15">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 ms-3">
+                                                                        <div class="row">
+                                                                            <div class=" d-flex align-items-center"
+                                                                                style="padding-right: 0;">
+                                                                                <p class="mt-2 me-3">
+                                                                                    Year Escalation Rate (%)
+
+                                                                                </p>
+
+                                                                                <div class=" d-flex align-items-center"
+                                                                                    style="padding-left: 0;">
+                                                                                    <input type="number"
+                                                                                        [(ngModel)]="escalationRate2"
+                                                                                        class="form-control color-text" step="1"
+                                                                                        oninput="this.value = this.value.replace(/\D/g, '')"
+                                                                                        min="0" disabled />
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="d-flex align-items-center">
+                                                                              <p class="mt-2 me-6 mb-0">
+                                                                                Lifetime Savings (₹)
+                                                                              </p>
+                                                                              <div class="mt-2 p-0">
+                                                                                <span class="color-text left-margin">{{ totalYearlySavingUIThree }}</span>
+                                                                              </div>
+                                                                            </div>
+                                                                          </div>
+                                                                          
+                                                                        <!-- <div class="row">
+                                                                            <div class="col-md-4 mt-5 left-padding">
+                                                                                <button
+                                                                                    class="btn button-cal btn-sm px-4 rounded-pill"
+                                                                                    (click)="calculateSavings(escalationRate2, 2)">Calculate
+                                                                                </button>
+                                                                            </div>
+                                                                        </div> -->
+                                                                    </div>
+                                                                    <div class="col-md-7" *ngIf="graphHide">
+                                                                        <p class="para-left">Energy Savings Per Year
+                                                                            (kWh/month)</p>
+
+                                                                        <div class="ht-600 ht-lg-600 wd-500 graph-height">
+                                                                            <canvas baseChart
+                                                                                [data]="solidColorChartDataYearSavingThree"
+                                                                                [options]="solidColorChartOptions"
+                                                                                [type]="solidColorChartType"></canvas>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- Option 3 -->
+                                                    <div class="col-md-12 graph-pad mt-2">
+                                                        <div class="card-body body-radius no-shadow title-card">
+                                                            <div class="main-content-label tx-12 mg-b-15">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 ms-3">
+                                                                        <div class="row">
+                                                                            <div class=" d-flex align-items-center"
+                                                                                style="padding-right: 0;">
+                                                                                <p class="mt-2 me-3">
+                                                                                    Year Escalation Rate (%)
+
+                                                                                </p>
+
+                                                                                <div class=" d-flex align-items-center"
+                                                                                    style="padding-left: 0;">
+                                                                                    <input type="number"
+                                                                                        [(ngModel)]="escalationRate3"
+                                                                                        class="form-control color-text" step="1"
+                                                                                        oninput="this.value = this.value.replace(/\D/g, '')"
+                                                                                        min="0" disabled />
+                                                                                   
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="d-flex align-items-center">
+                                                                              <p class="mt-2 me-6 mb-0">
+                                                                                Lifetime Savings (₹)
+                                                                              </p>
+                                                                              <div class="mt-2 p-0">
+                                                                                <span class="color-text left-margin">{{ totalYearlySavingUIFive }}</span>
+                                                                              </div>
+                                                                            </div>
+                                                                          </div>
+                                                                          
+                                                                        <!-- <div class="row">
+                                                                            <div class="col-md-4 mt-5 left-padding">
+                                                                                <button
+                                                                                    class="btn button-cal btn-sm px-4 rounded-pill"
+                                                                                    (click)="calculateSavings(escalationRate3, 3)">Calculate
+                                                                                </button>
+                                                                            </div>
+                                                                        </div> -->
+                                                                    </div>
+                                                                    <div class="col-md-7" *ngIf="graphHide">
+                                                                        <p class="para-left">Energy Savings Per Year
+                                                                            (kWh/month)</p>
+
+                                                                        <div class="ht-600 ht-lg-600 wd-500 graph-height">
+                                                                            <canvas baseChart
+                                                                                [data]="solidColorChartDataYearSavingFive"
+                                                                                [options]="solidColorChartOptions"
+                                                                                [type]="solidColorChartType"></canvas>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+
+                                        </ng-template>
+                                    </li>
+                                    <li [ngbNavItem]="4"><a ngbNavLink>BoQs </a>
+                                        <ng-template ngbNavContent>
+                                            <p></p>
+                                        </ng-template>
+                                    </li>
+
+                                    <li [ngbNavItem]="5"><a ngbNavLink>Proposal</a>
+                                        <ng-template ngbNavContent>
+                                            <div class="row p-4">
+                                                <div class="card body-radius" style="min-height: 340px !important">
+
+                                                    <p><button class=" text-white mt-8 me-4 button-download"
+                                                            (click)="downloadProposal(companyId)"
+                                                            *ngIf="isEditMode == false">
+                                                            Download Proposal&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                                                title="Download Proposal"></i>
+                                                        </button></p>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </li>
+
+                                    <li [ngbNavItem]="6">
+                                        <a ngbNavLink>Financing Details
+                                        </a>
+                                        <ng-template ngbNavContent>
+
+                                            <div class="container p-4 padding-card">
+                                                <!-- Total Project Cost -->
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                  <!-- Left Section: Label and Input -->
+                                                  <div class="d-flex align-items-center">
+                                                    <label for="totalProjectCost" class="me-2 mb-0 text-muted text-width">Total Project Cost (₹)</label>
+                                                    <input [(ngModel)]="totalProjectCost" id="totalProjectCost" type="number" class="form-control" readonly />
+                                                  </div>
+                                              
+                                                  <!-- Right Section: Add Button -->
+                                                  <!-- <button type="button" class="btn-sm button-add" (click)="addFinancingOption()">Add</button> -->
+                                                </div>
+                                              
+                                                <!-- Financing Options -->
+                                                <div *ngFor="let option of options; let i = index" class="card body-radius p-5 colPadding-card">
+                                                  <div class="row">
+                                                    <!-- Left Half: Input Fields -->
+                                                    <div class="col-md-6 p-4 colPadding1">
+                                                      <div class="row">
+                                                        <div class="card body-radius no-shadow title-card">
+                                                          <div class="card-body p-3">
+                                                            <div class="row mb-2">
+                                                              <div class="col-md-6">
+                                                                <label class="mb-0 text-muted" for="downPayment{{ i }}">Down Payment (%)</label>
+                                                                <input [(ngModel)]="option.downPayment" id="downPayment{{ i }}" type="number" class="form-control" readonly />
+                                                              </div>
+                                                              <div class="col-md-6">
+                                                                <label class="mb-0 text-muted" for="rateOfInterest{{ i }}">Rate of Interest (%)</label>
+                                                                <input [(ngModel)]="option.rateOfInterest" id="rateOfInterest{{ i }}" type="number" step="0.01" class="form-control" readonly />
+                                                              </div>
+                                                            </div>
+                                              
+                                                            <div class="row mb-2">
+                                                              <div class="col-md-6">
+                                                                <label class="mb-0 text-muted" for="tenure{{ i }}">Tenure (Years)</label>
+                                                                <input [(ngModel)]="option.tenure" id="tenure{{ i }}" type="number" class="form-control"  readonly/>
+                                                              </div>
+                                                              <div class="col-md-6">
+                                                                <label class="mb-0 text-muted" for="escalation_rate{{ i }}">Escalation Rate</label>
+                                                                <input [(ngModel)]="option.escalation_rate" id="escalation_rate{{ i }}" type="number" class="form-control"  readonly/>
+                                                              </div>
+                                                            </div>
+                                              
+                                                            <div class="row mb-2">
+                                                              <div class="col-md-6">
+                                                                <label class="mb-0 text-muted" for="unitPrice{{ i }}">Current Tariff</label>
+                                                                <input [(ngModel)]="current_tariff" id="current_tariff{{ i }}" type="number" class="form-control" readonly />
+                                                              </div>
+                                                              <div class="col-md-6">
+                                                                <label class="mb-0 text-muted" for="emi{{ i }}">EMI</label>
+                                                                <input [(ngModel)]="option.emi" id="emi{{ i }}" type="number" class="form-control" readonly />
+                                                              </div>
+                                                            </div>
+                                              
+                                                            <div class="row mb-2">
+                                                              <div class="col-md-6">
+                                                                <label class="mb-0 text-muted" for="totalPayment{{ i }}">Total Payment</label>
+                                                                <input [(ngModel)]="option.totalPayment" id="totalPayment{{ i }}" type="number" class="form-control" readonly />
+                                                              </div>
+                                                              <div class="col-md-6">
+                                                                <label class="mb-0 text-muted" for="lifetimeSavings{{ i }}">Life Time Savings</label>
+                                                                <input [(ngModel)]="option.lifetimeSavings" id="lifetimeSavings{{ i }}" type="number" class="form-control" readonly />
+                                                              </div>
+                                                            </div>
+                                              
+                                                            <!-- <div class="row mt-3">
+                                                              <div class="col-md-12 d-flex justify-content-end">
+                                                            
+                                                                <button class="btn-sm button-add" *ngIf="options.length > 1" (click)="removeFinancingOption(i)">Remove</button>
+                                              
+                                                                
+                                                                <button class="btn-sm button-backone ms-2" (click)="calculateFinancingForOption(i)">Calculate</button>
+                                                              </div>
+                                                            </div> -->
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                              
+                                                    <!-- Right Half: Yearly and Lifetime Net Savings -->
+                                                    <div class="col-md-6 p-4 colPadding1">
+                                                      <div class="row">
+                                                        <div class="card body-radius no-shadow title-card">
+                                                          <div class="card-body p-3">
+                                                            <h6 class="fw-bold">Yearly and Lifetime Net Savings</h6>
+                                              
+                                                            <!-- Table header -->
+                                                            <div class="table-responsive">
+                                                              <table class="table table-bordered border-radius-25" style="table-layout: fixed; width: 100%;">
+                                                                <thead>
+                                                                  <tr>
+                                                                    <th class="table-align">Year</th>
+                                                                    <th class="table-align">Yearly Savings</th>
+                                                                  </tr>
+                                                                </thead>
+                                                              </table>
+                                                            </div>
+                                              
+                                                            <!-- Table body -->
+                                                            <div class="table-responsive" style="max-height: 180px; overflow-y: auto;">
+                                                              <table class="table table-bordered border-radius-25" style="table-layout: fixed; width:100%;">
+                                                                <tbody>
+                                                                  <tr *ngFor="let saving of option.saving; let year = index">
+                                                                    <td class="table-align">{{ year + 1 }}</td>
+                                                                    <td class="table-align">₹ {{ saving.toLocaleString('en-IN') }}</td>
+                                                                  </tr>
+                                                                </tbody>
+                                                              </table>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              
+                                                <!-- Save All Options Button -->
+                                                <!-- <div class="d-flex justify-content-end mt-2">
+                                                  <button class="button-add" (click)="saveOrUpdateAllOptions()">{{ saveButtonText }}</button> 
+                                                </div> -->
+                                              </div>
+                                              
+
+                                            
+
+
+
+
+
+
+
+                                        </ng-template>
+                                    </li>
+
+                                    <li [ngbNavItem]="7">
+                                        <a ngbNavLink>Activities
+                                        </a>
+                                        <ng-template ngbNavContent>
+
+                                            <div class="card body-radius p-4 mt-3 margin-border"
+                                                >
+
+                                                <div class="row">
+                                                    <div class="col-md-12 pad-right">
+                                                        <div class="card no-shadow title-card body-radius">
+                                                            <div class="table-responsive border-radius-25">
+                                                                <table class="table table-hover border-radius-25">
+                                                                    <thead class="mat-elevation-z5">
+                                                                        <tr>
+
+                                                                            <th style="text-align:left !important"
+                                                                                scope="col">
+                                                                                Date
+
+                                                                            </th>
+                                                                            <th style="text-align:left !important; width: 400px;"
+                                                                                scope="col">
+
+                                                                                Type
+                                                                            </th>
+                                                                            <th style="text-align:left !important"
+                                                                                scope="col">
+                                                                                Notes
+                                                                            </th>
+                                                                            <th style="text-align:center !important"
+                                                                                scope="col">
+                                                                                Actions
+                                                                            </th>
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr *ngIf="interactionData.length === 0">
+                                                                            <td colspan="4">
+                                                                                <div class="data-center">No Data Found.
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr *ngFor="let data of interactionData">
+
+                                                                            <td style="text-align:left !important">
+                                                                                {{data.interaction_datetime|
+                                                                                date:'dd/MM/yyyy'}}
+                                                                            </td>
+                                                                            <td style="text-align:left !important">
+
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'Text Message'">
+
+                                                                                    <img class="image-width" src="./assets/images/text message.svg"
+                                                                                    alt="Description of the image" />&nbsp;{{data.interaction_type
+                                                                                }}
+                                                                                </ng-container>
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'Text Note To Self'">
+
+                                                                                    <img class="image-width" src="./assets/images/text note for self.png"
+                                                                                        alt="Description of the image" />&nbsp;{{data.interaction_type
+                                                                                    }}
+                                                                                </ng-container>
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'Voice Note To Self'">
+
+                                                                                    <img class="image-width" src="./assets/images/microphone.png"
+                                                                                    alt="Description of the image" />&nbsp;{{data.interaction_type
+                                                                                }}
+                                                                                </ng-container>
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'Task For Self'">
+
+                                                                                    <img class="image-width" src="./assets/images/task for self.png"
+                                                                                        alt="Description of the image" />&nbsp;{{data.interaction_type
+                                                                                    }}
+                                                                                </ng-container>
+
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'WhatsApp Message'">
+
+                                                                                    <img src="./assets/images/whatsapp.svg"
+                                                                                        alt="Description of the image" />&nbsp;{{data.interaction_type
+                                                                                    }}
+                                                                                </ng-container>
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'Call'">
+                                                                                    <img src="./assets/images/call.svg"
+                                                                                        alt="Description of the image" />&nbsp;
+                                                                                    {{data.interaction_type
+                                                                                    }}
+                                                                                </ng-container>
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'Email'">
+                                                                                    <img src="./assets/images/message.svg"
+                                                                                        alt="Description of the image" />&nbsp;
+                                                                                    {{data.interaction_type
+                                                                                    }}
+                                                                                </ng-container>
+                                                                            </td>
+
+
+
+                                                                            <td style="text-align:left !important">
+                                                                                <span [ngStyle]="{ 'font-weight': data.interaction_type === 'Voice Note To Self' ? 'bold' : 'normal' }">
+                                                                                  <!-- Check for 'Voice Note To Self', 'Call', and 'Task For Self' -->
+                                                                                  {{ 
+                                                                                    data.interaction_type === 'Voice Note To Self' 
+                                                                                      ? '-' 
+                                                                                      : (data.interaction_type === 'Call' || data.interaction_type === 'Task For Self') 
+                                                                                        ? (data.notifications?.length ? data.notifications[0]?.notes || '-' : '-') 
+                                                                                        : data.notes || '-' 
+                                                                                  }}
+                                                                                </span>
+                                                                              </td>
+                                                                              
+                                                                              
+
+                                                                              <td style="text-align:center !important">
+                                                                                <!-- ✅ Show Speaker Button for "Voice Note To Self" if audio is available -->
+                                                                                <button
+                                                                                *ngIf="data.interaction_type === 'Voice Note To Self' && data.voice_recording_path"
+                                                                                (click)="openAudioModal(data)"
+                                                                                class="table-btn play-audio-btn">
+                                                                                <i class="fa fa-volume-up fs-16" title="Play Audio"></i>
+                                                                              </button>
+                                                                              
+                                                                                <!-- ✅ Show "-" for other interaction types OR if no voice recording -->
+                                                                                <span *ngIf="data.interaction_type !== 'Voice Note To Self' || !data.voice_recording_path" style="font-weight: bold; color: #555;">
+                                                                                  -
+                                                                                </span>
+                                                                              </td>
+                                                                              
+                                                                            
+                                                                            
+                                                                        </tr>
+                                                                    </tbody>
+
+                                                                </table>
+                                                            </div>
+
+                                                            <div class="d-flex justify-content-center">
+                                                                <ngb-pagination [collectionSize]="totalItems"
+                                                                    [(page)]="currentPage" [pageSize]="pageSize"
+                                                                    (pageChange)="onPageChange($event)" [maxSize]="4"
+                                                                    [ellipses]="true" size="sm">
+                                                                </ngb-pagination>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    
+
+
+
+
+                                                </div>
+                                                
+                                                <!-- Modal Template -->
+                                                <ng-template #editModal let-modal>
+                                                    <div class="card body-radius no-shadow title-card">
+                                                        <div class="card-body">
+                                                            <form [formGroup]="myInteractionsForm" (ngSubmit)="submitInteractionsForm(myInteractionsForm)">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label class="mb-0 text-muted">Type<span style="color: red;"> * </span></label>
+                                                                            <select class="form-control form-select select2" placeholder="Interaction Type" formControlName="interactionType">
+                                                                                <option *ngFor="let type of interactionTypes" [value]="type">{{type}}</option>
+                                                                            </select>
+                                                                            <small *ngIf="myInteractionsForm.get('interactionType')?.invalid && myInteractionsForm.get('interactionType')?.touched" class="text-danger">Interaction Type is required</small>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="mb-0 text-muted" for="dateTime">Date & Time<span style="color: red;"> * </span></label>
+                                                                            <input type="datetime-local" id="dateTime" formControlName="dateTime" class="form-control" required>
+                                                                            <small *ngIf="myInteractionsForm.get('dateTime')?.invalid && myInteractionsForm.get('dateTime')?.touched" class="text-danger">Date & Time is required</small>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="mb-0 text-muted">Notes<span style="color: red;"> * </span></label>
+                                                                            <input type="text" class="form-control" formControlName="notes">
+                                                                            <small *ngIf="myInteractionsForm.get('notes')?.invalid && myInteractionsForm.get('notes')?.touched" class="text-danger">Notes are required</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="p-0 d-flex justify-content-end">
+                                                                    <mat-card-actions>
+                                                                        <button class="mt-0 me-4 button-save" type="submit" *ngIf="isEditMode == true">Update</button>
+                                                                        <button class="mt-0 me-4 button-save" type="submit" *ngIf="isEditMode == false">Save</button>
+                                                                        <button class="mt-1 me-4 button-can" (click)="cancelInteraction()">Cancel</button>
+                                                                    </mat-card-actions>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </ng-template>
+                                                
+                                            </div>
+
+                                        </ng-template>
+                                    </li>
+
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div [ngbNavOutlet]="nav1" class="tabs-menu-body tab-content panel-body tabs-menu-body">
+                        </div>
+
+
+
+                        <!-- <ng-template #confirmationModal let-modal>
+                            <div class="modal-header custom-modal-header">
+                                <p class="modal-title" id="confirmationModalLabel">Confirmation</p>
+                                <button type="button" class="btn-close" aria-label="Close"
+                                    (click)="modal.dismiss('Cross click')">
+                                    <img src="./assets/images/confirmation-crossmark.svg"
+                                        alt="Description of the image" />
+                                </button>
+                            </div>
+                            <div class="modal-body text-center custom-modal-body">
+                                Are you sure you want to delete this interaction data?
+                            </div>
+                            <div class="modal-footer custom-modal-footer">
+                                <button type="button" (click)="deleteInteraction()" class=" btn-custom-yes">Yes</button>
+                                <button type="button" class=" btn-custom-no" (click)="modal.dismiss()">No</button>
+                            </div>
+                        </ng-template> -->
+
+
+                        <ng-template #audioModal let-modal>
+                            <div class="modal-header">
+                              <h4 class="modal-title">Play Audio</h4>
+                              <button type="button" class="close" (click)="modal.dismiss()">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                              <p><strong>Date & Time:</strong> <br>{{datetime|
+                                date: 'dd/MM/yyyy hh:mm a'}}</p>
+                              
+                              <audio class="audio-width" controls>
+                                <source [src]="audioURL" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                              </audio>
+                            </div>
+                          </ng-template>
+
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

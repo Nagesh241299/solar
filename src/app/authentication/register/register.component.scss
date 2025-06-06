@@ -1,0 +1,205 @@
+.login-container {
+  display: flex;
+  height: 99vh;
+}
+
+.email {
+  margin-left: 120px !important;
+}
+
+/* Input container to position the icon */
+.input-container {
+  position: relative;
+  //width: 50%;
+}
+
+.left-half {
+  width: 50%;
+  height: 100%;
+  display: inline;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.full-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  padding: 5px !important;
+  padding-bottom: 0px !important;
+  border-radius: 25px !important;
+}
+
+.right-half {
+  width: 50%;
+  height: 100%;
+  padding: 0px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  flex-direction: column;
+}
+
+.logo {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  width: 140px;
+  height: 60px;
+}
+
+.color {
+  color: #1f82d3;
+  padding-right: 10px;
+}
+
+.text {
+  color: #200D63;
+  padding-right: 440px !important;
+  font-weight: bold;
+}
+
+.button-sendOtp {
+  background-color: #200D63;
+  border-radius: 34px;
+  height: 41px;
+  width: 330px !important;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+  padding-left: 10px !important;
+}
+
+.email {
+  margin-left: 15px !important;
+}
+
+/* Input container to position the icon */
+.input-container .icon {
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+}
+
+/* Adjust padding to avoid text overlap with the icon */
+.input-container .form-control {
+  padding-left: 55px;
+  /* Adjusted to move text slightly right */
+  height: 45px;
+  font-size: 14px;
+}
+
+.form-group {
+  padding-left: 30% !important;
+}
+
+.col md-6 {
+  padding-left: 0px !important;
+}
+
+.button-sign {
+  margin-left: 12px !important;
+  //width: 285px !important;
+}
+
+.link-hype {
+  margin-left: 15px !important;
+}
+
+.padding-remove {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  padding-left: 0px !important;
+}
+
+/* Mobile View Adjustments */
+@media (max-width: 768px) {
+
+  /* Stack the login container vertically */
+  .login-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* Adjust left and right halves to take full width */
+  .left-half,
+  .right-half {
+    width: 50%;
+    height: 50%;
+  }
+
+  /* Adjust logo for mobile */
+  .logo {
+    position: static;
+    margin-bottom: 20px;
+    width: 120px;
+    height: 50px;
+  }
+
+  /* Adjust text alignment for mobile */
+  .text {
+    padding-right: 20px !important;
+
+  }
+
+  /* Button adjustments for mobile */
+  .button-sendOtp {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  /* Adjust email margin */
+  .email {
+    margin-left: 10px !important;
+  }
+
+  /* Adjust input fields padding for mobile */
+  .input-container .form-control {
+    font-size: 16px;
+    padding-left: 50px !important;
+    /* Space for icon */
+    margin-left: 0px !important;
+    /* Move input fields slightly right */
+  }
+
+  /* Adjust form-group padding for mobile */
+  .form-group {
+    padding-left: 20px !important;
+    /* Shifted slightly right */
+  }
+
+  /* Button width for mobile */
+  .button-sign {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    /* Centered for mobile */
+  }
+
+  /* Center link for mobile */
+  .link-hype {
+    text-align: center;
+    margin-left: 0 !important;
+  }
+
+  /* Remove unnecessary padding */
+  .padding-remove {
+    padding-left: 10px !important;
+    /* Shifted slightly right */
+  }
+
+  /* Adjust image fit on mobile */
+  .full-image {
+    object-fit: cover;
+    width: 98%;
+    /* Ensure the image fits the container */
+    height: 98%;
+  }
+
+}

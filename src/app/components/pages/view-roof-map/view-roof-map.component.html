@@ -1,0 +1,1259 @@
+<div class="container-fluid" style="margin-top: 10px;padding-top:0px !important">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card body-radius">
+                <div class="card-body" style="padding: 10px !important; min-height: 450px !important;">
+                    <div class="row col-md-12">
+                        <div class="row">
+                            <div class="col-md-8">
+
+                                <!-- <p class="float-left poppins-title" style=" color:#22A447">View Roof Details</p> -->
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <!-- <li class="breadcrumb-item"><a href="/pages/homepage">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page" style="color: #374173;">View
+                                        Roof Details</li> -->
+                                        <li class="breadcrumb-item active poppins-confirmation mt-2" aria-current="page"
+                                            style="color: #22A447; margin-left: 15px;">
+                                            {{customer_first_name}} {{customer_last_name}}</li>
+                                    </ol>
+                                </nav>
+                            </div>
+
+
+                            <div class="col-md-2">
+
+                                <mat-form-field class="w-100 poppins-tableadStatus"
+                                    style="margin-left: 110px !important;margin-top: 7px !important;"
+                                    appearance="outline">
+                                    <!-- <mat-label>Lead Status:</mat-label> -->
+                                    <mat-select placeholder="Lead Status" [(ngModel)]="leadStatus"
+                                        (selectionChange)="onStatusSelectionChange($event)">
+                                        <mat-option *ngFor="let type of leadTypes" [value]="type">{{type}}</mat-option>
+                                    </mat-select>
+
+                                </mat-form-field>
+
+                                <!-- <div class="form-group w-100 poppins-tableadStatus"
+                                    style="margin-left: 110px !important;margin-top: 8px !important; position: relative;">
+                                
+                                    <mat-select id="leadStatus" class="form-control poppins-tableadStatus"
+                                        [(ngModel)]="leadStatus" (change)="onStatusSelectionChange($event)"
+                                        style="filter: 0% !important">
+                                        <mat-option *ngFor="let type of leadTypes" [value]="type">{{type}}</mat-option>
+                                    </mat-select>        
+                                </div> -->
+
+                            </div>
+                            <!-- <button class="btn btn-outline-secondary" (click)="resetLeadType()"
+                                                                    style="position: absolute; top: 50%; transform: translateY(-50%); right: 8px;">
+                                                                    <span
+                                                                        style="font-size: 12px; color: black !important; margin-right: 18px;">X</span>
+                                                                </button> -->
+
+
+
+
+                            <div class="col-md-1 ms-md-auto mt-2 text-end" style="margin-top: 10px">
+                                <button class="poppins-semibold" style="color:#FFFFFF
+                            ;background-color:#FF4747;border-radius: 34px;height:35px;width: 100px;"
+                                    (click)="cancel()">
+                                    <img src="./assets/images/arrow-back.svg" alt="Description of the image" />
+                                    &nbsp;&nbsp;
+                                    Back</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    &nbsp;&nbsp;
+                    <div class="panel panel-primary" style="padding: 0px !important;">
+                        <div class="tab-menu-heading">
+                            <div class="tabs-menu m-t-1">
+                                <!-- Tabs -->
+                                <ul ngbNav #nav1="ngbNav" (click)="tab()" [(activeId)]="TabStyle1" class="panel-tabs">
+                                    <li [ngbNavItem]="1"> <a ngbNavLink> Basic </a>
+
+
+                                        <ng-template ngbNavContent>
+                                            <div class="card">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+
+                                                            <div class=" card-body" style="padding: 10px !important">
+                                                                <div class="row" style="margin-top: 12px !important;">
+                                                                    <div class="col-md-6" style="margin-left: 0px;"
+                                                                        *ngIf="profie == 'Solar EPC User'">
+                                                                        <div>
+                                                                            <p class="poppins-tabdata">Consumer First
+                                                                                Name:
+                                                                            </p>
+                                                                            <p id="customer_first_name"
+                                                                                class="poppins-tabdataIn"> {{
+                                                                                customer_first_name
+                                                                                }}
+                                                                            </p>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6" style="margin-left: px;"
+                                                                        *ngIf="profie == 'Solar EPC User'">
+                                                                        <div>
+                                                                            <p class="poppins-tabdata">Consumer Last
+                                                                                Name:
+                                                                            </p>
+                                                                            <p class="poppins-tabdataIn"
+                                                                                id="customer_last_name">
+                                                                                {{
+                                                                                customer_last_name
+                                                                                }}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row" style="margin-top: 12px !important;">
+                                                                    <div class="col-md-12">
+                                                                        <div>
+                                                                            <p class="poppins-tabdata">Address:
+                                                                            </p>
+                                                                            <p class="poppins-tabdataAddress" id="">
+                                                                                {{ address_line_1 +' , '+
+                                                                                address_line_2
+                                                                                +
+                                                                                '
+                                                                                '
+                                                                                +
+                                                                                area_name + ' , '+ city +' ' + state+' '
+                                                                                +country }}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row" style="margin-top: 12px !important;">
+                                                                    <div class="col-md-6" style="margin-left:0px;">
+                                                                        <div>
+                                                                            <p class="poppins-tabdata">Roof Type:
+                                                                            </p>
+                                                                            <p class="poppins-tabdataIn" id="roofType">
+                                                                                {{ roofType }}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-6" style="margin-left:0px;">
+                                                                        <div>
+                                                                            <p class="poppins-tabdata">Solar
+                                                                                Installation
+                                                                                Status:
+                                                                            </p>
+                                                                            <p class="poppins-tabdataIn"
+                                                                                id="installationStatus">
+                                                                                {{
+                                                                                installationStatus
+                                                                                ===
+                                                                                'done'
+                                                                                ?
+                                                                                'Yes'
+                                                                                :
+                                                                                'No'
+                                                                                }}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <!-- <div class="row"> -->
+                                                                <div class="row" style="margin-top: 12px !important;">
+                                                                    <div class="col-md-6" style="margin-left:0px;">
+                                                                        <div *ngIf="installationStatus === 'notDone'">
+
+                                                                            <div
+                                                                                *ngIf="installationStatus === 'notDone'">
+                                                                                <p class="poppins-tabdata">Surface Area:
+                                                                                </p>
+                                                                                <p class="poppins-tabdataIn"
+                                                                                    id=" surface_area">
+                                                                                    {{ surface_area}} (in Sq.ft)
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6" style="margin-left:0px;"
+                                                                        *ngIf="profie != 'User'">
+                                                                        <div *ngIf="installationStatus === 'notDone'">
+                                                                            <p class="poppins-tabdata">
+                                                                                Potential
+                                                                                :
+                                                                            </p>
+                                                                            <p id="spgp" class="poppins-tabdataIn">
+                                                                                {{ formattedNumberSolarPotential
+                                                                                }} kW
+                                                                            </p>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row" *ngIf="installationStatus === 'done'"
+                                                                    style="margin-top: 12px !important;">
+
+                                                                    <div class="col-md-6" style="margin-left:0px;">
+                                                                        <div>
+                                                                            <p class="poppins-tabdata">Capacity
+                                                                            <p>
+                                                                            <p class="poppins-tabdataIn" id="capacity">
+                                                                                {{formattedNumberCapacity
+                                                                                }}(Kwp)
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6" style="margin-left:0px;">
+                                                                        <div>
+                                                                            <p class="poppins-tabdata">Commissioning
+                                                                                Date
+                                                                                :
+                                                                            </p>
+                                                                            <p class="poppins-tabdataIn" id="capacity">
+                                                                                {{
+                                                                                commissioningDate
+                                                                                }}
+                                                                            </p>
+
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <div class="row" *ngIf="installationStatus === 'done'"
+                                                                    style="margin-top: 12px !important;">
+                                                                    <!-- < ng - container * ngIf="installationStatus === 'done'" > -->
+                                                                    <div class="col-md-6" style="margin-left: 0px;">
+                                                                        <div>
+                                                                            <p class="poppins-tabdata">PV
+                                                                                Modules
+                                                                                Brand
+                                                                                Used:
+                                                                            </p>
+                                                                            <p class="poppins-tabdataIn"
+                                                                                id="pvBrandPreference">
+                                                                                {{
+                                                                                pvBrandPreference
+                                                                                }}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-6" style="margin-left:0px;">
+                                                                        <div>
+
+                                                                            <div>
+                                                                                <p class="poppins-tabdata">Inverter
+                                                                                    Brand
+                                                                                    Used:
+                                                                                </p>
+                                                                                <p class="poppins-tabdataIn"
+                                                                                    id="inverterBrand">
+                                                                                    {{
+                                                                                    inverterBrand
+                                                                                    }}
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="row" style="margin-top: 12px !important;">
+                                                                    <ng-container *ngIf="installationStatus === 'done'">
+                                                                        <div class="col-md-6" style="margin-left: 0px;">
+                                                                            <div>
+                                                                                <p class="poppins-tabdata">Did
+                                                                                    you
+                                                                                    use
+                                                                                    batteries
+                                                                                    ?
+                                                                                    :
+                                                                                </p>
+                                                                                <p class="poppins-tabdataIn"
+                                                                                    id="batteryUsage">
+                                                                                    {{
+                                                                                    batteryUsage
+                                                                                    ===
+                                                                                    'yes'
+                                                                                    ?
+                                                                                    'Yes'
+                                                                                    :
+                                                                                    'No'
+                                                                                    }}
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-4" style="margin-left:0px;">
+
+
+                                                                        </div>
+                                                                    </ng-container>
+                                                                </div>
+
+
+
+                                                                <!-- </div> -->
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div style="margin-top: 30px;">
+                                                                <!-- <div id="map" *ngIf="installationStatus === 'notDone'"
+                                                            style="height:300px;">
+                                                        </div>
+                                                        <div id="map" * ngIf="installationStatus === 'done'"
+                                                            style="height:500px;">
+                                                        </div> -->
+                                                                <!-- <div id="map" style="height:350px;"></div> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </li>
+
+
+                                    <!-- <li [ngbNavItem]="2" *ngIf="companyDataFlag">
+                                        <a class="poppins-tabtitle" ngbNavLink>Company</a> -->
+                                    <ng-template ngbNavContent style="margin-left: 50px;">
+                                        <div class="card">
+
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+
+                                                        <div class=" card-body" style="padding: 10px !important">
+                                                            <div class="row" style="margin-top: 12px !important;">
+                                                                <div class="col-md-12" style="margin-left: 0px;">
+
+                                                                    <div>
+                                                                        <p class="poppins-tabdata">Company
+                                                                            Name
+                                                                            :
+                                                                        </p>
+                                                                        <p class="poppins-tabdataEmail">
+                                                                            {{company_name}}
+                                                                        </p>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row" style="margin-top: 12px !important;">
+                                                                <div class="col-md-12" style="margin-left: 0px;">
+
+                                                                    <div>
+                                                                        <p class="poppins-tabdata">Email
+                                                                            Address
+                                                                            :
+                                                                        </p>
+                                                                        <p class="poppins-tabdataEmail">
+                                                                            {{email_addr}}
+                                                                        </p>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- <div class="col-md-7">
+
+                                                                <div>
+                                                                    <p class="poppins-tabdata">Corporate
+                                                                        Identification
+                                                                        Number:
+                                                                    </p>
+
+                                                                    <p class="poppins-tabdataIn">
+                                                                        {{corporate_identification_number}}
+                                                                    </p>
+
+                                                                </div>
+                                                            </div> -->
+                                                            </div>
+
+                                                            <div class="row" style="margin-top: 12px !important;">
+                                                                <div class="col-md-6" style="margin-left: 0px;">
+
+                                                                    <div>
+                                                                        <p class="poppins-tabdata">Company
+                                                                            Class
+                                                                            :
+                                                                        </p>
+                                                                        <p class="poppins-tabdataIn">
+                                                                            {{company_class}}
+                                                                        </p>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-6" style="margin-left: 0px;">
+
+                                                                    <div>
+                                                                        <p class="poppins-tabdata">Authorised
+                                                                            Cap
+                                                                            :
+                                                                        </p>
+                                                                        <p class="poppins-tabdataIn">
+                                                                            {{authorized_cap}}
+                                                                        </p>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row" style="margin-top: 12px !important;">
+                                                                <div class="col-md-6" style="margin-left: 0px;">
+
+                                                                    <div>
+                                                                        <p class="poppins-tabdata">Industrial
+                                                                            Class
+                                                                            :
+                                                                        </p>
+                                                                        <p class="poppins-tabdataIn">
+                                                                            {{industrial_class}}
+                                                                        </p>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-6" style="margin-left: 0px;">
+
+                                                                    <div>
+                                                                        <p class="poppins-tabdata">Paidup
+                                                                            Capital
+                                                                            :
+                                                                        </p>
+                                                                        <p class="poppins-tabdataIn">
+                                                                            {{paidup_capital}}
+                                                                        </p>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="row">
+                                                            <div class="col-md-12" style="margin-top: 20px;">
+                                                                <div>
+                                                                    <p class="poppins-tabdata">Registered
+                                                                        Office
+                                                                        Address
+                                                                        :
+                                                                    </p>
+
+                                                                    <p class="poppins-tabdataAddress1">
+                                                                        {{registered_office_address}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row" style="margin-top: 12px !important;">
+                                                            <div class="col-md-6" style="margin-left: 0px;">
+                                                                <div>
+                                                                    <p class="poppins-tabdata">Date
+                                                                        Of
+                                                                        Registration
+                                                                        :
+                                                                    </p>
+
+                                                                    <p class="poppins-tabdataIn">
+                                                                        {{date_of_registration|
+                                                                        date:'dd/MM/yyyy'}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6" style="margin-left: 0px;">
+                                                                <div>
+                                                                    <p class="poppins-tabdata">Registrar
+                                                                        Of
+                                                                        Companies
+                                                                        :
+                                                                    </p>
+                                                                    <p class="poppins-tabdataIn">
+                                                                        {{registrar_of_companies}}
+                                                                    </p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row" style="margin-top: 12px !important;">
+                                                            <div class="col-md-12" style="margin-left: 0px;">
+
+                                                                <div>
+                                                                    <p class="poppins-tabdata">Corporate
+                                                                        Identification
+                                                                        Number:
+                                                                    </p>
+
+                                                                    <p class="poppins-tabdataEmail">
+                                                                        {{corporate_identification_number}}
+                                                                    </p>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <!-- </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                                <!-- </div> -->
+
+                                                <div class="row">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped border">
+                                                            <thead>
+                                                                <tr>
+
+                                                                    <th style="text-transform: uppercase !important;text-align: left !important;   background-color: rgb(235, 234, 241, 1)"
+                                                                        scope="col" width="40%">
+                                                                        Director's
+                                                                        Name
+                                                                    </th>
+                                                                    <th style="text-transform: uppercase !important;text-align: left !important;background-color: rgb(235, 234, 241, 1)"
+                                                                        scope="col" width="30%">
+                                                                        Director's
+                                                                        Contact
+                                                                    </th>
+
+                                                                    <th style="text-transform: uppercase !important;text-align: left !important;background-color: rgb(235, 234, 241, 1)"
+                                                                        scope="col" width="30%">
+                                                                        Director's
+                                                                        Email
+                                                                    </th>
+
+
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let data of directorData">
+
+                                                                    <td style="text-align:left">
+                                                                        {{data.director_name}}
+                                                                    </td>
+                                                                    <td style="text-align:left">
+                                                                        {{data.director_contact
+                                                                        }}
+                                                                    </td>
+                                                                    <td style="text-align:left">
+                                                                        {{
+                                                                        data.director_email
+                                                                        }}
+                                                                    </td>
+
+
+                                                                </tr>
+                                                            </tbody>
+                                                            <!-- Add your data rendering logic here -->
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                    <!-- </li> -->
+                                    <li [ngbNavItem]="3">
+                                        <a class="poppins-tabtitle" ngbNavLink>Generation
+                                        </a>
+                                        <ng-template ngbNavContent>
+                                            <!-- <div class="container"> -->
+                                            <div class="row m-2">
+                                                <!-- First graph -->
+                                                <div class="row" style="margin: top 30px !important ;">
+                                                    <div col-md-1>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div *ngIf="installationStatus === 'done'"
+                                                            style="margin-top: 20px;margin-right: 15px !important">
+                                                            <p class="poppins-generation m-t-3">Annual Project Capacity:
+                                                                &nbsp;
+                                                                <span class="poppins-generationIn" id="capacity">
+                                                                    {{formattedNumberCapacity
+                                                                    }} kWh
+
+                                                                </span>
+                                                            <p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6" *ngIf="installationStatus === 'done'">
+
+                                                        <div style="margin-right: 15px !important;margin-top: 20px;">
+                                                            <p class="poppins-generation m-t-3">25 year Generation
+                                                                Capacity
+                                                                &nbsp;
+                                                                <span class="poppins-generationIn" id="capacity">
+                                                                    {{formattedNumberYearCapacity
+                                                                    }} kWh
+
+                                                                </span>
+                                                            <p>
+                                                        </div>
+
+
+                                                    </div>
+
+
+                                                    <div class="row">
+                                                        <!-- 
+                                                        <div class="col-md-1" style="margin-left: 30px;"> </div>-->
+
+                                                        <div class="col-md-6">
+                                                            <div *ngIf="installationStatus === 'notDone'"
+                                                                style="margin-top: 20px;margin-left: 20px !important">
+
+                                                                <p class="poppins-generation">Annual Solar Potential :
+                                                                    &nbsp;
+                                                                    <span id="spgp" class="poppins-generationIn">
+                                                                        {{ formattedNumberSolarPotential
+                                                                        }} kWh
+                                                                    </span>
+                                                                </p>
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6" *ngIf="installationStatus === 'notDone'">
+
+                                                            <div style="margin-top: 20px;margin-left: 20px !important">
+                                                                <p class="poppins-generation m-t-4">25 year Generation
+                                                                    Capacity
+                                                                    &nbsp;
+                                                                    <span class="poppins-generationIn" id="capacity">
+                                                                        {{formattedNumberYearCapacity
+                                                                        }} kWh
+
+                                                                    </span>
+                                                                <p>
+                                                            </div>
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="card overflow-hidden"
+                                                            style="margin-top: 15px !important">
+                                                            <div class="card-body" style="margin-top :20px !important">
+                                                                <div class="main-content-label tx-12 mg-b-15">
+                                                                    <p class="poppins-regularform">Electricity
+                                                                        Details
+                                                                        Per
+                                                                        Month
+                                                                        (kw/month)
+                                                                    </p>
+                                                                    &nbsp;
+                                                                </div>
+                                                                <div class="ht-600 ht-lg-500 wd-600">
+                                                                    <canvas baseChart [data]="solidColorChartData"
+                                                                        [options]="solidColorChartOptions"
+                                                                        [type]="solidColorChartType">
+                                                                    </canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Second graph -->
+                                                    <div class="col-md-6">
+                                                        <div class="card overflow-hidden"
+                                                            style="margin-top: 15px !important">
+                                                            <div class="card-body" style="margin-top: 20px !important">
+                                                                <div class="main-content-label tx-12 mg-b-15">
+                                                                    <!-- <h5>25 Year Generation</h5> -->
+                                                                    <p class="poppins-regularform">Electricity
+                                                                        Details
+                                                                        Per
+                                                                        Year
+                                                                        (In
+                                                                        Kwh)
+                                                                    </p>
+                                                                    &nbsp;
+                                                                </div>
+                                                                <div class="ht-600 ht-lg-500 wd-600">
+                                                                    <canvas baseChart [data]="solidColorChartDataYear"
+                                                                        [options]="solidColorChartOptions"
+                                                                        [type]="solidColorChartType">
+                                                                    </canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </ng-template>
+                                    </li>
+                                    <!-- <li [ngbNavItem]="4"><a ngbNavLink>Financing </a>
+                                <ng-template ngbNavContent>
+                                    <p></p>
+                                </ng-template>
+                            </li> -->
+                                    <li [ngbNavItem]="5">
+                                        <a class="poppins-tabtitle" ngbNavLink>Interactions
+                                        </a>
+                                        <ng-template ngbNavContent>
+                                            <div class="card"
+                                                style="padding-bottom: 15px !important;min-height: 390px !important;padding-left: 10px !important;">
+                                                <div class="col-md-2 ms-md-auto text-end m-t-2"
+                                                    style="margin-top:20px !important">
+                                                    <!-- 
+                                                    <button class="poppins-semibold" style="color:#FFFFFF
+                                            ;background-color:#22A447;border-radius: 34px;height: 35px;width: 157px;"
+                                                        *ngIf="type === 'homeFilter'"
+                                                        (click)="addInteractionHome()"><img
+                                                            src="./assets/images/Plus-sign-white.svg"
+                                                            alt="Description of the image" />
+                                                        &nbsp;Add
+                                                        Interaction</button>&nbsp;
+
+                                                    <button class="poppins-semibold" *ngIf="type != 'homeFilter'" style="color:#FFFFFF
+                                            ;background-color:#22A447;border-radius: 34px;height: 40px;width: 157px;"
+                                                        (click)="addInteraction()"><img
+                                                            src="./assets/images/Plus-sign-white.svg"
+                                                            alt="Description of the image" />
+                                                        &nbsp;Add
+                                                        Interaction</button> -->
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        &nbsp;
+                                                        <div class="card" style="margin-left: 15px !important;">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped border">
+                                                                    <thead>
+                                                                        <tr class="poppins-medium">
+
+                                                                            <th style="text-align:left !important"
+                                                                                scope="col" width="15%">
+                                                                                Date
+
+                                                                            </th>
+                                                                            <th style="text-align:left !important"
+                                                                                scope="col" width="35%">
+                                                                                Interaction
+                                                                                Type
+                                                                            </th>
+                                                                            <th style="text-align:left !important"
+                                                                                scope="col" width="37%">
+                                                                                Notes
+                                                                            </th>
+                                                                            <th style="text-align:left !important"
+                                                                                class="text-center" scope="col"
+                                                                                width="13%">
+                                                                                Actions
+                                                                            </th>
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr *ngFor="let data of interactionData"
+                                                                            class="poppins-regulartable"
+                                                                            style="height: 32px!important;">
+
+                                                                            <!-- <td style="text-align:left">{{company.customer_first_name}} {{company.customer_last_name}}</td>  -->
+                                                                            <td style="text-align:left !important">
+                                                                                {{data.interaction_datetime|
+                                                                                date:'dd/MM/yyyy'}}
+                                                                            </td>
+                                                                            <td style="text-align:left !important">
+
+
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'WhatsApp Message'">
+
+                                                                                    <img src="./assets/images/whatsapp.svg"
+                                                                                        alt="Description of the image" />&nbsp;{{data.interaction_type
+                                                                                    }}
+                                                                                </ng-container>
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'Call'">
+                                                                                    <img src="./assets/images/call.svg"
+                                                                                        alt="Description of the image" />&nbsp;
+                                                                                    {{data.interaction_type
+                                                                                    }}
+                                                                                </ng-container>
+                                                                                <ng-container
+                                                                                    *ngIf="data.interaction_type == 'Email'">
+                                                                                    <img src="./assets/images/message.svg"
+                                                                                        alt="Description of the image" />&nbsp;
+                                                                                    {{data.interaction_type
+                                                                                    }}
+                                                                                </ng-container>
+                                                                            </td>
+
+
+
+                                                                            <td style="text-align:left !important">{{
+                                                                                data.notes}}
+                                                                            </td>
+
+                                                                            <td style="text-align:left !important">
+                                                                                <button
+                                                                                    (click)="editInteraction(data.id)"
+                                                                                    class="mt-1">
+                                                                                    <img src="./assets/images/Edit_icon.svg"
+                                                                                        title="Edit"
+                                                                                        alt="Description of the image" />
+
+                                                                                </button>
+                                                                                <!-- <button
+                                                                                    (click)="editInteractionHome(data.id)"
+                                                                                    *ngIf="type === 'homeFilter'"
+                                                                                    class="mt-1">
+                                                                                    <img src="./assets/images/Edit_icon.svg"
+                                                                                        title="Edit"
+                                                                                        alt="Description of the image" />
+
+                                                                                </button> -->
+
+
+
+                                                                                <button>
+                                                                                    <!-- <i class="fa fa-trash-o fs-20 text-danger"
+                                                                    title="Delete"></i> -->
+                                                                                    <img (click)="openConfirmationModal(data.id,confirmationModal)"
+                                                                                        *ngIf="type != 'homeFilter'"
+                                                                                        src="./assets/images/Delete_icon.svg"
+                                                                                        title="Delete"
+                                                                                        alt="Description of the image" />
+                                                                                </button>
+
+                                                                                <button>
+                                                                                    <img (click)="openConfirmationModal(data.id,confirmationModal)"
+                                                                                        *ngIf="type === 'homeFilter'"
+                                                                                        src="./assets/images/Delete_icon.svg"
+                                                                                        title="Delete"
+                                                                                        alt="Description of the image" />
+                                                                                    <!-- <i class="fa fa-trash-o fs-20 text-danger"
+                                                                    title="Delete"
+                                                                    (click)="openConfirmationModal(data.id,confirmationModal)"
+                                                                    *ngIf="type === 'homeFilter'"></i> -->
+                                                                                </button>
+
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="d-flex justify-content-center between p-2 poppins-mediumin">
+                                                            <ngb-pagination [collectionSize]="totalItems"
+                                                                [(page)]="currentPage" [pageSize]="pageSize"
+                                                                (pageChange)="onPageChange($event)" [maxSize]="4"
+                                                                [ellipses]="true" size="sm">
+                                                            </ngb-pagination>
+                                                            <div class="d-flex justify-content-between p-2">
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-md-6" style="padding-right: 0px !important;">
+
+
+                                                        <form [formGroup]="myInteractionsForm"
+                                                            style="margin-left: 60px !important;margin-top: 15px !important;"
+                                                            class="poppins-regulartable">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <mat-label>Interaction Type<span
+                                                                                    style="color: red;margin-left: 2px;">*</span></mat-label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <mat-form-field class="w-90"
+                                                                                appearance="outline">
+                                                                                <mat-select
+                                                                                    placeholder="Interaction Type"
+                                                                                    formControlName="interactionType">
+                                                                                    <mat-option
+                                                                                        *ngFor="let type of interactionTypes"
+                                                                                        [value]="type">{{type}}
+                                                                                    </mat-option>
+                                                                                    <!-- <mat-option *ngFor="let type of interactionTypes"
+                                                        [value]="type.name">{{type.name}}&nbsp; <i class={{type.icon}}
+                                                            aria-hidden="true"></i></mat-option> -->
+                                                                                </mat-select>
+
+                                                                                <mat-error
+                                                                                    *ngIf="myInteractionsForm.controls['interactionType'].invalid || (myInteractionsForm.controls['interactionType'].touched || myInteractionsForm.controls['interactionType'].dirty)">Interaction
+                                                                                    Type is
+                                                                                    required</mat-error>
+                                                                            </mat-form-field>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <mat-label>Date & Time<span
+                                                                                    style="color: red;margin-left: 2px;">*</span></mat-label>
+                                                                            <!-- <div class="input-wrapper"> -->
+                                                                        </div>
+                                                                        <mat-form-field class="w-90"
+                                                                            appearance="outline">
+
+                                                                            <mat-datetimepicker-toggle
+                                                                                [for]="datetimePicker"
+                                                                                matSuffix></mat-datetimepicker-toggle>
+                                                                            <mat-datetimepicker #datetimePicker
+                                                                                type="datetime">
+                                                                            </mat-datetimepicker>
+                                                                            <input matInput formControlName="dateTime"
+                                                                                [matDatetimepicker]="datetimePicker"
+                                                                                required autocomplete="false">
+                                                                            <mat-error
+                                                                                *ngIf="myInteractionsForm.controls['dateTime'].invalid ||(myInteractionsForm.controls['dateTime'].touched
+                                                                                || myInteractionsForm.controls['dateTime'].dirty)">Date
+                                                                                & Time
+                                                                                is
+                                                                                required</mat-error>
+                                                                        </mat-form-field>
+
+                                                                        <!-- 
+                                                                        </div> -->
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <mat-label>Notes<span
+                                                                                    style="color: red;margin-left: 2px;">*</span></mat-label>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <mat-form-field class="w-90"
+                                                                                appearance="outline">
+                                                                                <input matInput placeholder="Notes"
+                                                                                    formControlName="notes">
+                                                                                <mat-error
+                                                                                    *ngIf="myInteractionsForm.controls['notes'].invalid ||(myInteractionsForm.controls['notes'].touched
+                                                                                || myInteractionsForm.controls['notes'].dirty)">Notes
+                                                                                    are
+
+                                                                                    required</mat-error>
+                                                                            </mat-form-field>
+
+                                                                        </div>
+
+                                                                    </div>
+
+
+
+
+
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <mat-card-actions style="padding-bottom: 20px;">
+                                                                <button class="poppins-semibold text-white mt-0 me-4 "
+                                                                    (click)="submitInteractionsForm()"
+                                                                    style="background-color: #22A447; border-radius:35px;width:90px;height: 33px !important;"
+                                                                    *ngIf="isEditMode == true">Update</button>&nbsp;
+                                                                <button class="poppins-semibold text-white mt-0 me-4"
+                                                                    (click)="submitInteractionsForm()"
+                                                                    style="background-color: #22A447; border-radius:35px;width:90px;height: 33px !important"
+                                                                    *ngIf="isEditMode == false">Submit</button>
+                                                                <button class="poppins-semibold text-white mt-1 me-4"
+                                                                    style="background-color: #FF4747; border-radius:35px;width:90px;height: 33px !important"
+                                                                    (click)="cancelInteraction()">Cancel</button>
+                                                                &nbsp;
+                                                            </mat-card-actions>
+                                                            &nbsp;&nbsp;
+                                                        </form>
+
+
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </li>
+                                    <li [ngbNavItem]="6">
+                                        <a class="poppins-tabtitle" ngbNavLink>Promotional Messages
+                                        </a>
+                                        <ng-template ngbNavContent>
+                                            <div class="card"
+                                                style="padding-bottom: 15px !important;min-height: 390px !important;padding-left: 10px !important;">
+                                                <div class="col-md-2 ms-md-auto text-end m-t-2"
+                                                    style="margin-top:20px !important">
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        &nbsp;
+                                                        <!-- <div class="card" style="margin-left: 15px !important;"> -->
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped border">
+                                                                <thead>
+                                                                    <tr class="poppins-medium">
+
+                                                                        <th style="text-align:left !important"
+                                                                            scope="col" width="15%">
+                                                                            Template Message Date
+
+                                                                        </th>
+                                                                        <th style="text-align:left !important"
+                                                                            scope="col" width="35%">
+                                                                            Template Meesage
+                                                                        </th>
+                                                                        <th style="text-align:left !important"
+                                                                            scope="col" width="37%">
+                                                                            Reply
+                                                                        </th>
+
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let data of promotionalData"
+                                                                        class="poppins-regulartable"
+                                                                        style="height: 32px!important;">
+
+                                                                        <!-- <td style="text-align:left">{{company.customer_first_name}} {{company.customer_last_name}}</td>  -->
+                                                                        <td style="text-align:left !important">
+                                                                            {{data.sent_at|
+                                                                            date:'dd/MM/yyyy'}}
+                                                                        </td>
+                                                                        <td style="text-align:left !important">
+
+
+
+
+                                                                            {{data.template_message
+                                                                            }}
+
+                                                                        </td>
+
+
+
+                                                                        <td style="text-align:left !important">{{
+                                                                            data.response}}
+                                                                        </td>
+
+
+                                                                    </tr>
+                                                                </tbody>
+
+                                                            </table>
+                                                        </div>
+                                                        <!-- </div> -->
+                                                        <div
+                                                            class="d-flex justify-content-center between p-2 poppins-mediumin">
+                                                            <ngb-pagination [collectionSize]="totalItems"
+                                                                [(page)]="currentPage" [pageSize]="pageSize"
+                                                                (pageChange)="onPageChangePromotionalMessage($event)"
+                                                                [maxSize]="4" [ellipses]="true" size="sm">
+                                                            </ngb-pagination>
+                                                            <div class="d-flex justify-content-between p-2">
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- <div class="col-md-6" style="padding-right: 0px !important;">
+
+
+                                                        <form [formGroup]="myInteractionsForm"
+                                                            style="margin-left: 60px !important;margin-top: 15px !important;"
+                                                            class="poppins-regulartable">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <mat-label>Interaction Type<span
+                                                                                    style="color: red;margin-left: 2px;">*</span></mat-label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <mat-form-field class="w-90"
+                                                                                appearance="outline">
+                                                                                <mat-select
+                                                                                    placeholder="Interaction Type"
+                                                                                    formControlName="interactionType">
+                                                                                    <mat-option
+                                                                                        *ngFor="let type of interactionTypes"
+                                                                                        [value]="type">{{type}}
+                                                                                    </mat-option>
+
+                                                                                </mat-select>
+
+                                                                                <mat-error
+                                                                                    *ngIf="myInteractionsForm.controls['interactionType'].invalid || (myInteractionsForm.controls['interactionType'].touched || myInteractionsForm.controls['interactionType'].dirty)">Interaction
+                                                                                    Type is
+                                                                                    required</mat-error>
+                                                                            </mat-form-field>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <mat-label>Date & Time<span
+                                                                                    style="color: red;margin-left: 2px;">*</span></mat-label>
+
+                                                                        </div>
+                                                                        <mat-form-field class="w-90"
+                                                                            appearance="outline">
+
+                                                                            <mat-datetimepicker-toggle
+                                                                                [for]="datetimePicker"
+                                                                                matSuffix></mat-datetimepicker-toggle>
+                                                                            <mat-datetimepicker #datetimePicker
+                                                                                type="datetime">
+                                                                            </mat-datetimepicker>
+                                                                            <input matInput formControlName="dateTime"
+                                                                                [matDatetimepicker]="datetimePicker"
+                                                                                required autocomplete="false">
+                                                                            <mat-error
+                                                                                *ngIf="myInteractionsForm.controls['dateTime'].invalid ||(myInteractionsForm.controls['dateTime'].touched
+                                                                                                                            || myInteractionsForm.controls['dateTime'].dirty)">Date
+                                                                                & Time
+                                                                                is
+                                                                                required</mat-error>
+                                                                        </mat-form-field>
+
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <mat-label>Notes<span
+                                                                                    style="color: red;margin-left: 2px;">*</span></mat-label>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <mat-form-field class="w-90"
+                                                                                appearance="outline">
+                                                                                <input matInput placeholder="Notes"
+                                                                                    formControlName="notes">
+                                                                                <mat-error
+                                                                                    *ngIf="myInteractionsForm.controls['notes'].invalid ||(myInteractionsForm.controls['notes'].touched
+                                                                                                                            || myInteractionsForm.controls['notes'].dirty)">Notes
+                                                                                    are
+
+                                                                                    required</mat-error>
+                                                                            </mat-form-field>
+
+                                                                        </div>
+
+                                                                    </div>
+
+
+
+
+
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <mat-card-actions style="padding-bottom: 20px;">
+                                                                <button class="poppins-semibold text-white mt-0 me-4 "
+                                                                    (click)="submitInteractionsForm()"
+                                                                    style="background-color: #22A447; border-radius:35px;width:90px;height: 33px !important;"
+                                                                    *ngIf="isEditMode == true">Update</button>&nbsp;
+                                                                <button class="poppins-semibold text-white mt-0 me-4"
+                                                                    (click)="submitInteractionsForm()"
+                                                                    style="background-color: #22A447; border-radius:35px;width:90px;height: 33px !important"
+                                                                    *ngIf="isEditMode == false">Submit</button>
+                                                                <button class="poppins-semibold text-white mt-1 me-4"
+                                                                    style="background-color: #FF4747; border-radius:35px;width:90px;height: 33px !important"
+                                                                    (click)="cancelInteraction()">Cancel</button>
+                                                                &nbsp;
+                                                            </mat-card-actions>
+                                                            &nbsp;&nbsp;
+                                                        </form>
+
+
+
+                                                    </div> -->
+
+
+
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div [ngbNavOutlet]="nav1" class="tabs-menu-body tab-content panel-body tabs-menu-body">
+                        </div>
+
+                        <!-- <ng-template #confirmationModal let-modal>
+
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+                            <button type="button" class="close" aria-label="Close"
+                                (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this interaction data?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" (click)="deleteInteraction()" class="btn btn-primary">Yes</button>
+                            <button type="button" class="btn btn-danger" (click)="modal.dismiss()">No</button>
+
+                        </div>
+                    </ng-template> -->
+                    </div>
+
+                    <ng-template #confirmationModal let-modal>
+                        <div class="modal-header custom-modal-header">
+                            <p class="modal-title poppins-semi" id="confirmationModalLabel">Confirmation</p>
+                            <button type="button" class="btn-close" aria-label="Close"
+                                (click)="modal.dismiss('Cross click')">
+                                <img src="./assets/images/confirmation-crossmark.svg" alt="Description of the image" />
+                            </button>
+                        </div>
+                        <div class="modal-body poppins-regularform text-center custom-modal-body">
+                            Are you sure you want to delete this interaction data?
+                        </div>
+                        <div class="modal-footer custom-modal-footer">
+                            <button type="button" (click)="deleteInteraction()"
+                                class="poppins-semibold btn-custom-yes">Yes</button>
+                            <button type="button" class="poppins-semibold btn-custom-no"
+                                (click)="modal.dismiss()">No</button>
+                        </div>
+                    </ng-template>
+
+
+
+
+
+
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

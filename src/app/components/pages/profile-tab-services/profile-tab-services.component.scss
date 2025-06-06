@@ -1,0 +1,51 @@
+.row-mragin {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.colPadding {
+    padding-top: 0% !important;
+    padding-bottom: 0% !important;
+    margin-right: 0% !important;
+    margin: 0% !important;
+}
+
+.title-card {
+    background-color: #F6F6F6;
+    border: 1px solid #CBCBCB;
+}
+
+.no-shadow {
+    box-shadow: none !important;
+}
+
+/************ New Figma Design **************/
+
+.title-card {
+    background-color: #F6F6F6;
+    border: 1px solid #CBCBCB;
+}
+
+.title-text {
+    font-weight: 600;
+    font-size: 16px;
+    color: #969696;
+}
+
+.title-value {
+    font-weight: 600;
+    font-size: 20px;
+    color: #000000;
+}
+
+.title-amount {
+    font-weight: 600;
+    font-size: 22px;
+    color: #200D63;
+}
+
+.details-title {
+    font-weight: 600;
+    font-size: 18px;
+    color: #000000;
+}

@@ -1,0 +1,163 @@
+<!-- app-Header -->
+<!-- <div class="header sticky app-header fixed-header visible-title"> -->
+<div class="container-fluid">
+  <div class="card" style="border-radius: 62px !important; height: 71px !important; ">
+    <div class="card-body" style="padding:0px;">
+      <div class="d-flex align-items-center ">
+        <!-- sidebar-toggle -->
+        <a routerLink="/pages/homepage" (click)=" fetchCreditData()">
+          <img src="./assets/images/solar_junction_logo.png" class="header-brand-img mt-1" alt="logo" />
+          <!-- <img src="./assets/images/latestlogo.png" style="width:30%" class="header-brand-img light-logo1" alt="logo" /> -->
+        </a>
+
+        <!-- LOGO -->
+        <div class="m-auto d-lg-block" style="width: 65%;">
+          <form class="form-inline d-block">
+            <div class="main-header-center">
+
+              <ul class="side-menu justify-content-center">
+                <!-- 1st Level Menu -->
+                <li class="slide">
+                  <a [routerLink]="'/pages/homepage'" class="side-menu__item" routerLinkActive="selected"
+                    (click)=" fetchCreditData()">
+                    <!-- <img src="./assets/images/home-2.svg" alt="Description of the image" class="img" /> -->
+
+                    Home</a>
+                </li>
+                <li class="slide">
+                  <a [routerLink]="'/pages/boq'" [routerLinkActiveOptions]="{ exact: false }" class="side-menu__item"
+                    routerLinkActive="selected" (click)=" fetchCreditData()">
+                    BoQs</a>
+                </li>
+
+
+                <li class="slide">
+                  <a [routerLink]="'/pages/proposals'" [routerLinkActiveOptions]="{ exact: false }"
+                    class="side-menu__item" routerLinkActive="selected" (click)=" fetchCreditData()">
+
+                    Proposals</a>
+                </li>
+
+                <li class="slide">
+                  <a [routerLink]="'/pages/leads'" [routerLinkActiveOptions]="{ exact: false }" class="side-menu__item"
+                    routerLinkActive="selected" (click)=" fetchCreditData()">
+
+                    Leads</a>
+                </li>
+
+              </ul>
+
+
+
+            </div>
+
+
+
+          </form>
+        </div>
+        <div class="d-flex header-right-icons">
+          <div class="dropdown d-none">
+            <a href="javascript:void(0)" class="nav-link icon" data-bs-toggle="dropdown">
+              <i class="fe fe-search"></i>
+            </a>
+            <div class="dropdown-menu header-search dropdown-menu-start">
+              <div class="input-group w-100 p-2">
+                <input type="text" class="form-control" placeholder="Search...." />
+                <div class="input-group-text btn btn-primary">
+                  <i class="fe fe-search" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="navbar navbar-collapse responsive-navbar p-0">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-4" #collapse="ngbCollapse"
+              [(ngbCollapse)]="isCollapsed">
+              <div class="d-flex order-lg-2">
+                <div ngbDropdown class="dropdown d-lg-none d-flex">
+
+                  <div ngbDropdownMenu class="dropdown-menu header-search dropdown-menu-start">
+                    <div ngbDropdownItem class="input-group w-100 p-2">
+                      <input type="text" class="form-control" placeholder="Search...." />
+                      <div class="input-group-text btn btn-primary">
+                        <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- My Points -->
+                <!-- Credit Points : <span class="creditvalue">{{creditData.total_credit_points}}</span> -->
+                <div ngbDropdown class="dropdown d-flex notifications mt-2" style="margin-right: 15px;">
+                  <a class="nav-link icon credit m-10" data-bs-toggle="dropdown" ngbDropdownToggle>
+                    <img src="./assets/images/credit-icon.svg" alt="Description of the image" class="img"
+                      style="height: 23px;" />
+                    <div class="creditname" *ngIf="creditData != undefined" (click)="OpenCreditPointHistory()">Points
+                      <span class="creditvalue">{{creditData.total_credit_points}}</span>
+                    </div>
+                    <div *ngIf="creditData == undefined" (click)="OpenCreditPointHistory()">
+                      0
+                    </div>
+                  </a>
+                </div>
+                <!-- SIDE-MENU -->
+                <div ngbDropdown class="dropdown d-flex notifications mt-3" style="padding: 0% !important">
+                  <a class="nav-link icon" data-bs-toggle="dropdown" ngbDropdownToggle style="padding: 0% !important">
+                    <!-- <i class="fa-regular fa-bell"></i> -->
+                    <!-- <img src="./assets/images/bell1.svg" alt="notification" /> -->
+                    <img src="./assets/images/notification-bing-1.svg" alt="notification" width="23px" height="23px" />
+                    <span class="badge bg-secondary header-badge position-absolute">{{pendingNotification}}</span>
+                  </a>
+                  <div ngbDropdownMenu class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
+                    style="padding:0px !important;border-radius:15px ;">
+
+                    <div ngbDropdownItem class="drop-heading border-bottom text-center"
+                      *ngIf="notifications.length == 0">
+                      No Reminder Found!
+                    </div>
+                    <div class="notifications-menu" *ngIf="notifications.length > 0">
+                      <ng-container *ngFor="let notification of notifications">
+                        <a ngbDropdownItem class="dropdown-item d-flex"
+                          [ngClass]="{'unread': notification.is_read == false}"
+                          (click)="markAsReadAndNavigate(notification)">
+                          <!-- <div class="me-3 notifyimg">
+                            <i class="fe fe-bell"></i>
+                            <img src="./assets/images/notification-bing-1.svg" alt="Notification" />
+                          </div> -->
+                          <div class="mt-1 mb-1"> <!-- Increased top & bottom margin, aligned text to left -->
+                            <p class="mb-1 text-start">{{ notification.notes }}</p>
+                        </div>
+                        
+                        </a>
+                      </ng-container>
+                    </div>
+                    <div class="dropdown-divider m-0"></div>
+                    <a routerLink="/pages/notification-list" class="text-white dropdown-item text-center text-muted"
+                      style="background-color: #200D63;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">View
+                      all
+                      Reminder</a>
+                  </div>
+                </div>
+                <div ngbDropdown class="dropdown d-flex profile-1">
+                  <a ngbDropdownToggle href="javascript:void(0)" data-bs-toggle="dropdown"
+                    class="nav-link leading-none d-flex">
+                    <img src="./assets/images/profile-pic.svg" alt="profile-user"
+                      class=" profile-user brround cover-image large-avatar" />
+
+                  </a>
+                  <div ngbDropdownMenu class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <!-- <div class="dropdown-divider m-0"></div> -->
+                    <a ngbDropdownItem class="dropdown-item" style="color: #200D63" routerLink="/pages/profile">
+                      <i style="color: #200D63" class="dropdown-icon fe fe-user"></i> Profile
+                    </a>
+
+                    <a ngbDropdownItem (click)="signout()" class="dropdown-item"
+                      style="color: #200D63; cursor: pointer;">
+                      <i style="color: #200D63" class="dropdown-icon fe fe-alert-circle"></i> Log out
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>

@@ -1,0 +1,367 @@
+.title-card {
+  background-color: #F6F6F6;
+  border: 1px solid #CBCBCB;
+}
+
+
+input[type="color"] {
+  border: none;
+  outline: none;
+  /* Removes the outline when clicked */
+  background: none;
+  /* Removes the default background */
+  appearance: none;
+  /* Removes the default OS styles */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 200px;
+  /* Adjust width as needed */
+  height: 35px;
+  /* Adjust height as needed */
+  cursor: pointer;
+}
+
+.no-shadow {
+  box-shadow: none !important;
+}
+
+
+.remove-pad {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.colPadding {
+  padding-bottom: 0px !important;
+  padding-top: 9px !important;
+}
+
+.color-box {
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  // box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  width: 180px;
+  text-align: center;
+  padding: 3px;
+}
+
+.color-primary,
+.color-secondary {
+  padding: 10px;
+  // font-weight: bold;
+  color: white;
+}
+
+
+.color-primary {
+  border-top-left-radius: 6px 6px;
+  border-top-right-radius: 6px 6px;
+}
+
+.color-secondary {
+  border-bottom-left-radius: 6px 6px;
+  border-bottom-right-radius: 6px 6px;
+}
+
+/* Add this to your component's CSS file or global styles */
+.color-box {
+  border: 2px solid transparent;
+  /* Default border */
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.selected-color-box {
+  border: 2px solid #007bff;
+  /* Highlight border color */
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  /* Optional shadow */
+}
+
+.color-box {
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  position: relative;
+}
+
+.selected-color-box {
+  border: 2px solid #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.checkmark {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  color: white;
+  background-color: #200D63;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+
+.copy-btn {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Smooth transition */
+}
+
+.copy-btn:hover {
+  background-color: #200D63 !important;
+  /* Background turns blue */
+  color: white !important;
+  /* Text/icon turns white */
+  border-color: #200D63 !important;
+  /* Border color matches background */
+}
+
+
+// ::ng-deep .ng-select .ng-select-container {
+//   color: #333;
+//   background-color: #fff;
+//   border-radius: 14px !important;
+//   border: 1px solid #ccc;
+//   min-height: 36px !important;
+//   align-items: center;
+//   position: relative;
+// }
+
+
+// ::ng-deep ng-select .ng-select-container:after {
+//   content: '';
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   position: absolute;
+//   transition: border-color 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+//   border-bottom: none !important;
+//   /* Removes the bottom border */
+// }
+
+// ::ng-deep .ng-select .ng-dropdown-panel .ng-option {
+//   color: #333 !important;
+//   /* Ensures text remains visible */
+//   background-color: #fff !important;
+//   /* Default background */
+
+// }
+
+// ::ng-deep .ng-select .ng-dropdown-panel .ng-option:hover {
+//   background-color: #2875e7 !important;
+//   /* Light grey on hover */
+//   color: #fff !important;
+//   /* Black text on hover */
+
+// }
+
+// ::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+//   background-color: #2875e7 !important;
+//   border-radius: 2px;
+//   color: #fff;
+//   padding: 2px 5px;
+//   margin: 0 0.4375em 0.4375em 0;
+// }
+
+// ::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon {
+//   color: #fff;
+//   padding-right: 5px;
+// }
+
+// ::ng-deep .ng-select-container {
+//   box-shadow: none !important;
+// }
+
+// /* ✅ Fix: Ensure selected options inside dropdown remain visible */
+// ::ng-deep .ng-select .ng-dropdown-panel .ng-option-selected {
+//   background-color: #2875e7 !important;
+//   /* Blue background for selected items */
+//   color: #fff !important;
+//   /* White text for visibility */
+// }
+
+
+
+
+// /* General styling for ng-select */
+// ::ng-deep .ng-select .ng-select-container {
+//   color: #333;
+//   background-color: #fff;
+//   border-radius: 14px !important;
+//   border: 1px solid #ccc;
+//   min-height: 36px !important;
+//   align-items: center;
+//   position: relative;
+// }
+
+// /* Removing bottom border */
+// ::ng-deep ng-select .ng-select-container:after {
+//   content: '';
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   position: absolute;
+//   transition: border-color 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+//   border-bottom: none !important;
+// }
+
+// /* Dropdown options */
+// ::ng-deep .ng-select .ng-dropdown-panel .ng-option {
+//   color: #333 !important;
+//   /* Ensures text remains visible */
+//   background-color: #fff !important;
+//   /* Default background */
+// }
+
+// /* Hover effect for dropdown options */
+// ::ng-deep .ng-select .ng-dropdown-panel .ng-option:hover {
+//   background-color: #2875e7 !important;
+//   /* Blue on hover */
+//   color: #fff !important;
+//   /* White text on hover */
+// }
+
+// /* ✅ Fix: Ensure selected items are visible */
+// ::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+//   background-color: #2875e7 !important;
+//   /* Blue background */
+//   border-radius: 4px;
+//   color: #fff !important;
+//   /* White text for visibility */
+//   padding: 2px 8px;
+//   margin: 3px;
+//   display: inline-flex;
+//   align-items: center;
+// }
+
+// /* Fix for the close (X) icon inside selected tags */
+// ::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon {
+//   color: #fff !important;
+//   /* White icon for contrast */
+//   padding-right: 5px;
+//   cursor: pointer;
+// }
+
+// /* Remove default focus shadow */
+// ::ng-deep .ng-select-container {
+//   box-shadow: none !important;
+// }
+
+// /* ✅ Fix: Ensure selected options inside dropdown remain visible */
+// ::ng-deep .ng-select .ng-dropdown-panel .ng-option-selected {
+//   background-color: #2875e7 !important;
+//   /* Blue background for selected items */
+//   color: #fff !important;
+//   /* White text for visibility */
+// }
+
+// ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+//   color: #141212 !important;
+//   font-size: 12px;
+// }
+
+
+/* General styling for ng-select */
+::ng-deep .ng-select .ng-select-container {
+  color: #333;
+  background-color: #fff;
+  border-radius: 14px !important;
+  border: 1px solid #ccc;
+  min-height: 30px !important;
+  align-items: center;
+  position: relative;
+
+}
+
+/* ✅ Ensure all options remain visible */
+::ng-deep .ng-select .ng-dropdown-panel .ng-option {
+  color: #333 !important;
+  /* Ensures text remains visible */
+  background-color: #fff !important;
+  /* Default background */
+}
+
+/* ✅ Ensure selected options inside the dropdown remain visible */
+::ng-deep .ng-select .ng-dropdown-panel .ng-option-selected {
+  background-color: #dce4ff !important;
+  /* Light blue background for selected items */
+  color: #333 !important;
+  /* Dark text for visibility */
+  font-weight: bold;
+}
+
+/* ✅ Ensure selected items inside the input field are visible */
+::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+  // background-color: #2875e7 !important;
+  /* Blue background */
+  border-radius: 4px;
+  color: #fff !important;
+  /* White text for contrast */
+  padding: 2px 8px;
+  margin: 3px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ✅ Ensure selected items remain visible in dropdown */
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background-color: #2875e7 !important;
+  /* Keep selected item background visible */
+  color: #fff !important;
+  /* White text for contrast */
+  font-size: 12px;
+}
+
+/* ✅ Fix hover effect */
+::ng-deep .ng-select .ng-dropdown-panel .ng-option:hover {
+  background-color: #2875e7 !important;
+  /* Blue background */
+  color: #fff !important;
+  /* White text */
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
+  // background-color: #200D63 !important;
+  color: #100f0f !important;
+}
+
+/* Remove default focus shadow */
+::ng-deep .ng-select-container {
+  box-shadow: none !important;
+  // border-bottom: none !important;
+}
+
+::ng-deep ng-select .ng-select-container:after {
+  content: '';
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  transition: border-color 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+  border-bottom: none !important;
+  /* Removes the bottom border */
+}
+
+::ng-deep .ng-select {
+  padding-bottom: 0px;
+}
+
+::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon:hover {
+  background-color: #d1e8ff;
+}
+
+::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon:hover {
+  background-color: #3F51B5;
+}
+
+::ng-deep .ng-select.ng-select-multiple .ng-select-container.ng-has-value .ng-value-container {
+  padding-bottom: 6px;
+  padding-top: 0px;
+  margin-top: 0px;
+}

@@ -1,0 +1,178 @@
+<main class="loader-container" *ngIf="isLoader">
+	<svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+		<defs>
+			<linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+				<stop offset="0%" stop-color="#5ebd3e" />
+				<stop offset="33%" stop-color="#ffb900" />
+				<stop offset="67%" stop-color="#f78200" />
+				<stop offset="100%" stop-color="#e23838" />
+			</linearGradient>
+			<linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+				<stop offset="0%" stop-color="#e23838" />
+				<stop offset="33%" stop-color="#973999" />
+				<stop offset="67%" stop-color="#009cdf" />
+				<stop offset="100%" stop-color="#5ebd3e" />
+			</linearGradient>
+		</defs>
+		<g fill="none" stroke-linecap="round" stroke-width="16">
+			<g class="ip__track" stroke="#ddd">
+				<path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
+				<path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
+			</g>
+			<g stroke-dasharray="180 656">
+				<path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0" d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
+				<path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358" d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
+			</g>
+		</g>
+	</svg>
+</main>
+<div class="container-fluid pt-0">
+  <div class="card body-radius mb-3">
+    <div class="card-body p-2">
+
+      <div class="card-header-section">
+          <div class="row">
+              <div class="col-12">
+                  <h4 class="header-title"><i class="fa fa-home btn-listing-icons"></i>Dashboard</h4>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="row p-2">
+      <div class="col-sm-12 col-md-6 col-lg-6">
+        <!-- <a href="/pages/myroof"> -->
+        <div class="card img-card height" style="background-color:#186338 !important;">
+          <div class="card-body" style="padding:10px;">
+            <div class="d-flex" style="padding:2px;">
+              <div class="text-white">
+                <p class="text-white mb-0 mt-2 poppins-boldd">Total Solar Installation Not Done</p>
+                <p class="mb-0 mt-1 number-font poppins-semi">{{data?.without_solar.number}}
+                  ({{data?.without_solar.percentage}})
+                </p>
+                <p class="text-white mb-0 mt-3 poppins-boldd">Generation Potential</p>
+                <p class="mb-0  mt-1 number-font poppins-semi">{{data?.without_solar.generation_potential}} (kW)</p>
+                <!-- <p class="text-white mb-2" style="color: rgba(41, 49, 76, 1);margin-top: 6px;">
+                          Updated hour ago
+                        </p> -->
+              </div>
+              <div class="ms-auto">
+                <img class="icon" src="./assets/images/media/Icon%202.svg" alt="Description of the image"
+                  title="View Details" />
+              </div>
+              <div class="mt-auto" style="min-width: 44px !important">
+                <img src="./assets/images/u_arrow-left.white.svg" alt="Description of the image"
+                  title="View Details" />
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- </a> -->
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6">
+        <!-- <a href="/pages/request-rooftop"> -->
+        <div class="card  img-card height" style="background-color:#200D63 !important;">
+          <div class="card-body" style="padding:10px;">
+            <div class="d-flex" style="padding:2px;">
+              <div class="text-white">
+                <p class="text-white mb-0 mt-2 poppins-boldd">Total Solar Installation Done</p>
+                <p class="mb-0 mt-1 number-font poppins-semi">{{data?.with_solar.number}}
+                  ({{data?.with_solar.percentage}})</p>
+
+                <p class="text-white mb-0 mt-4 poppins-boldd">Installation Capacity</p>
+                <p class="mb-0 mt-1 number-font poppins-semi">{{data?.with_solar.installed_capacity}} (kW)</p>
+
+                <!-- <p class="text-white mb-2" style="color: rgba(41, 49, 76, 1);margin-top: 6px;">
+                  Updated hour ago
+                </p> -->
+              </div>
+              <div class="ms-auto"> <img class="icon" src="./assets/images/Icon%203.svg"
+                  alt="Description of the image" title="View Details" />
+              </div>
+
+              <div class="mt-auto">
+                <img src="./assets/images/u_arrow-left.white.svg" alt="Description of the image"
+                  title="View Details" />
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- </a> -->
+    </div><!-- COL END -->
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 mt-3">
+        <div class="card bg-primary img-card card-bg-1 cursor-pointer" [routerLink]="'/pages/boq'">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="text-white">
+                        <h2 class="mb-0 number-font">{{total_boQs}}</h2>
+                        <p class="text-white mb-0">Total BoQs</p>
+                    </div>
+                    <div class="ms-auto"> <i class="fa fa-list-alt text-white fs-30 me-2 mt-2"></i> </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- COL END -->
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 mt-3">
+        <div class="card bg-secondary img-card card-bg-2 cursor-pointer" [routerLink]="'/pages/proposals'">
+            <div class="card-body ">
+                <div class="d-flex">
+                    <div class="text-white">
+                        <h2 class="mb-0 number-font">{{total_proposals}}</h2>
+                        <p class="text-white mb-0">Total Proposals</p>
+                    </div>
+                    <div class="ms-auto"> <i class="fa fa-tasks text-white fs-30 me-2 mt-2"></i> </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- COL END -->
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 mt-3">
+          <div class="card  bg-success img-card card-bg-4 cursor-pointer" [routerLink]="'/pages/leads'">
+              <div class="card-body">
+                  <div class="d-flex">
+                      <div class="text-white">
+                          <h2 class="mb-0 number-font">{{total_leads}}</h2>
+                          <p class="text-white mb-0">Total Leads</p>
+                      </div>
+                      <div class="ms-auto"> <i class="fa fa-users text-white fs-30 me-2 mt-2"></i> </div>
+                  </div>
+              </div>
+          </div>
+    </div><!-- COL END -->
+
+
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 mt-3">
+            <div class="card cursor-pointer" [routerLink]="'/pages/creditPointsHistory'">
+                <div class="card-body text-center">
+                    <i class="fa fa-dollar text-primary fa-3x text-primary-shadow"></i>
+                    <h6 class="mt-4 mb-2">Total Earned</h6>
+                    <h2 class="mb-2 number-font">{{data?.total_credit_points}}</h2>
+                    <!-- <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p> -->
+                </div>
+            </div>
+      </div><!-- COL END -->
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 mt-3">
+            <div class="card cursor-pointer" [routerLink]="'/pages/creditPointsHistory'">
+                <div class="card-body text-center">
+                    <i class="fa fa-share-square-o text-secondary fa-3x text-secondary-shadow"></i>
+                    <h6 class="mt-4 mb-2">Total Spent</h6>
+                    <h2 class="mb-2  number-font">{{data?.total_debit_points}}</h2>
+                    <!-- <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p> -->
+                </div>
+            </div>
+      </div><!-- COL END -->
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 mt-3">
+            <div class="card cursor-pointer" [routerLink]="'/pages/creditPointsHistory'">
+                <div class="card-body text-center">
+                    <i class="fa fa-briefcase text-success fa-3x text-success-shadow"></i>
+                    <h6 class="mt-4 mb-2">Total Redeemable</h6>
+                    <h2 class="mb-2 number-font">{{data?.total_redeemable}}</h2>
+                    <!-- <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p> -->
+                </div>
+            </div>
+      </div><!-- COL END -->
+    </div>
+  </div>
+  
+</div>

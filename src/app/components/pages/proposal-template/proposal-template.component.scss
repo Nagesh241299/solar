@@ -1,0 +1,70 @@
+::ng-deep .swal2-container {
+    z-index: 99999 !important;
+}
+
+.title-card {
+    background-color: #F6F6F6;
+    border: 1px solid #CBCBCB;
+}
+
+/************ New Figma Design **************/
+
+.title-card {
+    background-color: #F6F6F6;
+    border: 1px solid #CBCBCB;
+}
+
+.title-text {
+    font-weight: 600;
+    font-size: 16px;
+    color: #969696;
+}
+
+.title-value {
+    font-weight: 600;
+    font-size: 20px;
+    color: #000000;
+}
+
+.title-amount {
+    font-weight: 600;
+    font-size: 22px;
+    color: #200D63;
+}
+
+.details-title {
+    font-weight: 600;
+    font-size: 18px;
+    color: #000000;
+}
+
+.p {
+    width: 80px;
+}
+
+::ng-deep .swal2-container {
+    z-index: 99999 !important;
+}
+
+
+
+.download {
+    // background-color: #FF4747;
+    border-radius: 32px;
+    height: 35px;
+    width: 200px;
+    // color: #200D63;
+    font-size: 12px;
+    font-weight: 600;
+    border-color: #d6da1f;
+    border: 1px solid #200D63;
+    text-align: center;
+    color: #fff;
+    background-color: #200D63;
+
+    // /* Darker color with thicker border */
+    // &:hover {
+    //     color: #fff;
+    //     background-color: #200D63;
+    // }
+}

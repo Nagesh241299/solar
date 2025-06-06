@@ -1,0 +1,204 @@
+<main class="loader-container" *ngIf="isLoader">
+    <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5ebd3e" />
+                <stop offset="33%" stop-color="#ffb900" />
+                <stop offset="67%" stop-color="#f78200" />
+                <stop offset="100%" stop-color="#e23838" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0%" stop-color="#e23838" />
+                <stop offset="33%" stop-color="#973999" />
+                <stop offset="67%" stop-color="#009cdf" />
+                <stop offset="100%" stop-color="#5ebd3e" />
+            </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-width="16">
+            <g class="ip__track" stroke="#ddd">
+                <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+            <g stroke-dasharray="180 656">
+                <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0"
+                    d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358"
+                    d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+        </g>
+    </svg>
+</main>
+<div class="container-fluid pt-0">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+            <div class="card body-radius mb-3">
+                <!-- <div class="card-header p-1">
+                    <div class="row w-100">
+                        <div class="col-md-6">
+                            <h4 class="mb-0 mt-2 fw-bold " style="color: #22A447;padding-left: 30px;">Proposals</h4>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4 d-flex justify-content-end">
+                            <button class="mb-1 mt-1 me-2 btn btn-warning btn-sm px-4 rounded-pill mb-3 margin" type="
+                                button" (click)="addTemplate()" title="Add Roof Top">Create Template</button>
+
+
+                            <button class="btn btn-success btn-sm mb-1 mt-1 me-2 px-4  rounded-pill mb-3" type="button"
+                                (click)="addProposals()" style="background-color: #22A447 !important;"
+                                title="Add Roof Top">Add
+                                Proposal</button>
+                        </div>
+                    </div>
+
+                </div> -->
+                <div class="card-body p-2">
+
+                    <div class="card-header-section">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 class="mb-0 header-title"><i class="fa fa-bars btn-listing-icons"></i>Proposals</h4>
+                            </div>
+                            <div class="col-6">
+
+                                <button type="button" class="btn-sm m-2 float-end button-add"
+                                    (click)="addProposals()">Add</button>
+                                <button type="button" class="btn-sm m-2 float-end button-add"
+                                    (click)="addTemplate()">Template List</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="border-radius-25 card shadow-none mt-4">
+                        <form class="ngb-table border-radius-25">
+                            <div class="table-responsive border-radius-25">
+
+                                <table mat-table class="table table-hover border-radius-25">
+                                    <thead>
+                                        <tr>
+
+                                            <th mat-header-cell scope="col" width="250px">
+                                                Customer Name
+                                            </th>
+                                            <th mat-header-cell scope="col" width="108px">
+                                                Project Capacity
+                                            </th>
+
+                                            <th scope="col" width="80px"></th>
+                                            <th mat-header-cell scope="col" width="400px">
+                                                Location
+                                            </th>
+                                            <!-- <th scope="col" width="13%"> AREA
+                                            </th>
+                                            <th mat-header-cell scope="col" width="9%">PIN CODE
+                                            </th>
+                                            <th mat-header-cell scope="col" width="12%">CITY
+                                            </th>
+                                            <th mat-header-cell scope="col" width="13%">STATE</th> -->
+
+
+                                            <th mat-header-cell class="text-center" scope="col" width="150px">
+                                                Actions</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="Data.length === 0">
+
+                                            <td colspan="6">
+                                                <div class="data-center">
+                                                    No Data Found.
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr mat-row *ngFor="let uidata of Data" style="height: 40px;">
+                                            <!-- <td mat-cell style="text-align:left !important;vertical-align: left !important">
+                                            {{uidata.company_name}}
+                                        </td> -->
+                                            <td mat-cell
+                                                style="text-align:left !important;vertical-align: left !important">
+                                                {{uidata.contact_person_name}}
+                                            </td>
+                                            <td mat-cell
+                                                style="text-align:right !important;vertical-align: right !important">
+                                                {{ uidata.project_size | number: '1.0-0' }}
+                                            </td>
+                                            <td></td>
+                                            <td mat-cell>
+                                                {{uidata.area}}, {{uidata.city}}, {{uidata.state}} -
+                                                {{uidata.pin_code}}
+                                            </td>
+                                            <!-- <td mat-cell style="text-align:left !important;vertical-align: left;">
+                                                {{uidata.area}}
+                                            </td>
+                                            <td mat-cell style="text-align:right !important;vertical-align: right;">
+                                                {{uidata.pin_code}}
+                                            </td>
+
+                                            <td mat-cell style="text-align:left !important;vertical-align: left;">{{
+                                                uidata.city }}</td>
+                                            <td mat-cell style="text-align:left !important;vertical-align: left;">{{
+                                                uidata.state }}</td> -->
+
+
+                                            <td mat-cell style="text-align:center !important;">
+
+                                                <button (click)="downloadProposal(uidata.id)"
+                                                    class="table-btn edit-btn">
+
+                                                    <i class="fa fa-download fs-16 text-primary" title="Download"></i>
+                                                </button>
+
+                                                <button (click)="editProposal(uidata.id)" class="table-btn edit-btn">
+                                                    <i class="fa fa-pencil fs-16" title="Edit"></i>
+                                                </button>
+
+                                                <button (click)="deleteProposal(uidata.id)"
+                                                    class="table-btn delete-btn">
+                                                    <i class="fa fa-trash fs-16" title="Delete"></i>
+
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+
+
+
+
+                                </table>
+                            </div>
+                            <div class="d-flex justify-content-center between p-2">
+                                <ngb-pagination [collectionSize]="totalItems" [(page)]="currentPage"
+                                    [pageSize]="pageSize" (pageChange)="onPageChange($event)" [maxSize]="4"
+                                    [ellipses]="true" size="sm">
+                                </ngb-pagination>
+                                <div class="d-flex justify-content-between p-2">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <ng-template #confirmationModal let-modal>
+        <div class="modal-header p-2">
+            <h4 class="modal-title" id="confirmationModalLabel"><b>Confirmation</b></h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+
+            </button>
+        </div>
+        <div class="modal-body text-center custom-modal-body">
+            Are you sure you want to delete this proposal data?
+        </div>
+        <div class="modal-footer p-2">
+            <!-- <button type="button" class="button-yes text-white body-radius" (click)="deleteProposal()">Yes</button> -->
+            <button type="button" class="button-no text-white body-radius" (click)="modal.dismiss()">No</button>
+        </div>
+    </ng-template>

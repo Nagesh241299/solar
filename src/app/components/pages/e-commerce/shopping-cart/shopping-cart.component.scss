@@ -1,0 +1,12 @@
+
+::ng-deep{
+    .dark-mode{
+        app-shopping-cart{
+            .btn-light:hover,
+            .btn-light:focus {
+                color: #fff;
+                background-color: #30304d;
+            }
+        }
+    }
+}

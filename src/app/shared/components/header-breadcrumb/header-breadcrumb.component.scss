@@ -1,0 +1,46 @@
+ol.breadcrumb{
+    background: transparent !important;
+    margin-bottom: 0 !important;
+}
+@media (max-width: 767px){
+    .header-search-icon {
+        display: none !important;
+    }
+}
+
+.dropdown-menu-arrow:before{
+    z-index: -1 !important;
+}
+
+.dropdown-menu{
+    right: 0;
+    left: auto !important;
+}
+.header-search.dropdown-menu {
+    left: 0 !important;
+    right: auto;
+}
+.dropdown-toggle::after{
+    display: none;
+}
+
+@media screen and (max-width:810px) and (min-width:768px) {
+    .nav-link.icon{
+        padding: 12px 6px !important;
+    }
+}
+
+.nav-link{
+    display: flex !important;
+}
+
+::ng-deep{
+    .dark-mode{
+        // .breadcrumb .breadcrumb-item.active{
+        //     color: $darkPrimary-1 !important;
+        // }
+        .breadcrumb-item a, .breadcrumb-item + .breadcrumb-item::before {
+            color: #cbcbd2 !important;
+        }
+    }
+}

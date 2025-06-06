@@ -1,0 +1,195 @@
+<main class="loader-container" *ngIf="isLoader">
+    <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5ebd3e" />
+                <stop offset="33%" stop-color="#ffb900" />
+                <stop offset="67%" stop-color="#f78200" />
+                <stop offset="100%" stop-color="#e23838" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0%" stop-color="#e23838" />
+                <stop offset="33%" stop-color="#973999" />
+                <stop offset="67%" stop-color="#009cdf" />
+                <stop offset="100%" stop-color="#5ebd3e" />
+            </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-width="16">
+            <g class="ip__track" stroke="#ddd">
+                <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+            <g stroke-dasharray="180 656">
+                <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0"
+                    d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358"
+                    d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+        </g>
+    </svg>
+</main>
+<div class="container-fluid pt-0">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+            <div class="card body-radius mb-3">
+                <!-- <div class="card-header p-1">
+                    <div class="row w-100">
+                        <div class="col-6">
+                            <h4 class="mb-0 mt-2 fw-bold " style="color: #22A447;padding-left: 30px;">Template Listing
+                            </h4>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn-sm mb-1 mt-1 float-end button-add"
+                                (click)="LargeSizeOpen(largesizemodal)" title="Add Resinomial">Add</button>
+                        </div>
+                    </div>
+
+                </div> -->
+                <div class="card-body p-2">
+                    <div class="card-header-section">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 class="mb-0 header-title"><i class="fa fa-arrow-left btn-back"
+                                        [routerLink]="'/pages/proposals'"></i>Template
+                                    Listing</h4>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn-sm m-2 float-end button-add"
+                                    (click)="LargeSizeOpen(largesizemodal)">Add</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-radius-25 card shadow-none mt-4">
+                        <form class="ngb-table border-radius-25">
+                            <div class="table-responsive border-radius-25">
+
+                                <table mat-table class="table table-hover border-radius-25">
+                                    <thead class="mat-elevation-z5">
+                                        <tr>
+                                            <th scope="col" style="vertical-align: left;text-align: top !important;"
+                                                width="50%">
+                                                Title</th>
+
+                                            <th mat-header-cell class="text-center" style="vertical-align: middle"
+                                                scope="col" width="50%">
+                                                Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="Data.length === 0">
+                                            <td colspan="6">
+                                                <div class="data-center">
+                                                    No Data Found.
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr mat-row *ngFor="let item of Data">
+                                            <td mat-cell
+                                                style="text-align:left !important;vertical-align: top !important">
+                                                {{item.title}}</td>
+
+
+                                            <td mat-cell style="text-align:center !important;">
+                                                <button class="mt-1" (click)="onEditTemplate(item.id,largesizemodal)"
+                                                    class="table-btn edit-btn">
+
+                                                    <i class="fa fa-pencil fs-16" title="Edit"></i>
+                                                </button>
+                                                <button (click)="onDeleteTemplate(item.id)"
+                                                    class="table-btn delete-btn">
+                                                    <i class="fa fa-trash fs-16" title="Delete"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="d-flex justify-content-center between p-2">
+                                <ngb-pagination [collectionSize]="totalItems" [(page)]="currentPage"
+                                    [pageSize]="pageSize" (pageChange)="onPageChange($event)" [maxSize]="4"
+                                    [ellipses]="true" size="sm">
+                                </ngb-pagination>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal to add Template -->
+<ng-template #largesizemodal let-modal>
+
+    <div class="modal-body p-2" tabindex="0">
+        <div class="card body-radius title-card p-3 no-shadow">
+            <h5 class="details-title mb-0">{{ isEdit ? 'Edit Template' : 'Add Template' }}</h5>
+        </div>
+
+        <div class="card body-radius title-card p-3 no-shadow mt-2">
+            <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+                <!-- <div class="row"> -->
+                <div class="row mb-2">
+                    <!-- Title Field -->
+
+                    <div class="col-md-12 mb-1">
+                        <label for="title" class="mb-0 text-muted">Title <span style="color: red;">*</span></label>
+                        <input type="text" id="title" formControlName="title" class="form-control" autocomplete="off" />
+                        <small *ngIf="templateForm.get('title')?.touched && templateForm.get('title')?.invalid"
+                            class="text-danger">
+                            Title is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- File Upload Field -->
+                    <div class="col-md-12 mb-3">
+                        <!-- File Upload Field -->
+
+                        <label for="file" class="mb-0 text-muted">File Upload <span style="color: red;">*</span></label>
+                        <input type="file" id="file" (change)="onFileChange($event)" class="form-control"
+                            formControlName="file" accept=".doc,.docx" />
+                        <small *ngIf="templateForm.get('file')?.touched && templateForm.get('file')?.invalid"
+                            class="text-danger">
+                            File is required.
+                        </small>
+                        <div>
+                            <button type="button" class="btn mt-4 table-btn download" *ngIf="isEdit == false"
+                                (click)="downloadSample()">
+                                <i class="fa fa-download fs-16 text-primary" title="Download"></i>
+                                <!-- <i class="fa-solid fa-circle-down fs-16 "></i> -->
+                                &nbsp;
+                                Download Sample File
+                            </button>
+
+                            <!-- Preview button, visible only in edit mode -->
+                            <button type="button" class="btn mt-2 table-btn edit-btn" *ngIf="isEdit && filePreviewUrl"
+                                (click)="onPreviewFile()">
+                                <i class="fa fa-download fs-16 text-primary" title="Download"></i>&nbsp;
+                                Preview Uploaded File
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- </div> -->
+
+
+
+                <div class="p-2 mt-1">
+                    <button type="button" class="btn button-cancelModal float-end" (click)="closeModal()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary rounded-pill float-end me-2 p" *ngIf="isEdit == false">
+                        Save
+                    </button>
+                    <button type="submit" class="btn btn-primary rounded-pill float-end me-2 p" *ngIf="isEdit == true">
+                        Update
+                    </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>

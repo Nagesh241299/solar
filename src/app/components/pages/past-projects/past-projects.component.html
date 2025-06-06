@@ -1,0 +1,572 @@
+<main class="loader-container" *ngIf="isLoader">
+    <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5ebd3e" />
+                <stop offset="33%" stop-color="#ffb900" />
+                <stop offset="67%" stop-color="#f78200" />
+                <stop offset="100%" stop-color="#e23838" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0%" stop-color="#e23838" />
+                <stop offset="33%" stop-color="#973999" />
+                <stop offset="67%" stop-color="#009cdf" />
+                <stop offset="100%" stop-color="#5ebd3e" />
+            </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-width="16">
+            <g class="ip__track" stroke="#ddd">
+                <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+            <g stroke-dasharray="180 656">
+                <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0"
+                    d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358"
+                    d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+            </g>
+        </g>
+    </svg>
+</main>
+<div class="p-3 main">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-lg-12 p-0">
+                <!-- <div class="card body-radius"> -->
+                <div class="card-body p-0">
+                    <div class="row col-md-6 d-flex justify-content-end float-end mb-2">
+                        <button class=" button-add float-end" (click)="LargeSizeOpen(largesizemodal)" title="Add">Add
+                        </button>
+                    </div>
+                    <div class="border-radius-25 card shadow-none mt-2">
+                        <form class="ngb-table border-radius-25">
+                            <div class="table-responsive border-radius-25">
+
+
+                                <table mat-table class="table table-hover border-radius-25">
+                                    <thead>
+                                        <tr>
+
+                                            <th scope="col" class="uppercase">
+                                                Consumer Name</th>
+                                            <th mat-header-cell scope="col" style="width: 142px;">
+                                                Project Capacity
+                                            </th>
+                                            <th></th>
+                                            <th mat-header-cell scope="col" style="width: 600px;">
+                                                Location
+                                            </th>
+                                            <!-- <th mat-header-cell scope="col" width="10%"
+                                        style="vertical-align: middle;text-align: middle !important;">PIN CODE
+                                    </th>
+                                    <th mat-header-cell scope="col" width="17%"
+                                        style="vertical-align: middle;text-align: middle!important;">CITY
+                                    </th>
+                                    <th mat-header-cell scope="col" width="17%"
+                                        style="vertical-align: middle;text-align: middle!important;">STATE</th>
+                                    <th scope="col" width="18%"
+                                        style="vertical-align: middle;text-align:middle !important;" class="uppercase">
+                                        PROJECT CAPACITY
+                                    </th> -->
+
+                                            <th mat-header-cell class="text-center" style="vertical-align: middle"
+                                                scope="col" width="140px">
+                                                Actions</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="Data.length === 0">
+                                            <td colspan="5">
+                                                <div class="data-center">
+                                                    No Data Found.
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr mat-row *ngFor="let uidata of Data" style="height: 40px;">
+                                            <td mat-cell
+                                                style="text-align:left !important;vertical-align: left !important">
+                                                {{uidata.customer_first_name}}
+                                                {{uidata.customer_last_name}}</td>
+                                            <td mat-cell style="text-align:right !important;vertical-align: middle;">
+                                                {{ uidata.project_capacity | number: '1.0-0' }}
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                            <td mat-cell>
+                                                {{uidata.area_name}}, {{uidata.city}}, {{uidata.state}} -
+                                                {{uidata.pin_code}}
+                                            </td>
+
+
+
+                                            <td mat-cell style="text-align:center !important;">
+
+                                                <button (click)="editPastProject(uidata.id,largesizemodal)" class="mt-1"
+                                                    class="table-btn edit-btn">
+                                                    <i class="fa fa-pencil fs-16" title="Edit"></i>
+                                                </button>
+
+
+                                                <button (click)="deletePastProject(uidata.id)"
+                                                    class="table-btn delete-btn">
+                                                    <i class="fa fa-trash fs-16" title="Delete"></i>
+
+                                                </button>
+
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="d-flex justify-content-center between p-2">
+                                <ngb-pagination [collectionSize]="totalItems" [(page)]="currentPage"
+                                    [pageSize]="pageSize" (pageChange)="onPageChange($event)" [maxSize]="4"
+                                    [ellipses]="true" size="sm">
+                                </ngb-pagination>
+                                <div class="d-flex justify-content-between p-2">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- </div> -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #confirmationModal let-modal>
+    <div class="modal-header p-2">
+        <h4 class="modal-title" id="confirmationModalLabel"><b>Confirmation</b></h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+
+        </button>
+    </div>
+    <div class="modal-body text-center custom-modal-body">
+        Are you sure you want to delete this Past Project?
+    </div>
+    <div class="modal-footer p-2">
+        <!-- <button type="button" class="button-yes text-white body-radius" (click)="deletePastProject()">Yes</button> -->
+        <button type="button" class="button-no text-white body-radius" (click)="modal.dismiss()">No</button>
+    </div>
+</ng-template>
+
+<ng-template #largesizemodal let-modal>
+
+    <div class="modal-body p-2">
+        <div class="card body-radius title-card p-3 no-shadow">
+            <h5 class="details-title mb-0">{{ isEdit ? 'Edit Past Project' : 'Add Past Project' }}</h5>
+        </div>
+
+        <!-- <div class="card body-radius title-card no-shadow mt-2 p-2 main "> -->
+        <form [formGroup]="pastProjectForm" (ngSubmit)="pastProjectSubmit()">
+            <div class="row">
+                <div class="col-md-6  pt-0 paddingRight">
+                    <div class="card body-radius title-card p-2 no-shadow mt-1 pt-0">
+
+                        <div class="card-body p-2">
+                            <h5 class="fw-bold mb-3 marg">Consumer Details</h5>
+                            <div class="row mb-1 mt-0">
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">Type</label>
+                                    <select class="form-control form-select select2" formControlName="project_type"
+                                        (click)="typeSelect()">
+                                        <option value="" disabled selected>Select</option>
+                                        <option *ngFor="let type of project_typeArray" [value]="type">{{ type }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">Sub Type</label>
+                                    <select class="form-control form-select select2" formControlName="sub_type"
+                                        [disabled]="filteredSubTypes.length === 0">
+                                        <option value="" disabled selected>Select</option>
+                                        <option *ngFor="let subType of filteredSubTypes" [value]="subType">
+                                            {{subType
+                                            }}</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="row mb-1 p-0">
+                                <div class="col-md-12">
+                                    <label class="mb-0 text-muted">Company Name <span
+                                            style="color: red; margin-left: 2px;">*</span></label>
+
+                                    <div>
+                                        <input type="text" class="form-control w-100"
+                                            onkeypress="return /[a-zA-Z]*$/.test(event.key)"
+                                            formControlName="company_name" />
+                                        <small *ngIf="
+                                                      pastProjectForm.get('company_name')?.invalid &&
+                                                      pastProjectForm.get('company_name')?.touched
+                                                    " class="text-danger">
+                                            Company Name is required
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <div>
+                                        <label class="mb-0 text-muted" for="customer_first_name">
+                                            First Name
+                                            <span style="color: red; margin-left: 2px;">*</span>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <input type="text" id="customer_first_name" class="form-control w-100"
+                                            onkeypress="return /[a-zA-Z]/.test(event.key)"
+                                            formControlName="customer_first_name" />
+                                        <div class="text-danger small mt-1" *ngIf="
+                                                      pastProjectForm.get('customer_first_name')?.invalid &&
+                                                      pastProjectForm.get('customer_first_name')?.touched
+                                                    ">
+                                            First Name is required
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div>
+                                        <label class="mb-0 text-muted" for="customer_last_name">
+                                            Last Name <span style="color: red; margin-left: 2px;">*</span>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <input type="text" id="customer_last_name" class="form-control w-100"
+                                            onkeypress="return /[a-zA-Z]/.test(event.key)"
+                                            formControlName="customer_last_name" />
+                                        <div class="text-danger small mt-1" *ngIf="
+                                                      pastProjectForm.get('customer_last_name')?.invalid &&
+                                                      pastProjectForm.get('customer_last_name')?.touched
+                                                    ">
+                                            Last Name is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <div>
+                                        <label for="email_addr" class="mb-0 text-muted">Email
+                                            Address</label>
+                                    </div>
+                                    <div>
+                                        <input type="email" id="email_addr" class="form-control w-100"
+                                            formControlName="email_addr">
+                                        <small class="text-danger small mt-1"
+                                            *ngIf="pastProjectForm.get('email_addr')?.hasError('pattern')">
+                                            Please enter a valid Email address
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div>
+                                        <label for="contact_number" class="mb-0 text-muted">Consumer Mobile
+                                            Number</label>
+                                    </div>
+
+                                    <div>
+                                        <input class="mb-0 text-muted" type="text" id="contact_number"
+                                            class="form-control w-100" onkeypress="return /[0-9]/.test(event.key)"
+                                            maxlength="10" formControlName="contact_number">
+                                        <!-- Error: If input is not empty and not 10 digits -->
+                                        <small
+                                            *ngIf="pastProjectForm.get('contact_number')?.touched && pastProjectForm.get('contact_number')?.hasError('pattern')"
+                                            class="text-danger">
+                                            Mobile number must be exactly 10
+                                            digits.
+                                        </small>
+                                        <!-- <div class="text-danger small mt-1"
+                                                *ngIf="pastProjectForm.get('contact_number')?.invalid">
+                                                Contact Number is required
+                                            </div> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-1 p-0">
+                                <div class="col-md-12">
+                                    <label class="mb-0 text-muted">Address <span
+                                            style="color: red; margin-left: 2px;">*</span>
+                                    </label>
+                                    <div>
+                                        <input type="text" class="form-control w-100" formControlName="address_line_1">
+                                    </div>
+                                    <div class="text-danger small mt-1" *ngIf="pastProjectForm.get('address_line_1')?.invalid &&
+                                                      pastProjectForm.get('address_line_1')?.touched">
+                                        Address is required
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="row mb-1 p-0">
+                                            <div class="col-md-12">
+                                                <label class="mb-0 text-muted">Address Line 2
+                                                </label>
+                                                <div>
+                                                    <input type="text" class="form-control w-100"
+                                                        formControlName="address_line_2">
+                                                </div>
+                                            </div>
+                                        </div> -->
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <div>
+                                        <label class="mb-0 text-muted">Pin Code <span
+                                                style="color: red;">*</span></label>
+                                    </div>
+                                    <div>
+                                        <input type="text" class="form-control w-100"
+                                            onkeypress="return /[0-9]/.test(event.key)" (blur)="getAreaByPinCode()"
+                                            maxlength="6" formControlName="pin_code">
+                                        <small
+                                            *ngIf="pastProjectForm.get('pin_code')?.invalid && pastProjectForm.get('pin_code')?.touched"
+                                            class="text-danger">
+                                            Pin Code is required
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div>
+                                        <label class="mb-0 text-muted">Area <span style="color: red;">*</span></label>
+                                    </div>
+                                    <div>
+                                        <select class="form-control form-select select2" formControlName="area_name"
+                                            (change)="areaSelected()">
+                                            <!-- <option value="" disabled selected>Select Area
+                                                                                                                        </optio-->
+                                            <option *ngFor="let option of areaNames" [value]="option">
+                                                {{ option }}
+                                            </option>
+                                        </select>
+
+                                        <small
+                                            *ngIf="pastProjectForm.get('area_name')?.invalid && pastProjectForm.get('area_name')?.touched"
+                                            class="text-danger">
+                                            Area is required
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">City <span style="color: red;">*</span></label>
+                                    <div class="w-100">
+                                        <!-- <select class="form-control" formControlName="city"
+                                                class="form-control form-select select2">
+                                             
+                                                <option *ngFor="let option of cityNames" [value]="option">
+                                                    {{ option }}
+                                                </option>
+                                            </select> -->
+                                        <input type="text" class="form-control"
+                                            onkeypress="return /[a-zA-Z]/.test(event.key)" formControlName="city">
+                                        <small
+                                            *ngIf="pastProjectForm.get('city')?.invalid && pastProjectForm.get('city')?.touched"
+                                            class="text-danger">
+                                            City is required
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">State <span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control w-100" [(ngModel)]="stateN"
+                                        onkeypress="return /[a-zA-Z]/.test(event.key)" formControlName="state">
+                                    <small
+                                        *ngIf="pastProjectForm.get('state')?.invalid  && pastProjectForm.get('city')?.touched"
+                                        class="text-danger">
+                                        State is required
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 pt-0 paddingLeft">
+                    <div class="card body-radius title-card p-2 no-shadow mt-1 pt-0">
+
+                        <div class="card-body p-2">
+                            <h5 class="fw-bold mb-3 marg">Project Details</h5>
+                            <div class="row mb-1">
+                                <div class="col-md-12">
+                                    <label class="mb-0 text-muted">Title <span
+                                            style="color: red; margin-left: 2px;">*</span></label>
+                                    <input type="text" class="form-control"
+                                        onkeypress="return /[a-zA-Z]*$/.test(event.key)" formControlName="title" />
+                                    <small
+                                        *ngIf="pastProjectForm.get('title')?.touched && pastProjectForm.get('title')?.invalid"
+                                        class="text-danger">
+                                        Title is required.
+                                    </small>
+                                </div>
+
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-md-12">
+                                    <label class="mb-0 text-muted">Description</label>
+                                    <input type="text" class="form-control" formControlName="description" />
+                                </div>
+
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <div>
+                                        <!-- Label with 'mb-0 text-muted' -->
+                                        <label class="mb-0 text-muted">Project Capacity (kW) <span
+                                                style="color: red; margin-left: 2px;">*</span></label>
+                                        <div class="w-100">
+                                            <!-- Regular input field -->
+                                            <input type="text" class="form-control" formControlName="project_capacity"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                            <!-- Validation message (optional) -->
+                                            <small
+                                                *ngIf="pastProjectForm.get('project_capacity')?.invalid && pastProjectForm.get('project_capacity')?.touched"
+                                                class="text-danger">
+                                                Project Capacity is required
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <!-- Label with 'mb-0 text-muted' -->
+                                    <label class="mb-0 text-muted">Commissioning Date</label>
+
+                                    <!-- Input field with date picker functionality -->
+                                    <input type="date" class="form-control"
+                                        placeholder="Commissioning Date (MM/DD/YYYY)"
+                                        formControlName="solar_installation_commissioning_date"
+                                        max="{{ maxDate | date:'yyyy-MM-dd' }}"
+                                        onkeypress="return (event.charCode == 127 || event.charCode == 8 || event.charCode == 47 || (event.charCode >= 48 && event.charCode <= 57))"
+                                        (input)="validateDate($event)">
+                                    <!-- Validation message -->
+                                    <div *ngIf="pastProjectForm.get('solar_installation_commissioning_date')?.invalid"
+                                        class="text-danger">
+                                        Commissioning Date is required
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">Grid Connectivity</label>
+                                    <select class="form-control form-select select2" formControlName="grid_connectivity"
+                                        (click)="typeSelect()">
+                                        <!-- <option value="" disabled selected>Select</option> -->
+                                        <option *ngFor="let type of grid_connectivityArray" [value]="type">{{
+                                            type
+                                            }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="mb-0 text-muted">Batteries Used</label>
+                                    <select class="form-control form-select select2" formControlName="batteries_usage">
+                                        <!-- <option value="" disabled selected>Select</option> -->
+                                        <option *ngFor="let type of batteries_usageArray" [value]="type">{{ type
+                                            }}
+                                        </option>
+                                    </select>
+                                </div>
+
+
+                            </div>
+                            <div class="row mb-1">
+                                <!-- Modules Used Field -->
+                                <div class="col-md-12">
+                                    <label class="mb-0 text-muted">Modules Used</label>
+                                    <textarea class="form-control w-100" rows="1"
+                                        formControlName="modules_used"></textarea>
+                                    <div *ngIf="pastProjectForm.get('modules_used')?.invalid && pastProjectForm.get('modules_used')?.touched"
+                                        class="text-danger">
+                                        Modules Used is required
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Inverter Used Field -->
+                            <div class="row mb-1">
+                                <div class="col-md-12">
+                                    <label class="mb-0 text-muted">Inverter Used</label>
+                                    <textarea class="form-control w-100" rows="1"
+                                        formControlName="inverter_used"></textarea>
+                                    <div *ngIf="pastProjectForm.get('inverter_used')?.invalid && pastProjectForm.get('inverter_used')?.touched"
+                                        class="text-danger">
+                                        Inverter Used is required
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!-- <div class="row mb-1">
+                                <div class="col-md-12">
+                                    <label class="text-muted mb-0">Photo</label>
+                                    <div class="photo-upload text-center">
+                                       
+                                        <input type="file" class="form-control mt-0" (change)="onPhotoUpload($event)"
+                                            formControlName="photo" accept="image/*" />
+
+                                       
+                                        <img *ngIf="photoPreview" [src]="photoPreview" alt="Photo Preview"
+                                            class="img-fluid rounded-square mb-0 mt-1"
+                                            style="width: 120px; height: 100px; object-fit: cover; border: 1px solid #ccc;" />
+                                    </div>
+                                </div>
+
+
+                            </div> -->
+                            <div class="row mb-1">
+                                <div class="col-md-12">
+                                    <label class="text-muted mb-0">Photos</label>
+                                    <div class="photo-upload text-center">
+                                        <!-- File Input (Multiple Selection) -->
+                                        <input type="file" class="form-control mt-0" (change)="onPhotoUpload($event)"
+                                            accept="image/*" multiple />
+
+                                        <!-- Photo Previews -->
+                                        <div class="d-flex flex-wrap mt-2">
+
+                                            <div *ngFor="let photo of photoPreviews; let i = index"
+                                                class="me-2 mb-2 position-relative">
+
+                                                <img [src]="photo" alt="Photo Preview"
+                                                    class="img-fluid rounded-square previewPhoto" />
+
+                                                <!-- Remove Button (For Each Image) -->
+                                                <button type="button" (click)="removePhoto(i)"
+                                                    class="btn btn-sm btn-danger position-absolute crossmark">X</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-1 mt-1">
+                <button type="button" class="btn button-cancelModal float-end" (click)="closeModal()">
+                    Cancel
+                </button>
+                <button type="submit" class="btn btn-primary rounded-pill float-end me-2 p" *ngIf="isEdit == false">
+                    Save
+                </button>
+                <button type="submit" class="btn btn-primary rounded-pill float-end me-2" *ngIf="isEdit == true">
+                    Update
+                </button>
+
+            </div>
+        </form>
+
+    </div>
+</ng-template>
